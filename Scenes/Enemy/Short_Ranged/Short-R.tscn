@@ -1,11 +1,20 @@
 [gd_scene format=3 uid="uid://ccfglh7ctads5"]
 
 [ext_resource type="Script" uid="uid://743qfrqljurk" path="res://Scenes/Enemy/Short_Ranged/short_r.gd" id="1_l40u0"]
+[ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scenes/Enemy/StateMachine/state_machine.gd" id="2_7drta"]
+[ext_resource type="Script" uid="uid://dwfkejg0fu7x5" path="res://Scenes/Enemy/Short_Ranged/enemy_wander.gd" id="3_16av8"]
+[ext_resource type="Script" uid="uid://6bd2cb1kmt8i" path="res://Scenes/Enemy/Short_Ranged/enemy_chase.gd" id="4_16av8"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hp6sh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_827x2"]
 albedo_color = Color(1.0981416, 0.0640775, 0.08695503, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7t6ui"]
+size = Vector3(0.87240154, 0.22216797, 0.6299057)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bowrs"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hp6sh"]
 
@@ -16,7 +25,29 @@ script = ExtResource("1_l40u0")
 mesh = SubResource("CapsuleMesh_hp6sh")
 surface_material_override/0 = SubResource("StandardMaterial3D_827x2")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2142665247]
+transform = Transform3D(0.99985445, 0, 0.017063746, 0, 1, 0, -0.017063746, 0, 0.99985445, 0.0033847836, 0.44363123, -0.23607852)
+mesh = SubResource("BoxMesh_7t6ui")
+surface_material_override/0 = SubResource("StandardMaterial3D_bowrs")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1382511973]
 shape = SubResource("CapsuleShape3D_hp6sh")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1878653141]
+
+[node name="StateMachine" type="Node" parent="." unique_id=877257244 node_paths=PackedStringArray("InitialState")]
+script = ExtResource("2_7drta")
+InitialState = NodePath("../EnemyWander")
+metadata/_custom_type_script = "uid://des8mb1cibtv4"
+
+[node name="EnemyWander" type="Node" parent="." unique_id=1644325000]
+script = ExtResource("3_16av8")
+metadata/_custom_type_script = "uid://dwfkejg0fu7x5"
+
+[node name="EnemyChase" type="Node" parent="." unique_id=989941489]
+script = ExtResource("4_16av8")
+metadata/_custom_type_script = "uid://6bd2cb1kmt8i"
+
+[node name="EnemyChase2" type="Node" parent="." unique_id=1541559603]
+script = ExtResource("4_16av8")
+metadata/_custom_type_script = "uid://6bd2cb1kmt8i"

@@ -1,0 +1,30 @@
+extends "res://Scenes/Enemy/StateMachine/state.gd"
+class_name EnemyWander
+
+var wander_direction: Vector3
+var wander_time: float = 0.0
+
+@onready var enemy: CharacterBody3D = get_owner()
+
+func randomise_variables():
+	wander_direction = Vector3(
+		randf_range(-1.0, 1.0),
+		0.0,
+		randf_range(-1.0, 1.0)
+	).normalized()
+
+	wander_time = randf_range(1.5, 4.0)
+
+func enter():
+	randomise_variables()
+
+func _process(delta: float):
+	if wander_time < 0.0:
+		randomise_variables()
+
+	wander_time -= delta
+
+func _physics_process(delta: float):
+	enemy.velocity = wander_direction * enemy.WalkSpeed
+	if not enemy.is_on_floor():
+		enemy.velocity += enemy.get_gravity() * delta

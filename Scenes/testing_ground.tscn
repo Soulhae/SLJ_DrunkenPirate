@@ -82,11 +82,8 @@ mesh = SubResource("PrismMesh_hp6sh")
 transform = Transform3D(23.764013, 0, 0, 0, 12.703668, 0, 0, 0, 4.828599, 35.255077, 0, -7.638176)
 mesh = SubResource("PrismMesh_hp6sh")
 
-[node name="Enemy(SR)" parent="." unique_id=1434957411 groups=["enemy"] instance=ExtResource("1_x8jwb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6065388, 0)
-
 [node name="PlayerTEST" type="CharacterBody3D" parent="." unique_id=244582196]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7094917, 0.87821674, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.467567, 0.87821674, 0)
 script = ExtResource("4_dg8kd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTEST" unique_id=2038995254]
@@ -101,3 +98,53 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1886221673]
 transform = Transform3D(-0.98692006, 0.028345281, -0.1586988, 0, 0.9844209, 0.17582797, 0.16121031, 0.17352815, -0.97154474, 0, 0, 0)
+
+[node name="enemy test" type="Node" parent="." unique_id=1145592233]
+
+[node name="Enemy(SR)" parent="enemy test" unique_id=1434957411 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6065388, 0)
+
+[node name="Enemy(SR)2" parent="enemy test" unique_id=1080347634 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2826843, 1.6065388, 0)
+
+[node name="Enemy(SR)3" parent="enemy test" unique_id=782555142 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8663597, 1.6065388, 0)
+
+[node name="Enemy(SR)4" parent="enemy test" unique_id=253131911 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.260784, 7.457384, 36.78657)
+
+[node name="Enemy(SR)5" parent="enemy test" unique_id=1864951486 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8663597, 1.6065388, 16.76853)
+
+[node name="Enemy(SR)6" parent="enemy test" unique_id=1470957524 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5867939, 1.6065388, -3.7005982)
+
+[node name="Enemy(SR)7" parent="enemy test" unique_id=1941179237 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5867939, 1.6065388, -5.476885)
+
+[node name="Enemy(SR)8" parent="enemy test" unique_id=1162405593 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3210354, 1.6065388, -5.476885)
+
+[node name="Enemy(SR)9" parent="enemy test" unique_id=1900927631 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3210354, 10.153983, 24.597992)
+
+[node name="Enemy(SR)10" parent="enemy test" unique_id=372672805 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.16455, 1.6065388, -2.9308739)
+
+[node name="Enemy(SR)11" parent="enemy test" unique_id=1051631267 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18949318, 1.6065388, -1.6874738)
+
+[node name="Enemy(SR)12" parent="enemy test" unique_id=1933157364 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1854515, 1.6065388, -1.6874738)
+
+[node name="Enemy(SR)13" parent="enemy test" unique_id=257366266 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1854515, 8.191445, -21.188995)
+
+[node name="Enemy(SR)14" parent="enemy test" unique_id=1614927286 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.409782, 1.6065388, -4.4567313)
+
+[node name="Enemy(SR)15" parent="enemy test" unique_id=1441320995 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07107353, 1.6065388, 1.835496)
+
+[node name="Enemy(SR)16" parent="enemy test" unique_id=1049807430 groups=["enemy"] instance=ExtResource("1_x8jwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5867958, 1.6065388, -1.7466824)
