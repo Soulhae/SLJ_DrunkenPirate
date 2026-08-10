@@ -37,17 +37,13 @@ shape = SubResource("CapsuleShape3D_hp6sh")
 
 [node name="StateMachine" type="Node" parent="." unique_id=877257244 node_paths=PackedStringArray("InitialState")]
 script = ExtResource("2_7drta")
-InitialState = NodePath("../EnemyWander")
+InitialState = NodePath("EnemyWander")
 metadata/_custom_type_script = "uid://des8mb1cibtv4"
 
-[node name="EnemyWander" type="Node" parent="." unique_id=1644325000]
+[node name="EnemyWander" type="Node" parent="StateMachine" unique_id=1644325000]
 script = ExtResource("3_16av8")
 metadata/_custom_type_script = "uid://dwfkejg0fu7x5"
 
-[node name="EnemyChase" type="Node" parent="." unique_id=989941489]
-script = ExtResource("4_16av8")
-metadata/_custom_type_script = "uid://6bd2cb1kmt8i"
-
-[node name="EnemyChase2" type="Node" parent="." unique_id=1541559603]
+[node name="EnemyChase" type="Node" parent="StateMachine" unique_id=989941489]
 script = ExtResource("4_16av8")
 metadata/_custom_type_script = "uid://6bd2cb1kmt8i"

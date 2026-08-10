@@ -1,15 +1,21 @@
 extends Node
 class_name State
-signal Transitioned(state : State  , new_state_name: String)
 
+# Sent when this state wants to switch to another state.
+signal Transitioned(state: State, new_state_name: String)
+
+# Called when entering this state.
 func enter():
 	pass
-	
+
+# Called when leaving this state.
 func exit():
 	pass
 
-func _process(delta: float):
+# Regular frame update.
+func process(delta: float):
 	pass
-	
-func _physics_process(delta: float):
+
+# Physics update.
+func physics_process(delta: float):
 	pass

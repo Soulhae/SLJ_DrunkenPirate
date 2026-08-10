@@ -82,7 +82,10 @@ mesh = SubResource("PrismMesh_hp6sh")
 transform = Transform3D(23.764013, 0, 0, 0, 12.703668, 0, 0, 0, 4.828599, 35.255077, 0, -7.638176)
 mesh = SubResource("PrismMesh_hp6sh")
 
-[node name="PlayerTEST" type="CharacterBody3D" parent="." unique_id=244582196]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1931030010]
+transform = Transform3D(-1, 0, -8.7422784e-08, -2.2933147e-08, 0.9649797, 0.26232463, 8.4361204e-08, 0.26232463, -0.9649797, -3.0237293, 13.914482, -29.490372)
+
+[node name="PlayerTEST" type="CharacterBody3D" parent="." unique_id=244582196 groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.467567, 0.87821674, 0)
 script = ExtResource("4_dg8kd")
 
@@ -92,9 +95,6 @@ shape = SubResource("CapsuleShape3D_hp6sh")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTEST" unique_id=642878637]
 mesh = SubResource("CapsuleMesh_hp6sh")
 surface_material_override/0 = SubResource("StandardMaterial3D_hp6sh")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1931030010]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 14.885567, -43.553574)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1886221673]
 transform = Transform3D(-0.98692006, 0.028345281, -0.1586988, 0, 0.9844209, 0.17582797, 0.16121031, 0.17352815, -0.97154474, 0, 0, 0)
@@ -123,7 +123,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5867939, 1.6065388, -3.7005
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5867939, 1.6065388, -5.476885)
 
 [node name="Enemy(SR)8" parent="enemy test" unique_id=1162405593 groups=["enemy"] instance=ExtResource("1_x8jwb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3210354, 1.6065388, -5.476885)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3210354, 0.6489215, -5.476885)
 
 [node name="Enemy(SR)9" parent="enemy test" unique_id=1900927631 groups=["enemy"] instance=ExtResource("1_x8jwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3210354, 10.153983, 24.597992)
