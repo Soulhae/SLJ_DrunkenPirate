@@ -1,9 +1,7 @@
-# Sends the player's position to all enemies.
 extends Node
 
-# Reference to the test player.
-@onready var target = $PlayerTEST
-
 func _process(delta):
-	# Tell every enemy where the player is.
-	get_tree().call_group("enemy", "target_position", target.global_position)
+	var player = get_tree().get_first_node_in_group("player")
+
+	if player:
+		get_tree().call_group("enemy","target_position",player.global_position)

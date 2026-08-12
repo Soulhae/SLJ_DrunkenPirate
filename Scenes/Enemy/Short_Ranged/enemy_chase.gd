@@ -13,26 +13,25 @@ func process(delta: float):
 	elif enemy.global_position.distance_to(player.global_position) < enemy.AttackReach:
 		Transitioned.emit(self, "enemyattack")
 
-# Move and face the player.
+# Move and face the player
 func physics_process(delta: float):
-	var next_location = enemy.nav.get_next_path_position()
-	var current_location = enemy.global_position
 
-	# Get direction from the navigation path.
-	var direction = (next_location - current_location).normalized()
+	var direction = (
+		player.global_position - enemy.global_position
+	).normalized()
 
-	# Face the direction of movement.
+	# Face the player
 	if direction.length() > 0.1:
 		enemy.look_at(
 			enemy.global_position + Vector3(direction.x, 0, direction.z),
 			Vector3.UP
 		)
-		
-	# Move toward the player.
+
+	# Movement
 	enemy.velocity.x = direction.x * enemy.RunSpeed
 	enemy.velocity.z = direction.z * enemy.RunSpeed
 
-	# Apply gravity.
+	# Gravity
 	if not enemy.is_on_floor():
 		enemy.velocity += enemy.get_gravity() * delta
 

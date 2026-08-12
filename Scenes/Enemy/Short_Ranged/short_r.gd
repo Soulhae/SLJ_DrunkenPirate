@@ -12,8 +12,8 @@ extends CharacterBody3D
 @export var JumpDistance: float = 3.0
 @export var AttackReach: float = 2.0
 @export var ChaseDistance: float = 10.0
-@export var WalkSpeed: float = 2.0
-@export var RunSpeed: float = 4.0
+@export var WalkSpeed: float = 3.0
+@export var RunSpeed: float = 8.5
 
 # Player target.
 var target: Node3D
