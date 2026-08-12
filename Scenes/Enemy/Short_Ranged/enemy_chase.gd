@@ -10,7 +10,8 @@ class_name EnemyChase
 func process(delta: float):
 	if enemy.global_position.distance_to(player.global_position) > enemy.ChaseDistance:
 		Transitioned.emit(self, "enemywander")
-
+	elif enemy.global_position.distance_to(player.global_position) < enemy.AttackReach:
+		Transitioned.emit(self, "enemyattack")
 
 # Move and face the player.
 func physics_process(delta: float):

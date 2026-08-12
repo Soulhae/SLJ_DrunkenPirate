@@ -8,6 +8,9 @@ extends CharacterBody3D
 @onready var nav = $NavigationAgent3D
 
 # Enemy movement settings.
+@export var JumpVelocity: float = 5.0
+@export var JumpDistance: float = 3.0
+@export var AttackReach: float = 2.0
 @export var ChaseDistance: float = 10.0
 @export var WalkSpeed: float = 2.0
 @export var RunSpeed: float = 4.0
@@ -18,3 +21,9 @@ var target: Node3D
 # Receives the player's position from the main scene.
 func target_position(target_position):
 	nav.target_position = target_position
+	
+# WIP
+# Makes the enemy jump.
+func jump():
+	if is_on_floor():
+		velocity.y = JumpVelocity   #  not implemeted this yet...............
