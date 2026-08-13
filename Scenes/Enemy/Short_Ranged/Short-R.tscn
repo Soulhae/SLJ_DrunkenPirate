@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccfglh7ctads5"]
 
-[ext_resource type="Script" uid="uid://743qfrqljurk" path="res://Scenes/Enemy/Short_Ranged/short_r.gd" id="1_l40u0"]
+[ext_resource type="Script" uid="uid://743qfrqljurk" path="res://Scenes/Enemy/Short_Ranged/Enemy.gd" id="1_l40u0"]
 [ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scenes/Enemy/StateMachine/state_machine.gd" id="2_7drta"]
 [ext_resource type="Script" uid="uid://dwfkejg0fu7x5" path="res://Scenes/Enemy/Short_Ranged/enemy_wander.gd" id="3_16av8"]
 [ext_resource type="Script" uid="uid://6bd2cb1kmt8i" path="res://Scenes/Enemy/Short_Ranged/enemy_chase.gd" id="4_16av8"]
@@ -28,11 +28,11 @@ radius = 0.52685547
 [node name="Enemy(SR)" type="CharacterBody3D" unique_id=1434957411]
 script = ExtResource("1_l40u0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1153664325]
+[node name="body" type="MeshInstance3D" parent="." unique_id=1153664325]
 mesh = SubResource("CapsuleMesh_hp6sh")
 surface_material_override/0 = SubResource("StandardMaterial3D_827x2")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2142665247]
+[node name="eyes" type="MeshInstance3D" parent="." unique_id=2142665247]
 transform = Transform3D(0.99985445, 0, 0.017063746, 0, 1, 0, -0.017063746, 0, 0.99985445, 0.0033847836, 0.44363123, -0.23607852)
 mesh = SubResource("BoxMesh_7t6ui")
 surface_material_override/0 = SubResource("StandardMaterial3D_bowrs")

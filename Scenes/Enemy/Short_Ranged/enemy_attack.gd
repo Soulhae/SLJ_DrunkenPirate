@@ -65,10 +65,10 @@ func physics_process(delta: float):
 	if attack_active:
 		attack_duration -= delta
 
-		if attack_duration <= 0.0:
-			attack_active = false
-			hitbox.monitoring = false
-			attack_duration = 0.2
+	if attack_duration <= 0.0:
+		attack_active = false
+		hitbox.monitoring = false
+		attack_duration = 0.2
 
 
 func exit():

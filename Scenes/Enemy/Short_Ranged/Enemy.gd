@@ -28,12 +28,7 @@ func _ready() -> void:
 # Receives the player's position from the main scene.
 func target_position(target_position):
 	nav.target_position = target_position
-	
-# WIP
-# Makes the enemy jump.
-func jump():
-	if is_on_floor():
-		velocity.y = JumpVelocity   #  not implemeted this yet...............
+
 
 # use enemy.take_demage(amount) to damage the enemy.
 func take_damage(amount: float):
