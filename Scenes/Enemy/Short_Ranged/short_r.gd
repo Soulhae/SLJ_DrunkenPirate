@@ -15,6 +15,7 @@ extends CharacterBody3D
 @export var ChaseDistance: float = 10.0
 @export var WalkSpeed: float = 3.0
 @export var RunSpeed: float = 8.5
+@export var Health: int = 200
 
 # Player target.
 var target: Node3D
@@ -33,3 +34,8 @@ func target_position(target_position):
 func jump():
 	if is_on_floor():
 		velocity.y = JumpVelocity   #  not implemeted this yet...............
+
+# use enemy.take_demage(amount) to damage the enemy.
+func take_damage(amount: float):
+	Health -= amount
+	print("Enemy HP: ", Health)

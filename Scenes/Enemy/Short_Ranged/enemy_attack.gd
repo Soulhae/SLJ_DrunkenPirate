@@ -1,36 +1,53 @@
 extends "res://Scenes/Enemy/StateMachine/state.gd"
 class_name EnemyAttack
 
-# References to the player and enemy.
+# References
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
+@onready var hitbox: Area3D = $"../../BOX/Hitbox"
 
-# Attack cooldown.
+# Attack settings
 var attack_cooldown = 1.0
 var attack_timer = 0.0
+var attack_duration = 0.2
+var attack_active = false
+
+
+func enter():
+	# Reset attack
+	attack_timer = 0.0
+	attack_duration = 0.2
+	attack_active = false
+	hitbox.monitoring = false
+
+	print("Swing Distance: ", enemy.global_position.distance_to(player.global_position))
+
 
 func process(delta: float):
-	# Return to chase if player leaves attack range.
+	# Check distance
 	var distance = enemy.global_position.distance_to(player.global_position)
 
 	if distance > enemy.AttackReach:
+		hitbox.monitoring = false
+		attack_active = false
 		Transitioned.emit(self, "enemychase")
 		return
 
-	# Deal damage after cooldown.
+	# Attack cooldown
 	attack_timer -= delta
 
-	if attack_timer <= 0.0:
-		print("Damage done")
+	if attack_timer <= 0.0 and not attack_active:
+		attack_active = true
+		attack_duration = 0.2
 		attack_timer = attack_cooldown
-
-func enter():
-	# Runs when entering the attack state.
-	print("Attack! Distance: ", enemy.global_position.distance_to(player.global_position))
-
+		hitbox.monitoring = true
+		print("Attack!")
+		
 func physics_process(delta: float):
-	# Face the player.
-	var direction = (player.global_position - enemy.global_position).normalized()
+	# Face player
+	var direction = (
+		player.global_position - enemy.global_position
+	).normalized()
 
 	if direction.length() > 0.1:
 		enemy.look_at(
@@ -38,8 +55,23 @@ func physics_process(delta: float):
 			Vector3.UP
 		)
 
-	# Apply gravity.
+	# Apply gravity
 	if not enemy.is_on_floor():
 		enemy.velocity += enemy.get_gravity() * delta
 
 	enemy.move_and_slide()
+
+	# Turn attack hitbox off
+	if attack_active:
+		attack_duration -= delta
+
+		if attack_duration <= 0.0:
+			attack_active = false
+			hitbox.monitoring = false
+			attack_duration = 0.2
+
+
+func exit():
+	# Make sure hitbox is disabled
+	hitbox.monitoring = false
+	attack_active = false

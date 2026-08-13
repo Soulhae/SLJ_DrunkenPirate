@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dwfkejg0fu7x5" path="res://Scenes/Enemy/Short_Ranged/enemy_wander.gd" id="3_16av8"]
 [ext_resource type="Script" uid="uid://6bd2cb1kmt8i" path="res://Scenes/Enemy/Short_Ranged/enemy_chase.gd" id="4_16av8"]
 [ext_resource type="Script" uid="uid://caa8acf8lrdpl" path="res://Scenes/Enemy/Short_Ranged/enemy_attack.gd" id="5_5q6vj"]
+[ext_resource type="Script" uid="uid://cb7ruy1miv8ix" path="res://Scenes/Enemy/Short_Ranged/enemy_death.gd" id="6_dhbw1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hp6sh"]
 
@@ -18,6 +19,11 @@ size = Vector3(0.87240154, 0.22216797, 0.6299057)
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hp6sh"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_su5vk"]
+radius = 0.52685547
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5q6vj"]
 
 [node name="Enemy(SR)" type="CharacterBody3D" unique_id=1434957411]
 script = ExtResource("1_l40u0")
@@ -53,8 +59,30 @@ metadata/_custom_type_script = "uid://6bd2cb1kmt8i"
 script = ExtResource("5_5q6vj")
 metadata/_custom_type_script = "uid://caa8acf8lrdpl"
 
+[node name="EnemyDeath" type="Node" parent="StateMachine" unique_id=1999066280]
+script = ExtResource("6_dhbw1")
+metadata/_custom_type_script = "uid://cb7ruy1miv8ix"
+
 [node name="Label3D" type="Label3D" parent="." unique_id=1130530563]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 pixel_size = 0.01
 billboard = 1
 text = "TEST"
+
+[node name="BOX" type="Node3D" parent="." unique_id=1342614745]
+
+[node name="Hurtbox" type="Area3D" parent="BOX" unique_id=1498011067]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/Hurtbox" unique_id=1240604139]
+shape = SubResource("CylinderShape3D_su5vk")
+
+[node name="Hitbox" type="Area3D" parent="BOX" unique_id=1693100317]
+collision_layer = 2
+collision_mask = 3
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/Hitbox" unique_id=1359936140]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13076651, -0.84151685)
+shape = SubResource("BoxShape3D_5q6vj")
