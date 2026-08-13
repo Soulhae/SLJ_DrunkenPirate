@@ -6,6 +6,7 @@ extends CharacterBody3D
 
 # Navigation system used by the enemy states.
 @onready var nav = $NavigationAgent3D
+@onready var label_3d: Label3D = $Label3D
 
 # Enemy movement settings.
 @export var JumpVelocity: float = 5.0
@@ -17,6 +18,11 @@ extends CharacterBody3D
 
 # Player target.
 var target: Node3D
+
+
+func _ready() -> void:
+	label_3d.text = name
+
 
 # Receives the player's position from the main scene.
 func target_position(target_position):

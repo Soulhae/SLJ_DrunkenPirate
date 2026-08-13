@@ -52,3 +52,9 @@ metadata/_custom_type_script = "uid://6bd2cb1kmt8i"
 [node name="EnemyAttack" type="Node" parent="StateMachine" unique_id=480480903]
 script = ExtResource("5_5q6vj")
 metadata/_custom_type_script = "uid://caa8acf8lrdpl"
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1130530563]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+pixel_size = 0.01
+billboard = 1
+text = "TEST"

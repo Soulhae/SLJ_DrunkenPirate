@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://l20t8ais4e3k"]
+
+[ext_resource type="Script" uid="uid://c84u4wnjy32a7" path="res://Scripts/TestingScripts/player_test.gd" id="1_8p05u"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cv0ty"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cke8t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cv0ty"]
+size = Vector3(1, 0.001, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cv0ty"]
+albedo_color = Color(0.47436506, 0.0015809989, 0.6828576, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cke8t"]
+material = SubResource("StandardMaterial3D_cv0ty")
+size = Vector3(0.5, 0.15, 0.25)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cke8t"]
+radius = 30.0
+
+[node name="Player" type="CharacterBody3D" unique_id=1973400536]
+script = ExtResource("1_8p05u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=219403245]
+shape = SubResource("CapsuleShape3D_cv0ty")
+
+[node name="Visuals" type="Node3D" parent="." unique_id=442783885]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals" unique_id=2016578365]
+mesh = SubResource("CapsuleMesh_cke8t")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Visuals" unique_id=1264403557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("BoxMesh_cv0ty")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Visuals" unique_id=2024655510]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -0.4)
+mesh = SubResource("BoxMesh_cke8t")
+
+[node name="HPivot" type="Node3D" parent="." unique_id=467669740]
+
+[node name="VPivot" type="Node3D" parent="HPivot" unique_id=498348825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="HPivot/VPivot" unique_id=1214883262]
+spring_length = 5.0
+margin = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="HPivot/VPivot/SpringArm3D" unique_id=1200272196]
+
+[node name="LockTargetRange" type="Area3D" parent="." unique_id=84205837]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LockTargetRange" unique_id=1440399636]
+shape = SubResource("SphereShape3D_cke8t")
+
+[connection signal="body_entered" from="LockTargetRange" to="." method="_on_lock_target_range_body_entered"]
+[connection signal="body_exited" from="LockTargetRange" to="." method="_on_lock_target_range_body_exited"]
