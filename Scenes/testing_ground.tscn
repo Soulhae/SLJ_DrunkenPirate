@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dv7pxc2am5unn" path="res://Scripts/TestingScripts/testing_ground.gd" id="1_1clf0"]
 [ext_resource type="PackedScene" uid="uid://ccfglh7ctads5" path="res://Scenes/Enemy/Short_Ranged/Short-R.tscn" id="1_x8jwb"]
 [ext_resource type="PackedScene" uid="uid://l20t8ais4e3k" path="res://Scenes/player/player.tscn" id="3_dg8kd"]
+[ext_resource type="PackedScene" uid="uid://cyyddidb38rak" path="res://Scenes/Enemy/Salt-Eaten/Salt-Eaten.tscn" id="4_dg8kd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1clf0"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -254,3 +255,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.29621, 11.144039, -21.860
 
 [node name="Enemy(SR)19" parent="Enemy" unique_id=1416345545 groups=["enemy"] instance=ExtResource("1_x8jwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.790684, 11.144039, -21.860725)
+
+[node name="BOSS" parent="." unique_id=1642110537 groups=["enemy"] instance=ExtResource("4_dg8kd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.269035, 7.183483, 0)
