@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="SlJ_DrunkenPirate"
+config/name="SLJ_DrunkenPirate"
+run/main_scene="uid://d2tay3gmr3hi2"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

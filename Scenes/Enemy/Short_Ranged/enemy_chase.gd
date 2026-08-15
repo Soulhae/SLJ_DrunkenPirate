@@ -7,7 +7,7 @@ class_name EnemyChase
 
 
 # Check if the player is too far away.
-func process(delta: float):
+func process(_delta: float):
 	if enemy.global_position.distance_to(player.global_position) > enemy.ChaseDistance:
 		Transitioned.emit(self, "enemywander")
 	elif enemy.global_position.distance_to(player.global_position) < enemy.AttackReach:

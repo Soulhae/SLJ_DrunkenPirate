@@ -13,9 +13,9 @@ func exit():
 	pass
 
 # Regular frame update.
-func process(delta: float):
+func process(_delta: float):
 	pass
 
 # Physics update.
-func physics_process(delta: float):
+func physics_process(_delta: float):
 	pass

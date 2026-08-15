@@ -13,10 +13,10 @@ func enter():
 	# Disable collisions
 	enemy.set_physics_process(false)
 
-func process(delta: float):
+func process(_delta: float):
 	# Nothing for now
 	pass
 
-func physics_process(delta: float):
+func physics_process(_delta: float):
 	# Nothing for now
 	pass
