@@ -2,10 +2,6 @@
 
 [ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scenes/Enemy/StateMachine/state_machine.gd" id="1_b52jn"]
 [ext_resource type="Script" uid="uid://d3fqsrojyg6y3" path="res://Scenes/Enemy/Salt-Eaten/salt_eaten.gd" id="1_n0msd"]
-[ext_resource type="Script" uid="uid://dwfkejg0fu7x5" path="res://Scenes/Enemy/Short_Ranged/enemy_wander.gd" id="2_n0msd"]
-[ext_resource type="Script" uid="uid://6bd2cb1kmt8i" path="res://Scenes/Enemy/Short_Ranged/enemy_chase.gd" id="4_86d58"]
-[ext_resource type="Script" uid="uid://caa8acf8lrdpl" path="res://Scenes/Enemy/Short_Ranged/enemy_attack.gd" id="5_ghlsd"]
-[ext_resource type="Script" uid="uid://cb7ruy1miv8ix" path="res://Scenes/Enemy/Short_Ranged/enemy_death.gd" id="6_8a7lf"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uxkxr"]
 radius = 1.0
@@ -70,21 +66,5 @@ shape = SubResource("BoxShape3D_oqb3r")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1861708363 node_paths=PackedStringArray("InitialState")]
 script = ExtResource("1_b52jn")
-InitialState = NodePath("EnemyWander")
+InitialState = NodePath("")
 metadata/_custom_type_script = "uid://des8mb1cibtv4"
-
-[node name="EnemyWander" type="Node" parent="StateMachine" unique_id=2016230357]
-script = ExtResource("2_n0msd")
-metadata/_custom_type_script = "uid://dwfkejg0fu7x5"
-
-[node name="EnemyChase" type="Node" parent="StateMachine" unique_id=364691468]
-script = ExtResource("4_86d58")
-metadata/_custom_type_script = "uid://6bd2cb1kmt8i"
-
-[node name="EnemyAttack" type="Node" parent="StateMachine" unique_id=678632787]
-script = ExtResource("5_ghlsd")
-metadata/_custom_type_script = "uid://caa8acf8lrdpl"
-
-[node name="EnemyDeath" type="Node" parent="StateMachine" unique_id=458044339]
-script = ExtResource("6_8a7lf")
-metadata/_custom_type_script = "uid://cb7ruy1miv8ix"
