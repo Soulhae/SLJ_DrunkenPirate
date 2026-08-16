@@ -11,8 +11,12 @@ var wander_time: float = 0.0
 
 # Choose a random direction and time.
 func randomise_variables():
-	if randf_range(0,3) != 1:
-		wander_direction = Vector3(randf_range(-1.0, 1.0),0.0,randf_range(-1.0, 1.0)).normalized()
+	if randi_range(0, 2) != 1:
+		wander_direction = Vector3(
+			randf_range(-1.0, 1.0),
+			0.0,
+			randf_range(-1.0, 1.0)
+		).normalized()
 	else:
 		wander_direction = Vector3.ZERO
 
@@ -24,28 +28,29 @@ func enter():
 	randomise_variables()
 
 
-# Check timers and chase distance.
+# Check timer and chase distance.
 func process(delta: float):
 	wander_time -= delta
 
-	if wander_time < 0.0:
-		randomise_variables()
-
+	# Player is close enough to chase.
 	if enemy.global_position.distance_to(player.global_position) < enemy.ChaseDistance:
 		Transitioned.emit(self, "bosschase")
+		return
+
+	# Finished wandering.
+	if wander_time <= 0.0:
+		Transitioned.emit(self, "bossrest")
 
 
 # Move and face the random direction.
 func physics_process(delta: float):
 
-	# Face movement direction.
 	if wander_direction.length() > 0.1:
 		enemy.look_at(
-			enemy.global_position + Vector3(wander_direction.x, 0, wander_direction.z),
+			enemy.global_position + wander_direction,
 			Vector3.UP
 		)
 
-	# Move in the random direction.
 	enemy.velocity.x = wander_direction.x * enemy.WalkSpeed
 	enemy.velocity.z = wander_direction.z * enemy.WalkSpeed
 

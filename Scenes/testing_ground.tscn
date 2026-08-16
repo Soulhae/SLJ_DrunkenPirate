@@ -192,7 +192,7 @@ mesh = SubResource("BoxMesh_hp6sh")
 
 [node name="Player" parent="." unique_id=1973400536 groups=["player"] instance=ExtResource("3_dg8kd")]
 
-[node name="Enemy" type="Node" parent="." unique_id=687565011]
+[node name="Enemy" type="Node3D" parent="." unique_id=1556096386]
 
 [node name="Enemy(SR)" parent="Enemy" unique_id=1434957411 groups=["enemy"] instance=ExtResource("1_x8jwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.994644, 0.75461197, -39.36117)

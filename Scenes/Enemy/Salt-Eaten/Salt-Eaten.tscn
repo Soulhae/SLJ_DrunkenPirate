@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scenes/Enemy/StateMachine/state_machine.gd" id="1_b52jn"]
 [ext_resource type="Script" uid="uid://d3fqsrojyg6y3" path="res://Scenes/Enemy/Salt-Eaten/salt_eaten.gd" id="1_n0msd"]
+[ext_resource type="Script" uid="uid://cqbrpl8be1xkm" path="res://Scenes/Enemy/Salt-Eaten/boss_rest.gd" id="3_1517h"]
+[ext_resource type="Script" uid="uid://dgxc8rj21hf0s" path="res://Scenes/Enemy/Salt-Eaten/boss_wander.gd" id="4_ls4fi"]
+[ext_resource type="Script" uid="uid://dtvpwqjke6ni6" path="res://Scenes/Enemy/Salt-Eaten/boss_chase.gd" id="5_jt70v"]
+[ext_resource type="Script" uid="uid://djulo36byti4k" path="res://Scenes/Enemy/Salt-Eaten/boss_attack.gd" id="6_jt70v"]
+[ext_resource type="Script" uid="uid://dxa5jh0ma3yv2" path="res://Scenes/Enemy/Salt-Eaten/boss_recovery.gd" id="7_w4e77"]
+[ext_resource type="Script" uid="uid://dpw28v8mixq1x" path="res://Scenes/Enemy/Salt-Eaten/boss_death.gd" id="8_hqacl"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uxkxr"]
 radius = 1.0
@@ -66,5 +72,29 @@ shape = SubResource("BoxShape3D_oqb3r")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1861708363 node_paths=PackedStringArray("InitialState")]
 script = ExtResource("1_b52jn")
-InitialState = NodePath("")
+InitialState = NodePath("BossRest")
 metadata/_custom_type_script = "uid://des8mb1cibtv4"
+
+[node name="BossRest" type="Node" parent="StateMachine" unique_id=870261481]
+script = ExtResource("3_1517h")
+metadata/_custom_type_script = "uid://cqbrpl8be1xkm"
+
+[node name="BossWander" type="Node" parent="StateMachine" unique_id=913366541]
+script = ExtResource("4_ls4fi")
+metadata/_custom_type_script = "uid://dgxc8rj21hf0s"
+
+[node name="BossChase" type="Node" parent="StateMachine" unique_id=48892720]
+script = ExtResource("5_jt70v")
+metadata/_custom_type_script = "uid://dtvpwqjke6ni6"
+
+[node name="BossAttack" type="Node" parent="StateMachine" unique_id=1507483052]
+script = ExtResource("6_jt70v")
+metadata/_custom_type_script = "uid://djulo36byti4k"
+
+[node name="BossRecovery" type="Node" parent="StateMachine" unique_id=1419181460]
+script = ExtResource("7_w4e77")
+metadata/_custom_type_script = "uid://dxa5jh0ma3yv2"
+
+[node name="BossDeath" type="Node" parent="StateMachine" unique_id=22303754]
+script = ExtResource("8_hqacl")
+metadata/_custom_type_script = "uid://dpw28v8mixq1x"
