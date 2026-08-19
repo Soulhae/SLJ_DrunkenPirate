@@ -20,7 +20,7 @@ func enter():
 	attack_active = false
 	hitbox.monitoring = false
 
-	print("Swing Distance: ", enemy.global_position.distance_to(player.global_position))
+	#print("Swing Distance: ", enemy.global_position.distance_to(player.global_position))
 
 
 func process(delta: float):
@@ -41,7 +41,7 @@ func process(delta: float):
 		attack_duration = 0.2
 		attack_timer = attack_cooldown
 		hitbox.monitoring = true
-		print("Attack!")
+		#print("Attack!")
 		
 func physics_process(delta: float):
 	# Face player

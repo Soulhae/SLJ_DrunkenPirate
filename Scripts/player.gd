@@ -31,10 +31,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				PI/4
 			);
 			return;
-		else:
-			var new_enemy_position: Vector3 = Vector3(enemy_target.global_position.x, 
-					h_pivot.global_position.y, enemy_target.global_position.z)
-			h_pivot.look_at(new_enemy_position)
+		#else:
+			#var new_enemy_position: Vector3 = Vector3(enemy_target.global_position.x, 
+					#h_pivot.global_position.y, enemy_target.global_position.z)
+			#h_pivot.look_at(new_enemy_position)
 	
 	if event.is_action_pressed("lock_target"):
 		if enemy_target != null:
@@ -56,9 +56,12 @@ func _unhandled_input(event: InputEvent) -> void:
 						closest_enemy = body
 						closest_distance = enemy_distance_to_center
 					enemies_in_range.append(body)
-			enemy_target = closest_enemy
-			print("Enemies in range (%s): %s" %[enemies_in_range.size(), enemies_in_range])
-			print("Locked enemy ", enemy_target)
+			if check_enemy_is_visible(closest_enemy):
+				enemy_target = closest_enemy
+			else:
+				enemy_target = null
+			#print("Enemies in range (%s): %s" %[enemies_in_range.size(), enemies_in_range])
+			#print("Locked enemy ", enemy_target)
 
 
 func _process(delta: float) -> void:
@@ -90,15 +93,17 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (h_pivot.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var target_angle: float
+	
 	if not enemy_target:
 		target_angle = atan2(-direction.x, -direction.z)
 	else:
 		var enemy_to_player_vector: Vector3 = (enemy_target.global_position - global_position).normalized()
 		target_angle = atan2(-enemy_to_player_vector.x, -enemy_to_player_vector.z)
+	visuals.rotation.y = lerp_angle(visuals.rotation.y, target_angle, 5 * delta)
+	
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-		visuals.rotation.y = lerp_angle(visuals.rotation.y, target_angle, 5 * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
@@ -107,13 +112,29 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_lock_target_range_body_entered(body: Node3D) -> void:
-	if body.is_in_group("enemy"):
-		print("Enemy: %s in range" % body)
+	#if body.is_in_group("enemy"):
+		#print("Enemy: %s in range" % body)
+	pass
 
 
 func _on_lock_target_range_body_exited(body: Node3D) -> void:
 	if body == enemy_target:
 		enemy_target = null
 	
-	if body.is_in_group("enemy"):
-		print("Enemy: %s now out of range" % body.name)
+	#if body.is_in_group("enemy"):
+		#print("Enemy: %s now out of range" % body.name)
+
+
+func check_enemy_is_visible(closest_enemy: CharacterBody3D) -> bool:
+	if not closest_enemy:
+		return false
+	
+	var ray_from : Vector3 = camera_3d.global_position
+	var ray_to : Vector3 = closest_enemy.global_position
+	var space = get_world_3d().direct_space_state
+	var ray_query = PhysicsRayQueryParameters3D.create(ray_from, ray_to)
+	ray_query.exclude = [self.get_rid()]
+	var ray_result = space.intersect_ray(ray_query)
+	
+	#print(ray_result)
+	return true if ray_result and ray_result.collider == closest_enemy else false
