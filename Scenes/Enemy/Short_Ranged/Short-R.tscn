@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ccfglh7ctads5"]
 
 [ext_resource type="Script" uid="uid://743qfrqljurk" path="res://Scenes/Enemy/Short_Ranged/Enemy.gd" id="1_l40u0"]
-[ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scenes/Enemy/StateMachine/state_machine.gd" id="2_7drta"]
+[ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scripts/StateMachine/state_machine.gd" id="2_7drta"]
 [ext_resource type="Script" uid="uid://dwfkejg0fu7x5" path="res://Scenes/Enemy/Short_Ranged/enemy_wander.gd" id="3_16av8"]
 [ext_resource type="Script" uid="uid://6bd2cb1kmt8i" path="res://Scenes/Enemy/Short_Ranged/enemy_chase.gd" id="4_16av8"]
 [ext_resource type="Script" uid="uid://caa8acf8lrdpl" path="res://Scenes/Enemy/Short_Ranged/enemy_attack.gd" id="5_5q6vj"]

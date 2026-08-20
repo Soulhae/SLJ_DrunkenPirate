@@ -81,37 +81,11 @@ func _process(delta: float) -> void:
 		h_pivot.look_at(new_enemy_position)
 
 
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var direction := (h_pivot.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	var target_angle: float
-	
-	if not enemy_target:
-		target_angle = atan2(-direction.x, -direction.z)
-	else:
-		var enemy_to_player_vector: Vector3 = (enemy_target.global_position - global_position).normalized()
-		target_angle = atan2(-enemy_to_player_vector.x, -enemy_to_player_vector.z)
-	visuals.rotation.y = lerp_angle(visuals.rotation.y, target_angle, 5 * delta)
-	
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
+func _physics_process(_delta: float) -> void:
+	pass
 
 
-func _on_lock_target_range_body_entered(body: Node3D) -> void:
+func _on_lock_target_range_body_entered(_body: Node3D) -> void:
 	#if body.is_in_group("enemy"):
 		#print("Enemy: %s in range" % body)
 	pass
@@ -138,3 +112,20 @@ func check_enemy_is_visible(closest_enemy: CharacterBody3D) -> bool:
 	
 	#print(ray_result)
 	return true if ray_result and ray_result.collider == closest_enemy else false
+
+
+func get_camera_relative_input() -> Vector3:
+	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	return (h_pivot.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+
+func update_visuals_rotation(direction: Vector3, delta: float) -> void:
+	var target_angle: float
+	
+	if enemy_target:
+		var enemy_to_player_vector: Vector3 = (enemy_target.global_position - global_position).normalized()
+		target_angle = atan2(-enemy_to_player_vector.x, -enemy_to_player_vector.z)
+		visuals.rotation.y = lerp_angle(visuals.rotation.y, target_angle, 5 * delta)
+	elif direction:
+		target_angle = atan2(-direction.x, -direction.z)
+		visuals.rotation.y = lerp_angle(visuals.rotation.y, target_angle, 5 * delta)

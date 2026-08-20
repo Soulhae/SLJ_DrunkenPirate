@@ -1,4 +1,4 @@
-extends "res://Scenes/Enemy/StateMachine/state.gd"
+extends State
 class_name BossWander
 
 var wander_direction: Vector3

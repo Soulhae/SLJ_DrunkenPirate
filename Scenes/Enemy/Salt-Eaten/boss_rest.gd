@@ -1,4 +1,4 @@
-extends "res://Scenes/Enemy/StateMachine/state.gd"
+extends State
 class_name BossRest
 
 var rest_time: float = 0.0

@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://l20t8ais4e3k"]
 
-[ext_resource type="Script" uid="uid://c84u4wnjy32a7" path="res://Scripts/player.gd" id="1_8p05u"]
+[ext_resource type="Script" uid="uid://c84u4wnjy32a7" path="res://Scripts/player/player.gd" id="1_8p05u"]
+[ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scripts/StateMachine/state_machine.gd" id="2_eo61r"]
+[ext_resource type="Script" uid="uid://baf1s8378ue47" path="res://Scripts/player/states/player_idle.gd" id="3_ca0mu"]
+[ext_resource type="Script" uid="uid://qbosyss3efhl" path="res://Scripts/player/states/player_move.gd" id="4_6upyo"]
+[ext_resource type="Script" uid="uid://bv6o83grmw5m3" path="res://Scripts/player/states/player_air.gd" id="5_xxarj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cv0ty"]
 
@@ -38,6 +42,12 @@ mesh = SubResource("BoxMesh_cv0ty")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -0.4)
 mesh = SubResource("BoxMesh_cke8t")
 
+[node name="Label3D" type="Label3D" parent="Visuals" unique_id=1577466752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4000001, 0)
+pixel_size = 0.01
+billboard = 1
+text = "TEST"
+
 [node name="HPivot" type="Node3D" parent="." unique_id=467669740]
 
 [node name="VPivot" type="Node3D" parent="HPivot" unique_id=498348825]
@@ -53,6 +63,22 @@ margin = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LockTargetRange" unique_id=1440399636]
 shape = SubResource("SphereShape3D_cke8t")
+
+[node name="StateMachine" type="Node" parent="." unique_id=593315136 node_paths=PackedStringArray("InitialState")]
+script = ExtResource("2_eo61r")
+InitialState = NodePath("PlayerIdle")
+
+[node name="PlayerIdle" type="Node" parent="StateMachine" unique_id=291363046]
+script = ExtResource("3_ca0mu")
+metadata/_custom_type_script = "uid://baf1s8378ue47"
+
+[node name="PlayerMove" type="Node" parent="StateMachine" unique_id=3523786]
+script = ExtResource("4_6upyo")
+metadata/_custom_type_script = "uid://qbosyss3efhl"
+
+[node name="PlayerAir" type="Node" parent="StateMachine" unique_id=75677728]
+script = ExtResource("5_xxarj")
+metadata/_custom_type_script = "uid://bv6o83grmw5m3"
 
 [connection signal="body_entered" from="LockTargetRange" to="." method="_on_lock_target_range_body_entered"]
 [connection signal="body_exited" from="LockTargetRange" to="." method="_on_lock_target_range_body_exited"]

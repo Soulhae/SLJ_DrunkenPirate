@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyyddidb38rak"]
 
-[ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scenes/Enemy/StateMachine/state_machine.gd" id="1_b52jn"]
+[ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scripts/StateMachine/state_machine.gd" id="1_b52jn"]
 [ext_resource type="Script" uid="uid://d3fqsrojyg6y3" path="res://Scenes/Enemy/Salt-Eaten/salt_eaten.gd" id="1_n0msd"]
 [ext_resource type="Script" uid="uid://cqbrpl8be1xkm" path="res://Scenes/Enemy/Salt-Eaten/boss_rest.gd" id="3_1517h"]
 [ext_resource type="Script" uid="uid://dgxc8rj21hf0s" path="res://Scenes/Enemy/Salt-Eaten/boss_wander.gd" id="4_ls4fi"]

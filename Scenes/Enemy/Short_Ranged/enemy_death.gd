@@ -1,4 +1,4 @@
-extends "res://Scenes/Enemy/StateMachine/state.gd"
+extends State
 class_name EnemyDeath
 # Reference to the player and enemy.
 @onready var player = get_tree().get_first_node_in_group("player")

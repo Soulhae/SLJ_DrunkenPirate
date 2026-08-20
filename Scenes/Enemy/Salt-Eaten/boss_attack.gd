@@ -1,4 +1,4 @@
-extends "res://Scenes/Enemy/StateMachine/state.gd"
+extends State
 class_name BossAttack
 
 # Reference to the enemy and its attack hitbox.
