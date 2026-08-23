@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@export var Health: int = 100
 
 const SPEED = 10.0
 const JUMP_VELOCITY = 4.5
@@ -129,3 +130,11 @@ func update_visuals_rotation(direction: Vector3, delta: float) -> void:
 	elif direction:
 		target_angle = atan2(-direction.x, -direction.z)
 		visuals.rotation.y = lerp_angle(visuals.rotation.y, target_angle, 5 * delta)
+		
+func take_damage(amount: int) -> void:
+	Health -= amount
+	print("PLAYER HEALTH: ", Health)
+
+	if Health <= 0:
+		Health = 0
+		print("PLAYER DIED")

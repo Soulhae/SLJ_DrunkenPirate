@@ -16,6 +16,12 @@ height = 4.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b52jn"]
 albedo_color = Color(0, 1, 1, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_hqacl"]
+size = Vector3(1.352417, 0.69976807, 1.2325468)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqacl"]
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u3l87"]
 radius = 1.0
 height = 4.0
@@ -29,6 +35,13 @@ radius = 0.52685547
 [sub_resource type="BoxShape3D" id="BoxShape3D_oqb3r"]
 size = Vector3(1, 1, 0.91308594)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hqacl"]
+height = 5.3918457
+radius = 11.450195
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hp6sh"]
+size = Vector3(2.3980713, 1, 5.1990967)
+
 [node name="BOSS" type="CharacterBody3D" unique_id=1642110537]
 script = ExtResource("1_n0msd")
 
@@ -38,9 +51,14 @@ pixel_size = 0.01
 billboard = 1
 text = "Salt Eaten"
 
-[node name="body" type="MeshInstance3D" parent="." unique_id=1771702886]
+[node name="Body" type="MeshInstance3D" parent="." unique_id=1771702886]
 mesh = SubResource("CapsuleMesh_uxkxr")
 surface_material_override/0 = SubResource("StandardMaterial3D_b52jn")
+
+[node name="Eye" type="MeshInstance3D" parent="." unique_id=993517484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015258789, 1.027175, -0.3862813)
+mesh = SubResource("BoxMesh_hqacl")
+surface_material_override/0 = SubResource("StandardMaterial3D_hqacl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=561946460]
 shape = SubResource("CapsuleShape3D_u3l87")
@@ -69,6 +87,20 @@ monitoring = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/Hitbox" unique_id=1889977301]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.80847836)
 shape = SubResource("BoxShape3D_oqb3r")
+
+[node name="slam_radius" type="Area3D" parent="BOX" unique_id=1085303923]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/slam_radius" unique_id=2034274680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63952637, 0)
+shape = SubResource("CylinderShape3D_hqacl")
+
+[node name="punch_hitbox" type="Area3D" parent="BOX" unique_id=1070185608]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/punch_hitbox" unique_id=2067290081]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040549517, 0, -2.3555207)
+shape = SubResource("BoxShape3D_hp6sh")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1861708363 node_paths=PackedStringArray("InitialState")]
 script = ExtResource("1_b52jn")

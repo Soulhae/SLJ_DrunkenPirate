@@ -1,31 +1,35 @@
 extends State
 class_name BossAttack
 
-# Reference to the enemy and its attack hitbox.
-# Reference to the player and enemy.
+# References
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
 
-@onready var hitbox: Area3D = $"../../BOX/Hitbox"
+# Attack hitboxes
+@onready var slam_radius: Area3D = $"../../BOX/slam_radius"
+@onready var punch_hitbox: Area3D = $"../../BOX/punch_hitbox"
 
-# Keeps track of whether the current attack has finished.
+# Attack damage
+@export var punch_damage: int = 20
+@export var slam_damage: int = 30
+
+# Attack state
 var attack_finished: bool = false
-
-
-# Choose and start an attack.
-func enter():
-	attack_finished = false
-	hitbox.monitoring = false
-	
-	choose_attack()
-# Stores the previous attack.
 var last_attack: int = -1
+var ground_slam_active: bool = false
+
+
+func enter() -> void:
+	attack_finished = false
+	ground_slam_active = false
+	punch_hitbox.monitoring = false
+
+	choose_attack()
 
 
 # Choose which attack to use.
-func choose_attack():
+func choose_attack() -> void:
 
-	# Get the distance between the boss and player.
 	var distance_to_player = enemy.global_position.distance_to(
 		player.global_position
 	)
@@ -33,56 +37,51 @@ func choose_attack():
 	var possible_attacks: Array[int] = []
 	var weights: Array[float] = []
 
-
 	# Close range.
 	if distance_to_player <= 4.0:
 		possible_attacks = [0, 1]
 		weights = [0.6, 0.4]
 
-
-	# Mid range.
-	elif distance_to_player <= 12.0:
-		possible_attacks = [1, 2]
+	# Mid / long range.
+	else:
+		possible_attacks = [0, 1]
 		weights = [0.4, 0.6]
 
-
-	# Long range.
-	else:
-		possible_attacks = [2]
-		weights = [1.0]
-
-
-	# Avoid using the same attack twice in a row.
+	# Prevent the same attack twice in a row.
 	if possible_attacks.size() > 1 and last_attack in possible_attacks:
 		var index = possible_attacks.find(last_attack)
 		possible_attacks.remove_at(index)
 		weights.remove_at(index)
 
-
-	# Choose an attack.
-	var attack = choose_weighted_attack(possible_attacks, weights)
+	var attack = choose_weighted_attack(
+		possible_attacks,
+		weights
+	)
 
 	last_attack = attack
 
-
 	match attack:
 		0:
-			bite()
+			punch()
 		1:
-			tail_slam()
-		2:
-			water_spit()
+			ground_slam()
 
 
 # Choose an attack using weighted randomness.
-func choose_weighted_attack(attacks: Array[int], weights: Array[float]) -> int:
+func choose_weighted_attack(
+	attacks: Array[int],
+	weights: Array[float]
+) -> int:
 
 	var total_weight: float = 0.0
 
 	for weight in weights:
 		total_weight += weight
 
-	var random_value = randf_range(0.0, total_weight)
+	var random_value = randf_range(
+		0.0,
+		total_weight
+	)
 
 	for i in range(attacks.size()):
 		random_value -= weights[i]
@@ -92,123 +91,162 @@ func choose_weighted_attack(attacks: Array[int], weights: Array[float]) -> int:
 
 	return attacks[attacks.size() - 1]
 
-	
 
-# ATTACK 0 - BITE
+# PUNCH
+func punch() -> void:
 
+	print("PUNCH WIND UP")
 
-func bite():
+	punch_hitbox.monitoring = false
 
-	print("BITE WIND UP")
+	await get_tree().create_timer(0.6).timeout
 
-	# Wait during the bite wind-up.
-	await get_tree().create_timer(0.8).timeout
+	print("PUNCH ATTACK")
 
-	# The bite is now active.
-	print("BITE ATTACK")
+	punch_hitbox.monitoring = true
 
-	# Enable the melee hitbox.
-	hitbox.monitoring = true
-
-	# Keep the hitbox active for a short amount of time.
 	await get_tree().create_timer(0.2).timeout
 
-	# Check whether the player was hit.
-	check_melee_hitbox()
-
-	# Disable the hitbox after the attack.
-	hitbox.monitoring = false
-
-	# Finish the attack.
-	attack_finished = true
-
-
-
-# ATTACK 1 - TAIL SLAM
-
-
-func tail_slam():
-
-	print("TAIL SLAM WIND UP")
-
-	# Tail slam has a longer wind-up.
-	await get_tree().create_timer(1.2).timeout
-
-	print("TAIL SLAM ATTACK")
-
-	# Enable the hitbox.
-	hitbox.monitoring = true
-
-	# Tail slam stays active longer than the bite.
-	await get_tree().create_timer(0.35).timeout
-
-	# Check for the player.
-	check_melee_hitbox()
-
-	# Disable the hitbox.
-	hitbox.monitoring = false
-
-	# Finish the attack.
-	attack_finished = true
-
-
-# ATTACK 2 - WATER SPIT
-
-
-func water_spit():
-
-	print("WATER SPIT WIND UP")
-
-	# Longer wind-up for a ranged attack.
-	await get_tree().create_timer(1.5).timeout
-
-	print("WATER SPIT ATTACK")
-
-	# The actual projectile can be added later.
-	# This attack does not use the melee hitbox.
-
-	attack_finished = true
-
-
-
-# MELEE HIT DETECTION
-
-
-func check_melee_hitbox():
-
-	var bodies = hitbox.get_overlapping_bodies()
-
-	for body in bodies:
+	for body in punch_hitbox.get_overlapping_bodies():
 
 		if body.is_in_group("player"):
-			print("PLAYER HURT")
+			body.take_damage(punch_damage)
+
+			# Push the player in the direction the boss faces.
+			var punch_direction = -enemy.global_transform.basis.z
+
+			punch_direction.y = 0.0
+			punch_direction = punch_direction.normalized()
+
+			body.velocity.x = punch_direction.x * 8.0
+			body.velocity.z = punch_direction.z * 8.0
+			body.velocity.y = 3.0
+
+			print("PLAYER PUNCHED")
+
+	punch_hitbox.monitoring = false
+
+	attack_finished = true
 
 
+# GROUND SLAM
+func ground_slam() -> void:
 
-# ATTACK STATE
+	# Ground Slam requires the boss to be grounded.
+	if not enemy.is_on_floor():
+		attack_finished = true
+		return
 
+	ground_slam_active = true
 
-func process(_delta: float):
+	print("GROUND SLAM WIND UP")
 
-	# Wait until the selected attack has finished.
-	if attack_finished:
-		Transitioned.emit(self, "bossrecovery")
-		attack_finished = false
+	await get_tree().create_timer(0.8).timeout
 
+	# Remember where the boss started the jump.
+	var slam_x = enemy.global_position.x
+	var slam_z = enemy.global_position.z
 
-# Keep the boss still while attacking.
-func physics_process(delta: float):
-
+	# Stop horizontal movement before jumping.
 	enemy.velocity.x = 0.0
 	enemy.velocity.z = 0.0
 
-	# Apply gravity.
+	print("GROUND SLAM JUMP")
+
+	enemy.velocity.y = 10.0
+
+	await get_tree().create_timer(0.15).timeout
+
+	# Keep the boss from moving horizontally while airborne.
+	while not enemy.is_on_floor():
+
+		enemy.velocity.x = 0.0
+		enemy.velocity.z = 0.0
+
+		await get_tree().process_frame
+
+	# Put the boss back at the original landing position.
+	enemy.global_position.x = slam_x
+	enemy.global_position.z = slam_z
+
+	print("GROUND SLAM LAND")
+
+	await get_tree().create_timer(0.1).timeout
+
+	print("GROUND SLAM ATTACK")
+
+	var bodies = slam_radius.get_overlapping_bodies()
+
+	for body in bodies:
+
+		# Player
+		if body.is_in_group("player"):
+
+			body.take_damage(slam_damage)
+
+			var direction = (
+				body.global_position
+				- enemy.global_position
+			)
+
+			direction.y = 0.0
+
+			if direction.length() > 0.1:
+				direction = direction.normalized()
+
+			body.velocity.x = direction.x * 5.0
+			body.velocity.z = direction.z * 5.0
+			body.velocity.y = 10.0
+
+			print("PLAYER HIT BY GROUND SLAM")
+
+		# Other enemies
+		elif body.is_in_group("enemy") and body != enemy:
+
+			var direction = (
+				body.global_position
+				- enemy.global_position
+			)
+
+			direction.y = 0.0
+
+			if direction.length() > 0.1:
+				direction = direction.normalized()
+
+			body.velocity.x = direction.x * 5.0
+			body.velocity.z = direction.z * 5.0
+			body.velocity.y = 10.0
+
+			print("ENEMY HIT BY GROUND SLAM: ", body.name)
+
+	ground_slam_active = false
+
+	await get_tree().create_timer(1.0).timeout
+
+	attack_finished = true
+
+
+func process(_delta: float) -> void:
+
+	if attack_finished:
+		attack_finished = false
+		Transitioned.emit(self, "bossrecovery")
+
+
+func physics_process(delta: float) -> void:
+
+	# Keep the boss stationary during attacks.
+	enemy.velocity.x = 0.0
+	enemy.velocity.z = 0.0
+
+	# Apply gravity while airborne.
 	if not enemy.is_on_floor():
 		enemy.velocity += enemy.get_gravity() * delta
 
 	enemy.move_and_slide()
 
 
-# Clean up the hitbox if the state is exited.
-func exit():
-	hitbox.monitoring = false
+func exit() -> void:
+
+	punch_hitbox.monitoring = false
+	ground_slam_active = false

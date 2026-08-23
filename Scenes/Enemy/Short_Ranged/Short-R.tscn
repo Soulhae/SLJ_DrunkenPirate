@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://6bd2cb1kmt8i" path="res://Scenes/Enemy/Short_Ranged/enemy_chase.gd" id="4_16av8"]
 [ext_resource type="Script" uid="uid://caa8acf8lrdpl" path="res://Scenes/Enemy/Short_Ranged/enemy_attack.gd" id="5_5q6vj"]
 [ext_resource type="Script" uid="uid://cb7ruy1miv8ix" path="res://Scenes/Enemy/Short_Ranged/enemy_death.gd" id="6_dhbw1"]
+[ext_resource type="Script" uid="uid://ci15s2qufkpw7" path="res://Scenes/Enemy/Short_Ranged/enemy_recover.gd" id="7_kj52q"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hp6sh"]
 
@@ -63,6 +64,10 @@ metadata/_custom_type_script = "uid://caa8acf8lrdpl"
 [node name="EnemyDeath" type="Node" parent="StateMachine" unique_id=1999066280]
 script = ExtResource("6_dhbw1")
 metadata/_custom_type_script = "uid://cb7ruy1miv8ix"
+
+[node name="EnemyRecovery" type="Node" parent="StateMachine" unique_id=901732708]
+script = ExtResource("7_kj52q")
+metadata/_custom_type_script = "uid://ci15s2qufkpw7"
 
 [node name="Label3D" type="Label3D" parent="." unique_id=1130530563]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)

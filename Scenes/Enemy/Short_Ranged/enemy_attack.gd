@@ -6,11 +6,15 @@ class_name EnemyAttack
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var hitbox: Area3D = $"../../BOX/Hitbox"
 
+var player_hit: bool = false
+
 # Attack settings
+var attack_finished: bool = false
 var attack_cooldown = 1.0
 var attack_timer = 0.0
 var attack_duration = 0.2
 var attack_active = false
+@export var attack_damage: int = 10
 
 
 func enter():
@@ -18,6 +22,8 @@ func enter():
 	attack_timer = 0.0
 	attack_duration = 0.2
 	attack_active = false
+	attack_finished = false
+	player_hit = false
 	hitbox.monitoring = false
 
 	#print("Swing Distance: ", enemy.global_position.distance_to(player.global_position))
@@ -38,11 +44,13 @@ func process(delta: float):
 
 	if attack_timer <= 0.0 and not attack_active:
 		attack_active = true
+		player_hit = false
 		attack_duration = 0.2
 		attack_timer = attack_cooldown
 		hitbox.monitoring = true
 		#print("Attack!")
-		
+
+
 func physics_process(delta: float):
 	# Face player
 	var direction = (
@@ -65,10 +73,21 @@ func physics_process(delta: float):
 	if attack_active:
 		attack_duration -= delta
 
+		for body in hitbox.get_overlapping_bodies():
+			if body.is_in_group("player") and not player_hit:
+				body.take_damage(attack_damage)
+				player_hit = true
+				print("PLAYER HURT")
+
 	if attack_duration <= 0.0:
 		attack_active = false
 		hitbox.monitoring = false
 		attack_duration = 0.2
+		attack_finished = true
+
+	if attack_finished:
+		attack_finished = false
+		Transitioned.emit(self, "enemyrecovery")
 
 
 func exit():
