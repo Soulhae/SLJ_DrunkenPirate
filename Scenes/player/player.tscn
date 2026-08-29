@@ -57,7 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 spring_length = 5.0
 margin = 0.5
 
-[node name="Camera3D" type="Camera3D" parent="HPivot/VPivot/SpringArm3D" unique_id=1200272196]
+[node name="Camera3D" type="Camera3D" parent="HPivot/VPivot/SpringArm3D" unique_id=1200272196 groups=["player_camera"]]
 
 [node name="LockTargetRange" type="Area3D" parent="." unique_id=84205837]
 

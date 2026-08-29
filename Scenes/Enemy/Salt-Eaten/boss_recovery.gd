@@ -10,7 +10,7 @@ var recovery_time: float = 0.8
 
 # Set up recovery.
 func enter():
-	print("RECOVERY")
+	print(" ====================    RECOVERY   ======================== ")
 	recovery_time = 0.8
 
 

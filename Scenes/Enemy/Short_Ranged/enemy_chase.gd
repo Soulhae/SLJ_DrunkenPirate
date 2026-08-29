@@ -13,6 +13,7 @@ func process(_delta: float):
 	elif enemy.global_position.distance_to(player.global_position) < enemy.AttackReach:
 		Transitioned.emit(self, "enemyattack")
 
+
 # Move and face the player
 func physics_process(delta: float):
 

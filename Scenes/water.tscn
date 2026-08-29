@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://v21w1070h0lx"]
+
+[ext_resource type="Material" path="res://Shader/water/water/Water.tres" id="1_gf5bf"]
+[ext_resource type="Script" uid="uid://e4id20mx1jv4" path="res://Scripts/water.gd" id="2_qq3op"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_p1x3s"]
+subdivide_width = 400
+subdivide_depth = 400
+orientation = 1
+
+[node name="Water" type="MeshInstance3D" unique_id=1487049067]
+cast_shadow = 0
+mesh = SubResource("QuadMesh_p1x3s")
+surface_material_override/0 = ExtResource("1_gf5bf")
+script = ExtResource("2_qq3op")

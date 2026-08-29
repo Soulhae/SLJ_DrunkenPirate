@@ -16,8 +16,14 @@ var enemy_target: CharacterBody3D
 @onready var lock_target_range: Area3D = $LockTargetRange
 @onready var camera_3d: Camera3D = $HPivot/VPivot/SpringArm3D/Camera3D
 
+@export var water: MeshInstance3D
+
+var last_position: Vector3
+
+
 
 func _ready() -> void:
+	last_position = global_position
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -83,7 +89,12 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	pass
+	if water == null:
+		return
+
+	if global_position.distance_to(last_position) > 0.5:
+		water.create_ripple(global_position)
+		last_position = global_position
 
 
 func _on_lock_target_range_body_entered(_body: Node3D) -> void:

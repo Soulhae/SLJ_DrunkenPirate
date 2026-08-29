@@ -12,11 +12,20 @@ extends CharacterBody3D
 @export var Health: int = 200
 @export var ChaseDistance: float = 20.0
 
+@export var water: MeshInstance3D
+@export var ripple_distance: float = 1.5
+
+var last_water_position: Vector3
+
 # Player target.
 var target: Node3D
 
 # Prevents the death transition from being called multiple times.
 var is_dead: bool = false
+
+
+func _ready() -> void:
+	last_water_position = global_position
 
 
 # Check if the boss has died.
@@ -28,6 +37,16 @@ func _process(_delta):
 			state_machine.current_state,
 			"bossdeath"
 		)
+
+
+
+func _physics_process(_delta: float) -> void:
+	if water == null:
+		return
+
+	if global_position.distance_to(last_water_position) > ripple_distance:
+		water.create_ripple(global_position)
+		last_water_position = global_position
 
 
 # Deal damage to the boss and reduce its health.

@@ -1,0 +1,71 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c3mh5p2w5s8g7"]
+
+[ext_resource type="Shader" uid="uid://cj0q7a5itomj6" path="res://Shader/water/Water.gdshader" id="1_wy1no"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3g2cp"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ae0tq"]
+noise = SubResource("FastNoiseLite_3g2cp")
+seamless = true
+as_normal_map = true
+bump_strength = 3.9
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y6q4c"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_twnso"]
+noise = SubResource("FastNoiseLite_y6q4c")
+as_normal_map = true
+bump_strength = 2.8
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_roscm"]
+noise_type = 3
+seed = 10
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tcnxe"]
+noise = SubResource("FastNoiseLite_roscm")
+seamless = true
+as_normal_map = true
+bump_strength = 9.0
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_wy1no")
+shader_parameter/albedo = Color(0, 0.32156864, 0.43137255, 1)
+shader_parameter/albedo2 = Color(0, 0.4745098, 0.7647059, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.02
+shader_parameter/wave = SubResource("NoiseTexture2D_tcnxe")
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_ae0tq")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_twnso")
+shader_parameter/wave_direction = Vector2(2, 0)
+shader_parameter/wave_direction2 = Vector2(0, 1)
+shader_parameter/time_scale = 0.01499999966472
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.15
+shader_parameter/color_deep = Color(8.1822276e-07, 0.2593086, 0.34411833, 1)
+shader_parameter/color_shallow = Color(0.038417917, 0.47602648, 0.5634958, 1)
+shader_parameter/beers_law = 2.0
+shader_parameter/depth_offset = -0.75
+shader_parameter/edge_scale = 0.1
+shader_parameter/near = 1.0
+shader_parameter/far = 100.0
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+shader_parameter/foam_color = Color(0.77657044, 0.9529645, 0.97154623, 1)
+shader_parameter/foam_distance = 0.3
+shader_parameter/foam_strength = 2.0
+shader_parameter/wave_highlight_color = Color(0.32048672, 0.8743585, 0.8738869, 1)
+shader_parameter/wave_highlight_strength = 0.35
+shader_parameter/wave_highlight_scale = 5.0
+shader_parameter/refraction_strength = 0.04
+shader_parameter/water_alpha = 0.65
+shader_parameter/ripple_positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/ripple_times = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/ripple_strength = 0.25
+shader_parameter/ripple_speed = 2.0
+shader_parameter/ripple_width = 0.08
+shader_parameter/ripple_max_distance = 5.0

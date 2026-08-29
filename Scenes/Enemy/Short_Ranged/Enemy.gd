@@ -17,17 +17,32 @@ extends CharacterBody3D
 @export var RunSpeed: float = 8.5
 @export var Health: int = 200
 
+@export var water: MeshInstance3D
+@export var ripple_distance: float = 1.0
+
+var last_water_position: Vector3
+
 # Player target.
 var target: Node3D
 
 
 func _ready() -> void:
+	last_water_position = global_position
 	label_3d.text = name
 
 
 # Receives the player's position from the main scene.
 func target_position(target_position):
 	nav.target_position = target_position
+
+
+func _physics_process(_delta: float) -> void:
+	if water == null:
+		return
+
+	if global_position.distance_to(last_water_position) > ripple_distance:
+		water.create_ripple(global_position)
+		last_water_position = global_position
 
 
 # use enemy.take_demage(amount) to damage the enemy.

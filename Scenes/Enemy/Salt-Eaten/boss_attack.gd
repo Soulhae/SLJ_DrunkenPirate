@@ -9,6 +9,7 @@ class_name BossAttack
 @onready var slam_radius: Area3D = $"../../BOX/slam_radius"
 @onready var punch_hitbox: Area3D = $"../../BOX/punch_hitbox"
 
+
 # Attack damage
 @export var punch_damage: int = 20
 @export var slam_damage: int = 30
