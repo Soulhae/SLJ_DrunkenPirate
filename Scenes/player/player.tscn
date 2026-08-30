@@ -5,10 +5,14 @@
 [ext_resource type="Script" uid="uid://baf1s8378ue47" path="res://Scripts/player/states/player_idle.gd" id="3_ca0mu"]
 [ext_resource type="Script" uid="uid://qbosyss3efhl" path="res://Scripts/player/states/player_move.gd" id="4_6upyo"]
 [ext_resource type="Script" uid="uid://bv6o83grmw5m3" path="res://Scripts/player/states/player_air.gd" id="5_xxarj"]
+[ext_resource type="Script" uid="uid://c1f10o35d5xiq" path="res://Scripts/player/states/player_roll.gd" id="6_6upyo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cv0ty"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6upyo"]
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cke8t"]
+material = SubResource("StandardMaterial3D_6upyo")
 
 [sub_resource type="BoxMesh" id="BoxMesh_cv0ty"]
 size = Vector3(1, 0.001, 1)
@@ -22,6 +26,125 @@ size = Vector3(0.5, 0.15, 0.25)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cke8t"]
 radius = 30.0
+
+[sub_resource type="Animation" id="Animation_6upyo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/MeshInstance3D:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xxarj"]
+resource_name = "attack_1"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.7853982, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/MeshInstance3D:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6k3cy"]
+resource_name = "attack_2"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.7853982, 0), Vector3(0, 0.7853982, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/MeshInstance3D:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kd672"]
+resource_name = "attack_3"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.981317, 0), Vector3(0, 6.2831855, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/MeshInstance3D:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t3oqc"]
+_data = {
+&"RESET": SubResource("Animation_6upyo"),
+&"attack_1": SubResource("Animation_xxarj"),
+&"attack_2": SubResource("Animation_6k3cy"),
+&"attack_3": SubResource("Animation_kd672")
+}
 
 [node name="Player" type="CharacterBody3D" unique_id=1973400536]
 script = ExtResource("1_8p05u")
@@ -79,6 +202,13 @@ metadata/_custom_type_script = "uid://qbosyss3efhl"
 [node name="PlayerAir" type="Node" parent="StateMachine" unique_id=75677728]
 script = ExtResource("5_xxarj")
 metadata/_custom_type_script = "uid://bv6o83grmw5m3"
+
+[node name="PlayerRoll" type="Node" parent="StateMachine" unique_id=114965636]
+script = ExtResource("6_6upyo")
+metadata/_custom_type_script = "uid://c1f10o35d5xiq"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1138489737]
+libraries/ = SubResource("AnimationLibrary_t3oqc")
 
 [connection signal="body_entered" from="LockTargetRange" to="." method="_on_lock_target_range_body_entered"]
 [connection signal="body_exited" from="LockTargetRange" to="." method="_on_lock_target_range_body_exited"]

@@ -19,14 +19,18 @@ func physics_process(delta: float):
 		player.velocity.y = player.JUMP_VELOCITY
 		Transitioned.emit(self, "PlayerAir")
 	
+	if Input.is_action_just_pressed("roll") and player.is_on_floor():
+		Transitioned.emit(self, "PlayerRoll")
+		return
+	
 	var direction: Vector3 = player.get_camera_relative_input()
 	
 	if not direction:
 		Transitioned.emit(self, "PlayerIdle")
 		return
 	
-	player.velocity.x = direction.x * player.SPEED
-	player.velocity.z = direction.z * player.SPEED
+	player.velocity.x = direction.x * player.move_speed
+	player.velocity.z = direction.z * player.move_speed
 	
 	player.update_visuals_rotation(direction, delta)
 	

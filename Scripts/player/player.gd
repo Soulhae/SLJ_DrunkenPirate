@@ -2,13 +2,13 @@ extends CharacterBody3D
 
 @export var Health: int = 100
 
-const SPEED = 10.0
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 6.5
 
 @export var mouse_sens: float = 0.005
 @export var controller_sens: float = 4
 
 var enemy_target: CharacterBody3D
+var move_speed: float = 10.0
 
 @onready var visuals: Node3D = $Visuals
 @onready var h_pivot: Node3D = $HPivot
