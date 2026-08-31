@@ -7,10 +7,13 @@ extends CharacterBody3D
 
 # Boss movement settings.
 @export var AttackReach: float = 4.0
+@export var SlamReach: float = 8.0
+@export var DiveReach: float = 15.0
+@export var ChaseDistance: float = 20.0
 @export var WalkSpeed: float = 6.0
 @export var RunSpeed: float = 10.0
 @export var Health: int = 200
-@export var ChaseDistance: float = 20.0
+
 
 @export var water: MeshInstance3D
 @export var ripple_distance: float = 1.5
@@ -52,7 +55,7 @@ func _physics_process(_delta: float) -> void:
 # Deal damage to the boss and reduce its health.
 func take_damage(damage: int):
 	Health -= damage
-	
+
 	print("SALT-EATEN HEALTH: ", Health)
 	
 	# Prevent health from going below zero.

@@ -149,3 +149,4 @@ func take_damage(amount: int) -> void:
 	if Health <= 0:
 		Health = 0
 		print("======PLAYER DIED================")
+		queue_free()

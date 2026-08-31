@@ -37,10 +37,12 @@ func _physics_process(delta: float) -> void:
 
 # Handles state changes.
 func on_child_transitioned(state, new_state_name):
+
 	if state != current_state:
 		return
 
 	var new_state = states[new_state_name.to_lower()]
+
 
 	# Exit the old state.
 	if current_state:

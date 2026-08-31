@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://b7wbb8oxo4slj" path="res://Scenes/Enemy/Salt-Eaten/boss_punch.gd" id="9_eeg8w"]
 [ext_resource type="Script" uid="uid://e2jrx66jchfo" path="res://Scenes/Enemy/Salt-Eaten/boss_groundslam.gd" id="10_tsk3o"]
 [ext_resource type="Script" uid="uid://dxt018p87pf84" path="res://Scenes/Enemy/Salt-Eaten/boss_dive.gd" id="11_w7spc"]
-[ext_resource type="Script" uid="uid://d0ofvc66hx3pe" path="res://Scenes/Enemy/Salt-Eaten/boss_grab.gd" id="12_bo4yb"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uxkxr"]
 radius = 1.0
@@ -47,10 +46,7 @@ radius = 10.768555
 size = Vector3(2.3980713, 1, 5.1990967)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k0nfe"]
-size = Vector3(4.3621826, 3.6496582, 3.971527)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_w7spc"]
-size = Vector3(4.3621826, 3.6496582, 5.568321)
+size = Vector3(4.3621826, 3.6496582, 1.782898)
 
 [node name="BOSS" type="CharacterBody3D" unique_id=1642110537]
 script = ExtResource("1_n0msd")
@@ -115,14 +111,8 @@ shape = SubResource("BoxShape3D_hp6sh")
 [node name="DIVE" type="Area3D" parent="BOX" unique_id=37302961]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/DIVE" unique_id=2124476961]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26603007, 0.45788574, -3.8412843)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26603007, 0.45788574, -2.7469697)
 shape = SubResource("BoxShape3D_k0nfe")
-
-[node name="GRAB" type="Area3D" parent="BOX" unique_id=939451423]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/GRAB" unique_id=1268267955]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.266, 0.458, -2.7909966)
-shape = SubResource("BoxShape3D_w7spc")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1861708363 node_paths=PackedStringArray("InitialState")]
 script = ExtResource("1_b52jn")
@@ -164,7 +154,3 @@ metadata/_custom_type_script = "uid://e2jrx66jchfo"
 [node name="BossDive" type="Node" parent="StateMachine" unique_id=908175596]
 script = ExtResource("11_w7spc")
 metadata/_custom_type_script = "uid://dxt018p87pf84"
-
-[node name="BossGrab" type="Node" parent="StateMachine" unique_id=119607585]
-script = ExtResource("12_bo4yb")
-metadata/_custom_type_script = "uid://d0ofvc66hx3pe"
