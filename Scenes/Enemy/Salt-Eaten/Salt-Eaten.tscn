@@ -12,6 +12,10 @@
 [ext_resource type="Script" uid="uid://e2jrx66jchfo" path="res://Scenes/Enemy/Salt-Eaten/boss_groundslam.gd" id="10_tsk3o"]
 [ext_resource type="Script" uid="uid://dxt018p87pf84" path="res://Scenes/Enemy/Salt-Eaten/boss_dive.gd" id="11_w7spc"]
 [ext_resource type="Script" uid="uid://d0ofvc66hx3pe" path="res://Scenes/Enemy/Salt-Eaten/boss_grab.gd" id="12_bo4yb"]
+[ext_resource type="Script" uid="uid://cghoii6vqpp74" path="res://Scenes/Enemy/Salt-Eaten/boss_salt_bomb.gd" id="13_ma8vw"]
+[ext_resource type="PackedScene" uid="uid://bjx62vomghqfb" path="res://Scenes/salt_bomb.tscn" id="14_l62lc"]
+[ext_resource type="Script" uid="uid://cjlar3lslisrc" path="res://Scenes/Enemy/Salt-Eaten/boss_salt_clone.gd" id="15_aif0f"]
+[ext_resource type="PackedScene" uid="uid://bpskkw6c4h3wy" path="res://Scenes/Enemy/salt_clone.tscn" id="16_yhmgu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uxkxr"]
 radius = 1.0
@@ -65,7 +69,7 @@ text = "Salt Eaten"
 mesh = SubResource("CapsuleMesh_uxkxr")
 surface_material_override/0 = SubResource("StandardMaterial3D_b52jn")
 
-[node name="Eye" type="MeshInstance3D" parent="." unique_id=993517484]
+[node name="Eye" type="MeshInstance3D" parent="Body" unique_id=993517484]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015258789, 1.027175, -0.3862813)
 mesh = SubResource("BoxMesh_hqacl")
 surface_material_override/0 = SubResource("StandardMaterial3D_hqacl")
@@ -124,6 +128,12 @@ shape = SubResource("BoxShape3D_k0nfe")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.266, 0.458, -2.7909966)
 shape = SubResource("BoxShape3D_w7spc")
 
+[node name="SaltBombSpawn" type="Marker3D" parent="BOX" unique_id=973032657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4490584, -3.0136335)
+
+[node name="SaltCloneSpawn" type="Marker3D" parent="BOX" unique_id=1029339858]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9660754, 1.4490584, -1.3688564)
+
 [node name="StateMachine" type="Node" parent="." unique_id=1861708363 node_paths=PackedStringArray("InitialState")]
 script = ExtResource("1_b52jn")
 InitialState = NodePath("BossRest")
@@ -168,3 +178,15 @@ metadata/_custom_type_script = "uid://dxt018p87pf84"
 [node name="BossGrab" type="Node" parent="StateMachine" unique_id=119607585]
 script = ExtResource("12_bo4yb")
 metadata/_custom_type_script = "uid://d0ofvc66hx3pe"
+
+[node name="BossSaltBomb" type="Node" parent="StateMachine" unique_id=1653208805]
+script = ExtResource("13_ma8vw")
+bomb_scene = ExtResource("14_l62lc")
+wind_up_time = 1.0
+recovery_time = 2.0
+metadata/_custom_type_script = "uid://cghoii6vqpp74"
+
+[node name="BossSaltClone" type="Node" parent="StateMachine" unique_id=1891033210]
+script = ExtResource("15_aif0f")
+clone_scene = ExtResource("16_yhmgu")
+metadata/_custom_type_script = "uid://cjlar3lslisrc"
