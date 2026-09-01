@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bjx62vomghqfb"]
+
+[ext_resource type="Script" uid="uid://bf1ix37gggq0c" path="res://Scripts/salt_bomb.gd" id="1_ca42p"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hp6sh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hp6sh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_827x2"]
+radius = 5.0
+
+[node name="SaltBomb" type="Area3D" unique_id=1368687616]
+script = ExtResource("1_ca42p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=66039756]
+mesh = SubResource("SphereMesh_hp6sh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=192142371]
+shape = SubResource("SphereShape3D_hp6sh")
+
+[node name="ExplosionArea" type="Area3D" parent="." unique_id=483572958]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionArea" unique_id=1859644137]
+shape = SubResource("SphereShape3D_827x2")
