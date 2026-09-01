@@ -132,7 +132,7 @@ shape = SubResource("BoxShape3D_w7spc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4490584, -3.0136335)
 
 [node name="SaltCloneSpawn" type="Marker3D" parent="BOX" unique_id=1029339858]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4490584, -4.060814)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9660754, 1.4490584, -1.3688564)
 
 [node name="StateMachine" type="Node" parent="." unique_id=1861708363 node_paths=PackedStringArray("InitialState")]
 script = ExtResource("1_b52jn")
