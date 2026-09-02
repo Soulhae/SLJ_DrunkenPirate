@@ -6,12 +6,12 @@ extends CharacterBody3D
 @onready var state_machine: StateMachine = $StateMachine
 
 # Boss movement settings.
-@export var AttackReach: float = 4.0
+@export var AttackReach: float = 5.0
 @export var SlamReach: float = 8.0
-@export var DiveReach: float = 15.0
-@export var ChaseDistance: float = 20.0
-@export var WalkSpeed: float = 6.0
-@export var RunSpeed: float = 10.0
+@export var DiveReach: float = 20.0
+@export var ChaseDistance: float = 30.0
+@export var WalkSpeed: float = 10.0
+@export var RunSpeed: float = 15.0
 @export var Health: int = 200
 
 

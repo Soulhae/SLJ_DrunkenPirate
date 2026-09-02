@@ -29,7 +29,7 @@ shape = SubResource("CapsuleShape3D_euhkm")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=195156476]
 mesh = SubResource("CapsuleMesh_hp6sh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=922551418]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=922551418 groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03037262, 0.9977952, -0.6941999)
 mesh = SubResource("BoxMesh_827x2")
 surface_material_override/0 = SubResource("StandardMaterial3D_su5vk")

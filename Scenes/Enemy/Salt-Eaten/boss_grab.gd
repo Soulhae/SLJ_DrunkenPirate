@@ -5,7 +5,7 @@ class_name BossGrab
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var grab_area: Area3D = $"../../BOX/GRAB"
 
-@export var grab_damage: int = 20
+@export var grab_damage: int = 5
 @export var throw_force: float = 100.0
 @export var throw_up: float = 10.0
 
@@ -81,6 +81,18 @@ func process(_delta):
 
 
 func physics_process(delta):
+
+	# Always face the player during Grab.
+	if player != null:
+		var direction = player.global_position - enemy.global_position
+		direction.y = 0.0
+
+		if direction.length() > 0.1:
+			direction = direction.normalized()
+			enemy.look_at(
+				enemy.global_position + direction,
+				Vector3.UP
+			)
 
 	enemy.velocity.x = 0.0
 	enemy.velocity.z = 0.0

@@ -13,10 +13,19 @@ var time_alive := 0.0
 var can_attack := true
 
 
+func _ready() -> void:
+	add_to_group("enemy")
+
+
 func _physics_process(delta: float) -> void:
+
+	# Safety check
+	if not is_inside_tree():
+		return
 
 	if player == null:
 		return
+
 
 	# ========================================================
 	# LIFETIME
@@ -25,6 +34,7 @@ func _physics_process(delta: float) -> void:
 	time_alive += delta
 
 	if time_alive >= lifetime:
+		set_physics_process(false)
 		queue_free()
 		return
 
@@ -33,11 +43,7 @@ func _physics_process(delta: float) -> void:
 	# CHASE PLAYER
 	# ========================================================
 
-	var direction = (
-		player.global_position -
-		global_position
-	)
-
+	var direction = player.global_position - global_position
 	direction.y = 0.0
 
 	if direction.length() > 0.1:
@@ -65,7 +71,6 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-
 	move_and_slide()
 
 
@@ -73,7 +78,7 @@ func _physics_process(delta: float) -> void:
 	# ATTACK
 	# ========================================================
 
-	if can_attack:
+	if can_attack and is_inside_tree():
 
 		for body in attack_area.get_overlapping_bodies():
 
@@ -85,9 +90,15 @@ func _physics_process(delta: float) -> void:
 
 				can_attack = false
 
-				await get_tree().create_timer(
-					attack_cooldown
-				).timeout
+				var tree := get_tree()
+
+				if tree == null:
+					return
+
+				await tree.create_timer(attack_cooldown).timeout
+
+				if not is_inside_tree():
+					return
 
 				can_attack = true
 
