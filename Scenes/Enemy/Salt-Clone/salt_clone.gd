@@ -4,7 +4,7 @@ class_name SaltClone
 @onready var player: CharacterBody3D = get_tree().get_first_node_in_group("player")
 @onready var attack_area: Area3D = $AttackArea
 
-@export var move_speed: float = 5.0
+@export var move_speed: float = 3.0
 @export var damage: int = 15
 @export var lifetime: float = 5.0
 @export var attack_cooldown: float = 1.0
