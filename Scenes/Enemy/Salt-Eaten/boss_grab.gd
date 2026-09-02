@@ -82,6 +82,18 @@ func process(_delta):
 
 func physics_process(delta):
 
+	# Always face the player during Grab.
+	if player != null:
+		var direction = player.global_position - enemy.global_position
+		direction.y = 0.0
+
+		if direction.length() > 0.1:
+			direction = direction.normalized()
+			enemy.look_at(
+				enemy.global_position + direction,
+				Vector3.UP
+			)
+
 	enemy.velocity.x = 0.0
 	enemy.velocity.z = 0.0
 

@@ -4,9 +4,9 @@ class_name SaltBomb
 @onready var explosion_area: Area3D = $ExplosionArea
 
 @export var damage: int = 30
-@export var knockback_force: float = 15.0
-@export var bomb_gravity: float = 1.0
-@export var throw_speed: float = 15.0
+@export var knockback_force: float = 20.0
+@export var bomb_gravity: float = 0.6
+@export var throw_speed: float = 30.0
 @export var explosion_delay: float = 0.5
 
 var velocity: Vector3 = Vector3.ZERO

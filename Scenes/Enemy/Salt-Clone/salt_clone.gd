@@ -13,6 +13,9 @@ var time_alive := 0.0
 var can_attack := true
 
 
+func _ready() -> void:
+	add_to_group("enemy")
+
 func _physics_process(delta: float) -> void:
 
 	if player == null:

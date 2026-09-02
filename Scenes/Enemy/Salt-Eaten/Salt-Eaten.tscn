@@ -51,7 +51,7 @@ radius = 10.768555
 size = Vector3(2.3980713, 1, 5.1990967)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k0nfe"]
-size = Vector3(4.3621826, 3.6496582, 3.971527)
+size = Vector3(4.3621826, 3.6496582, 3.9509087)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w7spc"]
 size = Vector3(4.3621826, 3.6496582, 5.568321)
@@ -119,7 +119,7 @@ shape = SubResource("BoxShape3D_hp6sh")
 [node name="DIVE" type="Area3D" parent="BOX" unique_id=37302961]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/DIVE" unique_id=2124476961]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26603007, 0.45788574, -3.8412843)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26603007, 0.45788574, -3.830975)
 shape = SubResource("BoxShape3D_k0nfe")
 
 [node name="GRAB" type="Area3D" parent="BOX" unique_id=939451423]

@@ -1,9 +1,9 @@
 extends State
 class_name BossPunch
 
+@onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var punch_hitbox: Area3D = $"../../BOX/punch_hitbox"
-
 
 @export var punch_damage: int = 20
 
@@ -11,7 +11,6 @@ var attack_finished: bool = false
 
 
 func enter() -> void:
-
 	attack_finished = false
 	punch_hitbox.monitoring = false
 
@@ -64,6 +63,19 @@ func process(_delta: float) -> void:
 
 
 func physics_process(delta: float) -> void:
+
+	# Always face the player during Punch.
+	if player != null:
+		var direction = player.global_position - enemy.global_position
+		direction.y = 0.0
+
+		if direction.length() > 0.1:
+			direction = direction.normalized()
+
+			enemy.look_at(
+				enemy.global_position + direction,
+				Vector3.UP
+			)
 
 	enemy.velocity.x = 0.0
 	enemy.velocity.z = 0.0
