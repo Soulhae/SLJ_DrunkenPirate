@@ -8,7 +8,7 @@ class_name BossDive
 
 @export var dive_speed: float = 40.0
 @export var dive_depth: float = 1.5
-@export var dive_damage: int = 20
+@export var dive_damage: int = 10
 @export var throw_force: float = 5.0
 @export var stop_distance: float = 1.5
 

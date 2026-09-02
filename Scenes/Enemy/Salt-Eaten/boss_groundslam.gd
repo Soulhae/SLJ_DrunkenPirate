@@ -4,7 +4,7 @@ class_name BossGroundSlam
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var slam_radius: Area3D = $"../../BOX/slam_radius"
 
-@export var slam_damage: int = 30
+@export var slam_damage: int = 5
 @export var boss_jump_force: float = 15.0
 @export var player_launch_force: float = 10.0
 @export var knockback_force: float = 5.0

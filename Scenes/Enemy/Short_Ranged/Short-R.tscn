@@ -25,7 +25,6 @@ albedo_color = Color(0, 0, 0, 1)
 radius = 0.52685547
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5q6vj"]
-size = Vector3(1, 1, 0.91308594)
 
 [node name="Enemy(SR)" type="CharacterBody3D" unique_id=1434957411]
 script = ExtResource("1_l40u0")

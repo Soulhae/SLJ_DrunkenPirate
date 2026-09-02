@@ -5,7 +5,7 @@ class_name BossGrab
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var grab_area: Area3D = $"../../BOX/GRAB"
 
-@export var grab_damage: int = 20
+@export var grab_damage: int = 5
 @export var throw_force: float = 100.0
 @export var throw_up: float = 10.0
 

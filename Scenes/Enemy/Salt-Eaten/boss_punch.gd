@@ -5,7 +5,7 @@ class_name BossPunch
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var punch_hitbox: Area3D = $"../../BOX/punch_hitbox"
 
-@export var punch_damage: int = 20
+@export var punch_damage: int = 2
 
 var attack_finished: bool = false
 
