@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://bpskkw6c4h3wy"]
 
 [ext_resource type="Script" uid="uid://c60u8avcghywk" path="res://Scenes/Enemy/Salt-Clone/salt_clone.gd" id="1_ac1f2"]
+[ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scripts/StateMachine/state_machine.gd" id="2_lq6ub"]
+[ext_resource type="Script" uid="uid://iq1i7bqjiih7" path="res://Scenes/Enemy/Salt-Clone/chase_clone.gd" id="3_2wywy"]
+[ext_resource type="Script" uid="uid://dl56gpyxj27xy" path="res://Scenes/Enemy/Salt-Clone/recover_clone.gd" id="4_ejyxt"]
+[ext_resource type="Script" uid="uid://dwpq0h0gd585v" path="res://Scenes/Enemy/Salt-Clone/clone_attack.gd" id="5_v4f3n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_euhkm"]
 radius = 1.0
@@ -17,9 +21,9 @@ size = Vector3(1.4809723, 0.5428467, 1)
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_euhkm"]
-size = Vector3(3.8732605, 3.856903, 4.912964)
+size = Vector3(4, 4, 2)
 
-[node name="SaltClone" type="CharacterBody3D" unique_id=219987348]
+[node name="SaltClone" type="CharacterBody3D" unique_id=219987348 groups=["enemy"]]
 script = ExtResource("1_ac1f2")
 lifetime = 10.0
 
@@ -29,7 +33,7 @@ shape = SubResource("CapsuleShape3D_euhkm")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=195156476]
 mesh = SubResource("CapsuleMesh_hp6sh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=922551418 groups=["enemy"]]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=922551418]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03037262, 0.9977952, -0.6941999)
 mesh = SubResource("BoxMesh_827x2")
 surface_material_override/0 = SubResource("StandardMaterial3D_su5vk")
@@ -37,5 +41,22 @@ surface_material_override/0 = SubResource("StandardMaterial3D_su5vk")
 [node name="AttackArea" type="Area3D" parent="." unique_id=445641641]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea" unique_id=1846969574]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30296326, -0.18345642, -2.818634)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30296326, -0.18345642, -1.6840624)
 shape = SubResource("BoxShape3D_euhkm")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1477859809 node_paths=PackedStringArray("InitialState")]
+script = ExtResource("2_lq6ub")
+InitialState = NodePath("SaltCloneChase")
+metadata/_custom_type_script = "uid://des8mb1cibtv4"
+
+[node name="SaltCloneChase" type="Node" parent="StateMachine" unique_id=541477549]
+script = ExtResource("3_2wywy")
+metadata/_custom_type_script = "uid://iq1i7bqjiih7"
+
+[node name="SaltCloneRecovery" type="Node" parent="StateMachine" unique_id=1277126977]
+script = ExtResource("4_ejyxt")
+metadata/_custom_type_script = "uid://dl56gpyxj27xy"
+
+[node name="SaltCloneAttack" type="Node" parent="StateMachine" unique_id=1488248650]
+script = ExtResource("5_v4f3n")
+metadata/_custom_type_script = "uid://dwpq0h0gd585v"
