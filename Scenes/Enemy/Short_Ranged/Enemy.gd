@@ -15,7 +15,7 @@ extends CharacterBody3D
 @export var ChaseDistance: float = 10.0
 @export var WalkSpeed: float = 3.0
 @export var RunSpeed: float = 8.5
-@export var Health: int = 200
+@export var Health: int = 50
 
 @export var water: MeshInstance3D
 @export var ripple_distance: float = 1.0
@@ -45,7 +45,19 @@ func _physics_process(_delta: float) -> void:
 		last_water_position = global_position
 
 
-# use enemy.take_demage(amount) to damage the enemy.
-func take_damage(amount: float):
-	Health -= amount
+# use enemy.take_demage(amount) to damage the enemy
+
+var is_dead := false
+
+func take_damage(damage: int) -> void:
+	if is_dead:
+		return
+
+	Health -= damage
 	print("Enemy HP: ", Health)
+
+	if Health <= 0:
+		Health = 0
+		is_dead = true
+		print("ENEMY DIED")
+		queue_free()

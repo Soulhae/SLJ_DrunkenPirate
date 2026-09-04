@@ -3,7 +3,7 @@ class_name BossStun
 
 @onready var enemy: CharacterBody3D = get_owner()
 
-@export var stun_time: float = 1.0
+@export var stun_time: float = 2.0
 
 var stun_finished: bool = false
 

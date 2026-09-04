@@ -30,7 +30,7 @@ size = Vector3(0.5, 0.15, 0.25)
 radius = 30.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hp6sh"]
-radius = 4.0
+radius = 5.0
 
 [sub_resource type="Animation" id="Animation_6upyo"]
 length = 0.001
@@ -246,7 +246,7 @@ shape = SubResource("SphereShape3D_cke8t")
 [node name="AttackHitbox" type="Area3D" parent="." unique_id=1448916071]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitbox" unique_id=204741067]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.7218585)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.803316)
 shape = SubResource("SphereShape3D_hp6sh")
 
 [node name="StateMachine" type="Node" parent="." unique_id=593315136 node_paths=PackedStringArray("InitialState")]
