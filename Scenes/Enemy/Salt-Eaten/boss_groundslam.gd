@@ -21,19 +21,22 @@ func enter():
 
 func ground_slam():
 
+	if not is_inside_tree() or not is_instance_valid(enemy):
+		return
+
 	if not enemy.is_on_floor():
 		attack_finished = true
 		return
 
 	print("GROUND SLAM WIND UP")
 
-	var main_loop = Engine.get_main_loop()
-	if main_loop == null:
+	var tree := get_tree()
+	if tree == null:
 		return
 
-	await get_tree().create_timer(0.8).timeout
+	await tree.create_timer(0.8).timeout
 
-	if not is_inside_tree():
+	if not is_inside_tree() or not is_instance_valid(enemy):
 		return
 
 	enemy.velocity = Vector3.ZERO
@@ -42,51 +45,45 @@ func ground_slam():
 
 	enemy.velocity.y = boss_jump_force
 
-	# Wait until the boss actually leaves the ground.
+	# Wait until the boss leaves the ground.
 	while enemy.is_on_floor():
 
-		if not is_inside_tree():
+		if not is_inside_tree() or not is_instance_valid(enemy):
 			return
 
-		main_loop = Engine.get_main_loop()
-		if main_loop == null:
-			return
-
-		await main_loop.process_frame
+		await tree.process_frame
 
 
 	# Wait until the boss lands.
 	while not enemy.is_on_floor():
 
-		if not is_inside_tree():
+		if not is_inside_tree() or not is_instance_valid(enemy):
 			return
 
 		enemy.velocity.x = 0.0
 		enemy.velocity.z = 0.0
 
-		main_loop = Engine.get_main_loop()
-		if main_loop == null:
-			return
+		await tree.process_frame
 
-		await main_loop.process_frame
 
+	if not is_inside_tree() or not is_instance_valid(enemy):
+		return
 
 	print("GROUND SLAM LAND")
 
 	slam_radius.monitoring = true
 
-	if not is_inside_tree():
-		return
+	await tree.create_timer(0.1).timeout
 
-	await get_tree().create_timer(0.1).timeout
-
-	if not is_inside_tree():
+	if not is_inside_tree() or not is_instance_valid(enemy):
 		return
 
 	print("GROUND SLAM ATTACK")
 
-
 	for body in slam_radius.get_overlapping_bodies():
+
+		if not is_instance_valid(body):
+			continue
 
 		# ====================================================
 		# PLAYER
@@ -94,7 +91,7 @@ func ground_slam():
 
 		if body.is_in_group("player"):
 
-			body.take_damage(slam_damage , enemy)
+			body.take_damage(slam_damage, enemy)
 
 			var direction: Vector3 = body.global_position - enemy.global_position
 			direction.y = 0.0
@@ -119,7 +116,6 @@ func ground_slam():
 
 		elif body.is_in_group("enemy"):
 
-			# Don't launch the boss itself.
 			if body == enemy:
 				continue
 
@@ -144,9 +140,9 @@ func ground_slam():
 
 	print("GROUND SLAM RECOVERY")
 
-	await get_tree().create_timer(1.0).timeout
+	await tree.create_timer(1.0).timeout
 
-	if not is_inside_tree():
+	if not is_inside_tree() or not is_instance_valid(enemy):
 		return
 
 	print("GROUND SLAM FINISHED")
@@ -167,7 +163,9 @@ func process(_delta):
 
 func physics_process(delta):
 
-	# Don't interfere with the jump's horizontal movement.
+	if not is_instance_valid(enemy):
+		return
+
 	enemy.velocity.x = 0.0
 	enemy.velocity.z = 0.0
 
@@ -179,4 +177,5 @@ func physics_process(delta):
 
 func exit():
 
-	slam_radius.monitoring = false
+	if is_instance_valid(slam_radius):
+		slam_radius.monitoring = false

@@ -1,3 +1,219 @@
 [gd_scene format=3 uid="uid://dchtlmndg3m06"]
 
+[ext_resource type="PackedScene" uid="uid://bb2lp50sjndus" path="res://demo/components/Environment.tscn" id="1_rc8yv"]
+[ext_resource type="PackedScene" uid="uid://b35mxcc3d74di" path="res://Shader/water/WaterPlane.tscn" id="2_41hqx"]
+[ext_resource type="PackedScene" uid="uid://l20t8ais4e3k" path="res://Scenes/player/player.tscn" id="3_41hqx"]
+[ext_resource type="PackedScene" uid="uid://cyyddidb38rak" path="res://Scenes/Enemy/Salt-Eaten/Salt-Eaten.tscn" id="4_wha5u"]
+[ext_resource type="PackedScene" uid="uid://ccfglh7ctads5" path="res://Scenes/Enemy/Short_Ranged/Short-R.tscn" id="5_tstyl"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_rc8yv"]
+size = Vector2(200, 200)
+subdivide_width = 400
+subdivide_depth = 400
+orientation = 1
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_hp6sh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_827x2"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wha5u"]
+size = Vector3(85.345, 1, 37.675)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qwimq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_aq6fk"]
+radius = 31.355
+height = 63.454
+
+[sub_resource type="BoxMesh" id="BoxMesh_41hqx"]
+size = Vector3(10, 35.685, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_15mh3"]
+size = Vector3(100, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_03e8w"]
+size = Vector3(10, 10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_14i28"]
+size = Vector3(10, 5, 6)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_15mh3"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_03e8w"]
+top_radius = 50.0
+bottom_radius = 61.487
+height = 5.398
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_14i28"]
+top_radius = 50.0
+bottom_radius = 30.0
+height = 5.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uxkxr"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 49.583
+
+[sub_resource type="BoxMesh" id="BoxMesh_su5vk"]
+size = Vector3(200, 50, 1)
+
 [node name="BossFiGHT" type="Node3D" unique_id=960154153]
+
+[node name="Environment" parent="." unique_id=2092891468 instance=ExtResource("1_rc8yv")]
+
+[node name="Water" parent="." unique_id=1487049067 instance=ExtResource("2_41hqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8766222, 0)
+mesh = SubResource("QuadMesh_rc8yv")
+
+[node name="Player" parent="." unique_id=1973400536 node_paths=PackedStringArray("water") groups=["player"] instance=ExtResource("3_41hqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.04574, 6.749256, 0.44144726)
+water = NodePath("../Water")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=787746386]
+navigation_mesh = SubResource("NavigationMesh_hp6sh")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D" unique_id=161723027]
+use_collision = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=978645586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3098078, 0)
+mesh = SubResource("BoxMesh_827x2")
+
+[node name="CSGMesh3D13" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1690676344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35.66157, 0)
+mesh = SubResource("BoxMesh_827x2")
+
+[node name="CSGMesh3D14" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1474153947]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.037693, 35.66157, -51.73988)
+operation = 2
+mesh = SubResource("BoxMesh_wha5u")
+
+[node name="CSGMesh3D15" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1883563061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.277893, 41.249046, -44.50766)
+operation = 2
+mesh = SubResource("BoxMesh_qwimq")
+
+[node name="CSGMesh3D16" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1052737012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.7975, 35.66157, -24.851871)
+operation = 2
+mesh = SubResource("CapsuleMesh_aq6fk")
+
+[node name="CSGMesh3D12" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1542426379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.726793, 83.295166)
+mesh = SubResource("BoxMesh_41hqx")
+
+[node name="CSGMesh3D17" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1765175017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.318882, 18.726793, 83.295166)
+mesh = SubResource("BoxMesh_41hqx")
+
+[node name="CSGMesh3D18" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=996811141]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.318882, 18.726793, -89.66795)
+mesh = SubResource("BoxMesh_41hqx")
+
+[node name="CSGMesh3D19" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=228538225]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7136192, 18.726793, -89.66795)
+mesh = SubResource("BoxMesh_41hqx")
+
+[node name="CSGMesh3D20" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=983884681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.16443, 18.726793, -89.66795)
+mesh = SubResource("BoxMesh_41hqx")
+
+[node name="CSGMesh3D21" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=819851835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.16443, 18.726793, 79.166275)
+mesh = SubResource("BoxMesh_41hqx")
+
+[node name="CSGMesh3D9" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1575971038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.64309, 4.4255743, 0)
+mesh = SubResource("BoxMesh_15mh3")
+
+[node name="door" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=855610934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97.01312, 8.607908, 0)
+mesh = SubResource("BoxMesh_03e8w")
+
+[node name="door4" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1444352200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.67589, 7.7066364, 0)
+operation = 2
+mesh = SubResource("BoxMesh_14i28")
+
+[node name="door2" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1865376774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.774414, 7.6303177, -5.654336)
+mesh = SubResource("CylinderMesh_15mh3")
+
+[node name="door3" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1989788308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.774414, 7.6303177, 6.0863132)
+mesh = SubResource("CylinderMesh_15mh3")
+
+[node name="CSGMesh3D11" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1645914578]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.67087, 4.4872417, 0)
+mesh = SubResource("BoxMesh_15mh3")
+
+[node name="CSGMesh3D6" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=703603611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.484108, 0)
+mesh = SubResource("CylinderMesh_03e8w")
+
+[node name="CSGMesh3D10" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1991306192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.994974, 0)
+operation = 2
+mesh = SubResource("CylinderMesh_14i28")
+
+[node name="CSGMesh3D7" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1555508184]
+transform = Transform3D(1, 0, 0, 0, 0.94187504, 0.33596334, 0, -0.33596334, 0.94187504, 15.719978, 15.249655, 28.419353)
+mesh = SubResource("CylinderMesh_uxkxr")
+
+[node name="CSGMesh3D8" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=599755570]
+transform = Transform3D(-0.9726149, 0.078085385, -0.21891282, 0.0066770613, 0.95087373, 0.30950737, 0.23232651, 0.2995698, -0.92535526, -27.789293, 15.399803, -17.200396)
+mesh = SubResource("CylinderMesh_uxkxr")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=240995508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.558609, 96.936806)
+mesh = SubResource("BoxMesh_su5vk")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1587491758]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.558609, -101.26571)
+mesh = SubResource("BoxMesh_su5vk")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1956150023]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 98.043, 12.558609, -2.7814484)
+mesh = SubResource("BoxMesh_su5vk")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="NavigationRegion3D/CSGCombiner3D" unique_id=1685704080]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -97.49687, 12.558609, -2.7814484)
+mesh = SubResource("BoxMesh_su5vk")
+
+[node name="BOSS" parent="." unique_id=1642110537 node_paths=PackedStringArray("water") instance=ExtResource("4_wha5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4939237, 0)
+ChaseDistance = 40.0
+water = NodePath("../Water")
+
+[node name="enemy" type="Node3D" parent="." unique_id=529067313]
+
+[node name="Enemy(SR)" parent="enemy" unique_id=1434957411 instance=ExtResource("5_tstyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4353876, 66.368996)
+
+[node name="Enemy(SR)2" parent="enemy" unique_id=1138975474 instance=ExtResource("5_tstyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.03453, 4.4353876, 66.368996)
+
+[node name="Enemy(SR)3" parent="enemy" unique_id=1313413188 instance=ExtResource("5_tstyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.03453, 4.4353876, 17.235249)
+
+[node name="Enemy(SR)4" parent="enemy" unique_id=232121605 instance=ExtResource("5_tstyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.03453, 4.4353876, -37.273556)
+
+[node name="Enemy(SR)5" parent="enemy" unique_id=1791759148 instance=ExtResource("5_tstyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.03453, 11.350635, 1.8988113)
+
+[node name="Enemy(SR)6" parent="enemy" unique_id=1959320024 instance=ExtResource("5_tstyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.723858, 11.350635, -43.03603)
+
+[node name="Enemy(SR)7" parent="enemy" unique_id=1836208764 instance=ExtResource("5_tstyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7325039, 11.350635, -43.03603)
+
+[node name="Enemy(SR)8" parent="enemy" unique_id=1940830505 instance=ExtResource("5_tstyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.802307, 11.350635, -43.03603)
+
+[node name="Enemy(SR)9" parent="enemy" unique_id=457889626 instance=ExtResource("5_tstyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.802307, 11.350635, 35.959377)
