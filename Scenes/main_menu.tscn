@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://c158sumbq8j46"]
+
+[ext_resource type="Script" uid="uid://dibo6bteg062p" path="res://Scripts/main_menu.gd" id="1_28flt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hp6sh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ehe0"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 6
+shadow_offset = Vector2(0, 3.095)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce3w2"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 6
+shadow_offset = Vector2(0, -0.565)
+
+[node name="Main_menu" type="Control" unique_id=2090080253]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_28flt")
+
+[node name="BAckground" type="Panel" parent="." unique_id=1258484920]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_hp6sh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1796486402]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.5
+offset_top = -86.5
+offset_right = 64.5
+offset_bottom = 86.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 22
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Button" parent="VBoxContainer" unique_id=977904834]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 20
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ce3w2")
+text = "START GAME"
+
+[node name="options" type="Button" parent="VBoxContainer" unique_id=725813183]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 20
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ce3w2")
+text = "OPTIONS"
+
+[node name="QUIT" type="Button" parent="VBoxContainer" unique_id=486905300]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 20
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ce3w2")
+text = "Exit"
+
+[node name="Label" type="Label" parent="." unique_id=314465323]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -230.0
+offset_top = 95.0
+offset_right = 241.0
+offset_bottom = 183.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "Drunken Pirate"
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/QUIT" to="." method="_on_quit_pressed"]

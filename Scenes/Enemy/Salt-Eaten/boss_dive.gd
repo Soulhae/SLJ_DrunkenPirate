@@ -238,16 +238,10 @@ func physics_process(delta: float) -> void:
 	if enemy == null or not enemy.is_inside_tree():
 		return
 
-	if diving:
-		enemy.move_and_slide()
-		return
-
 	if not enemy.is_on_floor():
 		enemy.velocity += enemy.get_gravity() * delta
 
 	enemy.move_and_slide()
-
-
 func exit() -> void:
 
 	diving = false
