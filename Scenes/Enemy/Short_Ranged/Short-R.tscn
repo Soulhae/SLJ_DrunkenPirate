@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://caa8acf8lrdpl" path="res://Scenes/Enemy/Short_Ranged/enemy_attack.gd" id="5_5q6vj"]
 [ext_resource type="Script" uid="uid://cb7ruy1miv8ix" path="res://Scenes/Enemy/Short_Ranged/enemy_death.gd" id="6_dhbw1"]
 [ext_resource type="Script" uid="uid://ci15s2qufkpw7" path="res://Scenes/Enemy/Short_Ranged/enemy_recover.gd" id="7_kj52q"]
+[ext_resource type="Script" uid="uid://dae36g3h8c0pf" path="res://Scenes/Enemy/Short_Ranged/enemy_stun.gd" id="8_oyvh7"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hp6sh"]
 
@@ -26,7 +27,7 @@ radius = 0.52685547
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5q6vj"]
 
-[node name="Enemy(SR)" type="CharacterBody3D" unique_id=1434957411]
+[node name="Enemy(SR)" type="CharacterBody3D" unique_id=1434957411 groups=["enemy"]]
 script = ExtResource("1_l40u0")
 
 [node name="body" type="MeshInstance3D" parent="." unique_id=1153664325]
@@ -67,6 +68,10 @@ metadata/_custom_type_script = "uid://cb7ruy1miv8ix"
 [node name="EnemyRecovery" type="Node" parent="StateMachine" unique_id=901732708]
 script = ExtResource("7_kj52q")
 metadata/_custom_type_script = "uid://ci15s2qufkpw7"
+
+[node name="EnemyStun" type="Node" parent="StateMachine" unique_id=2103107899]
+script = ExtResource("8_oyvh7")
+metadata/_custom_type_script = "uid://dae36g3h8c0pf"
 
 [node name="Label3D" type="Label3D" parent="." unique_id=1130530563]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)

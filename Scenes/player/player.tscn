@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bv6o83grmw5m3" path="res://Scripts/player/states/player_air.gd" id="5_xxarj"]
 [ext_resource type="Script" uid="uid://c1f10o35d5xiq" path="res://Scripts/player/states/player_roll.gd" id="6_6upyo"]
 [ext_resource type="Script" uid="uid://cn82ob7weu5eq" path="res://Scripts/player/states/player_attack.gd" id="7_xxarj"]
+[ext_resource type="Script" uid="uid://cutwq5hur56e2" path="res://Scripts/player/states/player_block.gd" id="8_6k3cy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cv0ty"]
 
@@ -27,6 +28,9 @@ size = Vector3(0.5, 0.15, 0.25)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cke8t"]
 radius = 30.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hp6sh"]
+radius = 4.0
 
 [sub_resource type="Animation" id="Animation_6upyo"]
 length = 0.001
@@ -239,6 +243,12 @@ margin = 0.5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LockTargetRange" unique_id=1440399636]
 shape = SubResource("SphereShape3D_cke8t")
 
+[node name="AttackHitbox" type="Area3D" parent="." unique_id=1448916071]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitbox" unique_id=204741067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.7218585)
+shape = SubResource("SphereShape3D_hp6sh")
+
 [node name="StateMachine" type="Node" parent="." unique_id=593315136 node_paths=PackedStringArray("InitialState")]
 script = ExtResource("2_eo61r")
 InitialState = NodePath("PlayerIdle")
@@ -262,6 +272,10 @@ metadata/_custom_type_script = "uid://c1f10o35d5xiq"
 [node name="PlayerAttack" type="Node" parent="StateMachine" unique_id=362360048]
 script = ExtResource("7_xxarj")
 metadata/_custom_type_script = "uid://cn82ob7weu5eq"
+
+[node name="PlayerBlock" type="Node" parent="StateMachine" unique_id=32359862]
+script = ExtResource("8_6k3cy")
+metadata/_custom_type_script = "uid://cutwq5hur56e2"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1138489737]
 libraries/ = SubResource("AnimationLibrary_t3oqc")

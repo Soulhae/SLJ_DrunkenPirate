@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bjx62vomghqfb" path="res://Scenes/salt_bomb.tscn" id="14_l62lc"]
 [ext_resource type="Script" uid="uid://cjlar3lslisrc" path="res://Scenes/Enemy/Salt-Eaten/boss_salt_clone.gd" id="15_aif0f"]
 [ext_resource type="PackedScene" uid="uid://bpskkw6c4h3wy" path="res://Scenes/Enemy/salt_clone.tscn" id="16_yhmgu"]
+[ext_resource type="Script" uid="uid://cox2joxiy8awd" path="res://Scenes/Enemy/Salt-Eaten/boss_stun.gd" id="17_yhmgu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uxkxr"]
 radius = 1.0
@@ -56,7 +57,7 @@ size = Vector3(4.3621826, 3.6496582, 3.9509087)
 [sub_resource type="BoxShape3D" id="BoxShape3D_w7spc"]
 size = Vector3(4.3621826, 3.6496582, 5.568321)
 
-[node name="BOSS" type="CharacterBody3D" unique_id=1642110537]
+[node name="BOSS" type="CharacterBody3D" unique_id=1642110537 groups=["enemy"]]
 script = ExtResource("1_n0msd")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=2058151517]
@@ -190,3 +191,7 @@ metadata/_custom_type_script = "uid://cghoii6vqpp74"
 script = ExtResource("15_aif0f")
 clone_scene = ExtResource("16_yhmgu")
 metadata/_custom_type_script = "uid://cjlar3lslisrc"
+
+[node name="BossStun" type="Node" parent="StateMachine" unique_id=97029539]
+script = ExtResource("17_yhmgu")
+metadata/_custom_type_script = "uid://cox2joxiy8awd"

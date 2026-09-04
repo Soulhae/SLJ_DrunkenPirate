@@ -7,7 +7,7 @@ class_name EnemyAttack
 @onready var hitbox: Area3D = $"../../BOX/Hitbox"
 
 # Attack settings
-@export var attack_damage: int = 2
+@export var attack_damage: int = 5
 @export var attack_cooldown: float = 1.0
 @export var attack_duration: float = 0.2
 
@@ -127,7 +127,7 @@ func physics_process(delta: float) -> void:
 
 			if body.is_in_group("player") and not player_hit:
 
-				body.take_damage(attack_damage)
+				body.take_damage(attack_damage,enemy)
 
 				player_hit = true
 

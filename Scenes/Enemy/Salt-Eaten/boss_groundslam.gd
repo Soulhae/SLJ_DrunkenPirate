@@ -1,16 +1,16 @@
-extends "res://Scripts/StateMachine/state.gd"
+extends State
 class_name BossGroundSlam
 
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var slam_radius: Area3D = $"../../BOX/slam_radius"
 
-@export var slam_damage: int = 5
+@export var slam_damage: int = 15
 @export var boss_jump_force: float = 15.0
 @export var player_launch_force: float = 10.0
 @export var enemy_launch_force: float = 10.0
 @export var knockback_force: float = 5.0
 
-var attack_finished := false
+var attack_finished: bool = false
 
 
 func enter():
@@ -26,6 +26,10 @@ func ground_slam():
 		return
 
 	print("GROUND SLAM WIND UP")
+
+	var main_loop = Engine.get_main_loop()
+	if main_loop == null:
+		return
 
 	await get_tree().create_timer(0.8).timeout
 
@@ -44,7 +48,11 @@ func ground_slam():
 		if not is_inside_tree():
 			return
 
-		await get_tree().process_frame
+		main_loop = Engine.get_main_loop()
+		if main_loop == null:
+			return
+
+		await main_loop.process_frame
 
 
 	# Wait until the boss lands.
@@ -56,12 +64,19 @@ func ground_slam():
 		enemy.velocity.x = 0.0
 		enemy.velocity.z = 0.0
 
-		await get_tree().process_frame
+		main_loop = Engine.get_main_loop()
+		if main_loop == null:
+			return
+
+		await main_loop.process_frame
 
 
 	print("GROUND SLAM LAND")
 
 	slam_radius.monitoring = true
+
+	if not is_inside_tree():
+		return
 
 	await get_tree().create_timer(0.1).timeout
 
@@ -79,13 +94,15 @@ func ground_slam():
 
 		if body.is_in_group("player"):
 
-			body.take_damage(slam_damage)
+			body.take_damage(slam_damage , enemy)
 
-			var direction = body.global_position - enemy.global_position
+			var direction: Vector3 = body.global_position - enemy.global_position
 			direction.y = 0.0
 
 			if direction.length() > 0.1:
 				direction = direction.normalized()
+			else:
+				direction = Vector3.ZERO
 
 			body.velocity = Vector3(
 				direction.x * knockback_force,
@@ -106,11 +123,13 @@ func ground_slam():
 			if body == enemy:
 				continue
 
-			var direction = body.global_position - enemy.global_position
+			var direction: Vector3 = body.global_position - enemy.global_position
 			direction.y = 0.0
 
 			if direction.length() > 0.1:
 				direction = direction.normalized()
+			else:
+				direction = Vector3.ZERO
 
 			body.velocity = Vector3(
 				direction.x * knockback_force,

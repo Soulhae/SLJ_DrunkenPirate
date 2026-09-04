@@ -5,12 +5,12 @@ class_name BossGrab
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var grab_area: Area3D = $"../../BOX/GRAB"
 
-@export var grab_damage: int = 5
+@export var grab_damage: int = 10
 @export var throw_force: float = 100.0
 @export var throw_up: float = 10.0
 
-var finished := false
-var grabbed := false
+var finished: bool = false
+var grabbed: bool = false
 
 
 func enter():
@@ -26,13 +26,27 @@ func grab():
 
 	grab_area.monitoring = false
 
-	await get_tree().create_timer(0.6).timeout
+	var main_loop = Engine.get_main_loop()
+	if main_loop == null:
+		return
+
+	await main_loop.create_timer(0.6).timeout
+
+	if not is_inside_tree():
+		return
 
 	print("GRAB")
 
 	grab_area.monitoring = true
 
-	await get_tree().create_timer(0.1).timeout
+	main_loop = Engine.get_main_loop()
+	if main_loop == null:
+		return
+
+	await main_loop.create_timer(0.1).timeout
+
+	if not is_inside_tree():
+		return
 
 	for body in grab_area.get_overlapping_bodies():
 
@@ -45,17 +59,25 @@ func grab():
 
 			body.velocity = Vector3.ZERO
 
-			await get_tree().create_timer(0.5).timeout
+			main_loop = Engine.get_main_loop()
+			if main_loop == null:
+				return
 
-			body.take_damage(grab_damage)
+			await main_loop.create_timer(0.5).timeout
 
-			var direction = body.global_position - enemy.global_position
+			if not is_inside_tree():
+				return
+
+			body.take_damage(grab_damage, enemy)
+
+			var direction: Vector3 = body.global_position - enemy.global_position
 			direction.y = 0.0
 
 			if direction.length() > 0.1:
 				direction = direction.normalized()
+			else:
+				direction = Vector3.ZERO
 
-			# Throw player far away.
 			body.velocity = Vector3(
 				direction.x * throw_force,
 				throw_up,
@@ -68,7 +90,14 @@ func grab():
 
 	grab_area.monitoring = false
 
-	await get_tree().create_timer(0.8).timeout
+	main_loop = Engine.get_main_loop()
+	if main_loop == null:
+		return
+
+	await main_loop.create_timer(0.8).timeout
+
+	if not is_inside_tree():
+		return
 
 	finished = true
 
@@ -83,12 +112,14 @@ func process(_delta):
 func physics_process(delta):
 
 	# Always face the player during Grab.
-	if player != null:
-		var direction = player.global_position - enemy.global_position
+	if player != null and player.is_inside_tree():
+
+		var direction: Vector3 = player.global_position - enemy.global_position
 		direction.y = 0.0
 
 		if direction.length() > 0.1:
 			direction = direction.normalized()
+
 			enemy.look_at(
 				enemy.global_position + direction,
 				Vector3.UP

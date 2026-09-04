@@ -26,6 +26,9 @@ func physics_process(delta: float):
 	if Input.is_action_just_pressed("attack") and player.is_on_floor():
 		Transitioned.emit(self, "PlayerAttack")
 		return
+	if Input.is_action_just_pressed("block"):
+		Transitioned.emit(self, "PlayerBlock")
+		return
 	
 	var direction: Vector3 = player.get_camera_relative_input()
 	

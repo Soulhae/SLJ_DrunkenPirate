@@ -5,7 +5,7 @@ class_name BossPunch
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var punch_hitbox: Area3D = $"../../BOX/punch_hitbox"
 
-@export var punch_damage: int = 2
+@export var punch_damage: int = 8
 
 var attack_finished: bool = false
 
@@ -33,7 +33,7 @@ func punch() -> void:
 
 		if body.is_in_group("player"):
 
-			body.take_damage(punch_damage)
+			body.take_damage(punch_damage,enemy)
 
 			var punch_direction = -enemy.global_transform.basis.z
 
