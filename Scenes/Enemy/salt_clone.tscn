@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://iq1i7bqjiih7" path="res://Scenes/Enemy/Salt-Clone/chase_clone.gd" id="3_2wywy"]
 [ext_resource type="Script" uid="uid://dl56gpyxj27xy" path="res://Scenes/Enemy/Salt-Clone/recover_clone.gd" id="4_ejyxt"]
 [ext_resource type="Script" uid="uid://dwpq0h0gd585v" path="res://Scenes/Enemy/Salt-Clone/clone_attack.gd" id="5_v4f3n"]
+[ext_resource type="Script" uid="uid://0070p7j6poji" path="res://Scenes/Enemy/Salt-Clone/clone_stun.gd" id="6_ejyxt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_euhkm"]
 radius = 1.0
@@ -60,3 +61,7 @@ metadata/_custom_type_script = "uid://dl56gpyxj27xy"
 [node name="SaltCloneAttack" type="Node" parent="StateMachine" unique_id=1488248650]
 script = ExtResource("5_v4f3n")
 metadata/_custom_type_script = "uid://dwpq0h0gd585v"
+
+[node name="CloneStun" type="Node" parent="StateMachine" unique_id=653336515]
+script = ExtResource("6_ejyxt")
+metadata/_custom_type_script = "uid://0070p7j6poji"

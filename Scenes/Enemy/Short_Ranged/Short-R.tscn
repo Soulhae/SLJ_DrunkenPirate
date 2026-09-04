@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://caa8acf8lrdpl" path="res://Scenes/Enemy/Short_Ranged/enemy_attack.gd" id="5_5q6vj"]
 [ext_resource type="Script" uid="uid://cb7ruy1miv8ix" path="res://Scenes/Enemy/Short_Ranged/enemy_death.gd" id="6_dhbw1"]
 [ext_resource type="Script" uid="uid://ci15s2qufkpw7" path="res://Scenes/Enemy/Short_Ranged/enemy_recover.gd" id="7_kj52q"]
+[ext_resource type="Script" uid="uid://dae36g3h8c0pf" path="res://Scenes/Enemy/Short_Ranged/enemy_stun.gd" id="8_oyvh7"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hp6sh"]
 
@@ -22,11 +23,12 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hp6sh"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_su5vk"]
-radius = 0.52685547
+radius = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5q6vj"]
+size = Vector3(1, 1, 3)
 
-[node name="Enemy(SR)" type="CharacterBody3D" unique_id=1434957411]
+[node name="Enemy(SR)" type="CharacterBody3D" unique_id=1434957411 groups=["enemy"]]
 script = ExtResource("1_l40u0")
 
 [node name="body" type="MeshInstance3D" parent="." unique_id=1153664325]
@@ -68,6 +70,10 @@ metadata/_custom_type_script = "uid://cb7ruy1miv8ix"
 script = ExtResource("7_kj52q")
 metadata/_custom_type_script = "uid://ci15s2qufkpw7"
 
+[node name="EnemyStun" type="Node" parent="StateMachine" unique_id=2103107899]
+script = ExtResource("8_oyvh7")
+metadata/_custom_type_script = "uid://dae36g3h8c0pf"
+
 [node name="Label3D" type="Label3D" parent="." unique_id=1130530563]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 pixel_size = 0.01
@@ -89,5 +95,5 @@ collision_mask = 3
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/Hitbox" unique_id=1359936140]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.80847836)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1335231, -1.4448233)
 shape = SubResource("BoxShape3D_5q6vj")

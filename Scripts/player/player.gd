@@ -18,6 +18,9 @@ var move_speed: float = 10.0
 
 @export var water: MeshInstance3D
 
+@onready var state_machine: StateMachine = $StateMachine
+
+
 var last_position: Vector3
 
 
@@ -142,7 +145,24 @@ func update_visuals_rotation(direction: Vector3, delta: float) -> void:
 		target_angle = atan2(-direction.x, -direction.z)
 		visuals.rotation.y = lerp_angle(visuals.rotation.y, target_angle, 5 * delta)
 		
-func take_damage(amount: int) -> void:
+func take_damage(amount: int, attacker: Node = null) -> void:
+
+	# PARRY
+	if state_machine.current_state.name == "PlayerBlock":
+		var block_state: PlayerBlock = state_machine.current_state as PlayerBlock
+
+		if block_state.is_parrying():
+			print("========== PARRIED! ==========")
+
+			if attacker != null:
+				activate_parry_stun(attacker)
+
+			return
+
+		# NORMAL BLOCK
+		amount = int(amount * 0.7)
+		print("BLOCKED! Damage: ", amount)
+
 	Health -= amount
 	print("PLAYER HEALTH: ", Health)
 
@@ -150,3 +170,27 @@ func take_damage(amount: int) -> void:
 		Health = 0
 		print("======PLAYER DIED================")
 		get_tree().reload_current_scene()
+		
+func activate_parry_stun(attacker: Node) -> void:
+
+	if not is_instance_valid(attacker):
+		return
+
+	var attacker_state_machine = attacker.get_node_or_null("StateMachine")
+
+	if attacker_state_machine == null:
+		return
+
+	# Find whichever Stun state this enemy has.
+	for state in attacker_state_machine.get_children():
+
+		if state.name.to_lower().ends_with("stun"):
+
+			print("STUNNING: ", attacker.name)
+
+			attacker_state_machine.current_state.Transitioned.emit(
+				attacker_state_machine.current_state,
+				state.name.to_lower()
+			)
+
+			return
