@@ -71,14 +71,22 @@ A game made for  Soulslike Game Jam  #3
 
 "
 
-[node name="Label3" type="Label" parent="." unique_id=1333993652]
+[node name="1" type="Label" parent="." unique_id=1333993652]
 layout_mode = 0
-offset_left = 68.0
-offset_top = 212.0
-offset_right = 483.0
-offset_bottom = 395.0
+offset_left = 69.0
+offset_top = 231.0
+offset_right = 484.0
+offset_bottom = 569.0
 theme_override_font_sizes/font_size = 20
-text = "
+text = "PROGRAMMING & GAME DESIGN
+  -Kachori
+  -Soulhae
+
+3D ART
+ -BarryRylan_Art
+
+COMPOSER
+ - Ihor Koliako
 
 "
 
