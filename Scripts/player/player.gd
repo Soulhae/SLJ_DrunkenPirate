@@ -7,6 +7,10 @@ const JUMP_VELOCITY = 6.5
 @export var mouse_sens: float = 0.005
 @export var controller_sens: float = 4
 
+@export var max_heals: int = 3
+var heals_left: int
+@export var MaxHealth: int = 100
+
 var enemy_target: CharacterBody3D
 var move_speed: float = 10.0
 
@@ -23,9 +27,19 @@ var move_speed: float = 10.0
 
 var last_position: Vector3
 
+var drunk_timer: float = 0.0
+var drunk: bool = false
+var drunk_strength: float = 0.35
+var drunk_direction: Vector3 = Vector3.ZERO
+var drunk_change_timer: float = 0.0
+@onready var spring_arm: SpringArm3D = $HPivot/VPivot/SpringArm3D
+@onready var camera: Camera3D = $HPivot/VPivot/SpringArm3D/Camera3D
+var drunk_camera_time: float = 0.0
+var drunk_fov: float = 75.0
 
 
 func _ready() -> void:
+	heals_left = max_heals
 	last_position = global_position
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -75,6 +89,37 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
+	if drunk:
+		drunk_timer -= delta
+		drunk_camera_time += delta
+
+		# Camera wobble
+		var wobble_x: float = sin(drunk_camera_time * 2.5) * 0.04
+		var wobble_z: float = cos(drunk_camera_time * 2.0) * 0.04
+
+		spring_arm.rotation.x = wobble_x
+		spring_arm.rotation.z = wobble_z
+
+		# Camera bob
+		spring_arm.position.y = sin(drunk_camera_time * 3.0) * 0.05
+
+		# FOV wobble
+		var fov_wobble: float = sin(drunk_camera_time * 1.8) * 4.0
+		camera.fov = drunk_fov + fov_wobble
+
+		# Drunk effect ends
+		if drunk_timer <= 0.0:
+			drunk = false
+			drunk_timer = 0.0
+			drunk_camera_time = 0.0
+
+			spring_arm.rotation.x = 0.0
+			spring_arm.rotation.z = 0.0
+			spring_arm.position.y = 0.0
+			camera.fov = drunk_fov
+
+			print("NO LONGER DRUNK")
+
 	if not enemy_target:
 		var input_dir := Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
 		

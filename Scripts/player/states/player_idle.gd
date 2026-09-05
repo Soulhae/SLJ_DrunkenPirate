@@ -30,6 +30,11 @@ func physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("block"):
 		Transitioned.emit(self, "PlayerBlock")
 		return
+		
+	if Input.is_action_just_pressed("heal"):
+		if player.Health < player.MaxHealth and player.heals_left > 0:
+			Transitioned.emit(self, "playerheal")
+		return
 	
 	var direction: Vector3 = player.get_camera_relative_input()
 	

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b35mxcc3d74di" path="res://Shader/water/WaterPlane.tscn" id="2_41hqx"]
 [ext_resource type="PackedScene" uid="uid://l20t8ais4e3k" path="res://Scenes/player/player.tscn" id="3_41hqx"]
 [ext_resource type="PackedScene" uid="uid://cyyddidb38rak" path="res://Scenes/Enemy/Salt-Eaten/Salt-Eaten.tscn" id="4_wha5u"]
+[ext_resource type="Script" uid="uid://bdowfqtoviurd" path="res://Scripts/ui.gd" id="5_b3sq5"]
 [ext_resource type="PackedScene" uid="uid://ccfglh7ctads5" path="res://Scenes/Enemy/Short_Ranged/Short-R.tscn" id="5_tstyl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vibap"]
@@ -216,7 +217,7 @@ mesh = SubResource("BoxMesh_su5vk")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -97.49687, 12.558609, -2.7814484)
 mesh = SubResource("BoxMesh_su5vk")
 
-[node name="BOSS" parent="." unique_id=1642110537 node_paths=PackedStringArray("water") instance=ExtResource("4_wha5u")]
+[node name="BOSS" parent="." unique_id=1642110537 node_paths=PackedStringArray("water") groups=["Boss"] instance=ExtResource("4_wha5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4939237, 0)
 ChaseDistance = 40.0
 water = NodePath("../Water")
@@ -249,3 +250,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.802307, 11.350635, -43.036
 
 [node name="Enemy(SR)9" parent="enemy" unique_id=457889626 instance=ExtResource("5_tstyl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.802307, 11.350635, 35.959377)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1081356111]
+script = ExtResource("5_b3sq5")
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="UI" unique_id=1289265038]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 130.0
+offset_bottom = 60.0
+value = 100.0
+metadata/_edit_use_anchors_ = true
+
+[node name="HealLabel" type="Label" parent="UI" unique_id=952253845]
+offset_left = 30.0
+offset_top = 70.0
+offset_right = 70.0
+offset_bottom = 93.0
+text = "HEALS: 3"
+
+[node name="ClumsyLabel" type="Label" parent="UI" unique_id=1906036372]
+offset_left = 30.0
+offset_top = 101.0
+offset_right = 100.0
+offset_bottom = 124.0
+
+[node name="BossHealthBar" type="ProgressBar" parent="UI" unique_id=373227181]
+visible = false
+offset_left = 250.0
+offset_top = 482.0
+offset_right = 850.0
+offset_bottom = 517.0
+max_value = 200.0
+value = 200.0
+metadata/_edit_use_anchors_ = true
+
+[node name="BossName" type="Label" parent="UI" unique_id=1558027081]
+visible = false
+offset_left = 501.0
+offset_top = 452.0
+offset_right = 627.0
+offset_bottom = 487.0
+text = "SALT EATEN"

@@ -36,9 +36,22 @@ func physics_process(delta: float):
 		Transitioned.emit(self, "PlayerIdle")
 		return
 	
-	player.velocity.x = direction.x * player.move_speed
-	player.velocity.z = direction.z * player.move_speed
-	
+
+	if not direction:
+		Transitioned.emit(self, "PlayerIdle")
+		return
+
+	if player.drunk:
+		var drunk_offset := sin(Time.get_ticks_msec() * 0.006) * 0.7
+		direction = direction.rotated(Vector3.UP, drunk_offset)
+
+		var drunk_speed :float = player.move_speed * 0.75
+		player.velocity.x = direction.x * drunk_speed
+		player.velocity.z = direction.z * drunk_speed
+	else:
+		player.velocity.x = direction.x * player.move_speed
+		player.velocity.z = direction.z * player.move_speed
+
 	player.update_visuals_rotation(direction, delta)
-	
+
 	player.move_and_slide()
