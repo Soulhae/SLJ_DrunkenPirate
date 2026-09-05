@@ -39,7 +39,8 @@ height = 4.0
 radius = 10.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_uqvyf"]
-radius = 0.52685547
+height = 4.0
+radius = 1.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oqb3r"]
 size = Vector3(1, 1, 0.91308594)
@@ -52,10 +53,10 @@ radius = 10.768555
 size = Vector3(2.3980713, 1, 5.1990967)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k0nfe"]
-size = Vector3(4.3621826, 3.6496582, 3.9509087)
+size = Vector3(3.7079773, 3.6496582, 3.9509087)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w7spc"]
-size = Vector3(4.3621826, 3.6496582, 5.568321)
+size = Vector3(4.061096, 3.6496582, 5.568321)
 
 [node name="BOSS" type="CharacterBody3D" unique_id=1642110537 groups=["enemy"]]
 script = ExtResource("1_n0msd")
@@ -120,20 +121,20 @@ shape = SubResource("BoxShape3D_hp6sh")
 [node name="DIVE" type="Area3D" parent="BOX" unique_id=37302961]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/DIVE" unique_id=2124476961]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26603007, 0.45788574, -3.830975)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14104533, 0.45788574, -3.830975)
 shape = SubResource("BoxShape3D_k0nfe")
 
 [node name="GRAB" type="Area3D" parent="BOX" unique_id=939451423]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/GRAB" unique_id=1268267955]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.266, 0.458, -2.7909966)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11545679, 0.458, -2.7909966)
 shape = SubResource("BoxShape3D_w7spc")
 
 [node name="SaltBombSpawn" type="Marker3D" parent="BOX" unique_id=973032657]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4490584, -3.0136335)
 
 [node name="SaltCloneSpawn" type="Marker3D" parent="BOX" unique_id=1029339858]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9660754, 1.4490584, -1.3688564)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9660754, 3.003869, -0.10162115)
 
 [node name="StateMachine" type="Node" parent="." unique_id=1861708363 node_paths=PackedStringArray("InitialState")]
 script = ExtResource("1_b52jn")

@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cilklcf4rqdo3"]
+
+[ext_resource type="Script" uid="uid://cfc2und6drpq3" path="res://Scripts/credits.gd" id="1_r18jl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r18jl"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gryuy"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 8
+
+[node name="credits" type="Control" unique_id=809734447]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r18jl")
+
+[node name="Panel" type="Panel" parent="." unique_id=1579103279]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="." unique_id=1851002229]
+layout_mode = 0
+offset_left = 808.0
+offset_top = 492.0
+offset_right = 1082.0
+offset_bottom = 599.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_r18jl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gryuy")
+text = "MAIN MENU"
+
+[node name="Label" type="Label" parent="." unique_id=1680437424]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 43.0
+offset_right = 277.0
+offset_bottom = 214.0
+theme_override_font_sizes/font_size = 40
+text = "CREDITS
+
+"
+
+[node name="Label2" type="Label" parent="." unique_id=1262033585]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 111.0
+offset_right = 484.0
+offset_bottom = 263.0
+theme_override_font_sizes/font_size = 20
+text = "DRUNKEN PIRATE
+A game made for  Soulslike Game Jam  #3 
+
+
+"
+
+[node name="Label3" type="Label" parent="." unique_id=1333993652]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 212.0
+offset_right = 483.0
+offset_bottom = 395.0
+theme_override_font_sizes/font_size = 20
+text = "
+
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

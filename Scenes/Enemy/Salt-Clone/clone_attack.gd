@@ -5,7 +5,7 @@ class_name SaltCloneAttack
 @onready var player: CharacterBody3D = get_tree().get_first_node_in_group("player")
 @onready var attack_area: Area3D = $"../../AttackArea"
 
-@export var attack_damage: int = 10
+@export var attack_damage: int = 8
 @export var attack_range: float = 1.5
 @export var attack_windup: float = 0.4
 @export var attack_duration: float = 0.2
@@ -17,6 +17,7 @@ var player_hit := false
 
 
 func enter() -> void:
+
 	attack_finished = false
 	attack_active = false
 	player_hit = false
@@ -32,6 +33,7 @@ func enter() -> void:
 
 
 func process(delta: float) -> void:
+
 	if player == null:
 		return
 
@@ -66,7 +68,8 @@ func process(delta: float) -> void:
 
 	elif attack_finished:
 
-		attack_active = false
+		attack_finished = false
+	attack_active = false
 	attack_area.monitoring = false
 
 	Transitioned.emit(
@@ -74,9 +77,13 @@ func process(delta: float) -> void:
 		"saltclonerecovery"
 	)
 
+	return
+
 
 func perform_attack() -> void:
+
 	attack_active = true
+	attack_finished = false
 	player_hit = false
 
 	attack_area.monitoring = true
@@ -108,13 +115,15 @@ func physics_process(delta: float) -> void:
 	# DAMAGE
 	# ========================================================
 
-	if attack_active and not player_hit:
+	if attack_active and not attack_finished and not player_hit:
 
 		for body in attack_area.get_overlapping_bodies():
 
 			if body.is_in_group("player"):
 
-				body.take_damage(attack_damage)
+				print("CLONE DAMAGE: ", attack_damage)
+
+				body.take_damage(attack_damage, clone)
 
 				player_hit = true
 
@@ -127,6 +136,7 @@ func exit() -> void:
 
 	attack_area.monitoring = false
 	attack_active = false
+	attack_finished = false
 
 	clone.velocity.x = 0.0
 	clone.velocity.z = 0.0

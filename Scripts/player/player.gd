@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
 @export var Health: int = 100
+@onready var block_label: Label = $"../UI/BLOCK"
+@onready var damage_label: Label = $"../UI/DEMAGE"
 
 const JUMP_VELOCITY = 6.5
 
@@ -89,6 +91,17 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
+	if state_machine.current_state.name == "PlayerBlock":
+		var block_state: PlayerBlock = state_machine.current_state as PlayerBlock
+	
+		if block_state.is_parrying():
+			block_label.text = "PARRY!"
+		else:
+			block_label.text = "BLOCK"
+	
+		block_label.visible = true
+	else:
+		block_label.visible = false
 	if drunk:
 		drunk_timer -= delta
 		drunk_camera_time += delta
@@ -192,30 +205,57 @@ func update_visuals_rotation(direction: Vector3, delta: float) -> void:
 		
 func take_damage(amount: int, attacker: Node = null) -> void:
 
-	# PARRY
+	# PARRY / BLOCK
 	if state_machine.current_state.name == "PlayerBlock":
 		var block_state: PlayerBlock = state_machine.current_state as PlayerBlock
 
+		# SUCCESSFUL PARRY
 		if block_state.is_parrying():
 			print("========== PARRIED! ==========")
+
+			# Only now show PARRY!
+			block_label.text = "PARRY!"
+			block_label.visible = true
 
 			if attacker != null:
 				activate_parry_stun(attacker)
 
+			await get_tree().create_timer(0.5).timeout
+
+			# Go back to BLOCK if still blocking
+			if state_machine.current_state.name == "PlayerBlock":
+				block_label.text = "BLOCK"
+				block_label.visible = true
+			else:
+				block_label.visible = false
+
 			return
+
 
 		# NORMAL BLOCK
 		amount = int(amount * 0.7)
 		print("BLOCKED! Damage: ", amount)
 
+
+	# TAKE DAMAGE
 	Health -= amount
 	print("PLAYER HEALTH: ", Health)
 
+
+	# SHOW DAMAGE TAKEN
+	damage_label.text = "-" + str(amount)
+	damage_label.visible = true
+
+	await get_tree().create_timer(0.5).timeout
+
+	damage_label.visible = false
+
+
+	# DEATH
 	if Health <= 0:
 		Health = 0
 		print("======PLAYER DIED================")
 		get_tree().reload_current_scene()
-		
 func activate_parry_stun(attacker: Node) -> void:
 
 	if not is_instance_valid(attacker):

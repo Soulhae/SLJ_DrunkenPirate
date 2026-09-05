@@ -4,7 +4,7 @@ extends State
 @onready var player: CharacterBody3D = get_owner()
 @onready var anim_player: AnimationPlayer = player.get_node("AnimationPlayer")
 @onready var attack_hitbox: Area3D = player.get_node("AttackHitbox")
-
+@onready var damage_dealt_label: Label = player.get_node("../UI/DamageDealtLabel")
 @export var attack_damage_1: int = 10
 @export var attack_damage_2: int = 15
 @export var attack_damage_3: int = 20
@@ -64,9 +64,18 @@ func deal_attack_damage():
 	for body in attack_hitbox.get_overlapping_bodies():
 		if body.is_in_group("enemy"):
 			if body.has_method("take_damage"):
+
 				body.take_damage(damage)
+
+				# Show damage dealt
+				damage_dealt_label.text = str(damage)
+				damage_dealt_label.visible = true
+
 				print("PLAYER HIT: ", body.name, " DAMAGE: ", damage)
 
+				await get_tree().create_timer(0.5).timeout
+
+				damage_dealt_label.visible = false
 
 func allow_chain():
 	can_chain = true

@@ -1,26 +1,27 @@
 extends State
 class_name BossDeath
 
-# Reference to the enemy.
 @onready var enemy: CharacterBody3D = get_owner()
 
+var death_timer: float = 2.0
 
-# Set up the death state.
+
 func enter():
 	print("SALT-EATEN DIED")
 	enemy.velocity = Vector3.ZERO
+	death_timer = 2.0
 
 
-# No processing is needed after death for now.
-func process(_delta: float):
-	pass
+func process(delta):
+	death_timer -= delta
+	
+	if death_timer <= 0.0:
+		get_tree().change_scene_to_file("res://Scenes/win_screen.tscn")
 
 
-# Keep the boss stopped after death.
-func physics_process(delta: float):
+func physics_process(delta):
 	enemy.velocity = Vector3.ZERO
 
-	# Apply gravity.
 	if not enemy.is_on_floor():
 		enemy.velocity += enemy.get_gravity() * delta
 

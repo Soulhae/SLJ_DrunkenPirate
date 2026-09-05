@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://bwwbqbcreib3n"]
+
+[ext_resource type="Script" uid="uid://dlgqspwgr0wpa" path="res://Scripts/win_screen.gd" id="1_l5sol"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp6sh"]
+bg_color = Color(1, 1, 0.9882353, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0aiw"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_size = 5
+
+[node name="WinScreen" type="Control" unique_id=2089474448]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l5sol")
+
+[node name="background" type="Panel" parent="." unique_id=1647353423]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=184355806]
+visible = false
+layout_mode = 0
+offset_left = 293.0
+offset_top = 20.0
+offset_right = 833.0
+offset_bottom = 133.0
+theme_override_font_sizes/font_size = 40
+text = "                    VICTORY
+--------------------------------------------"
+
+[node name="Label2" type="Label" parent="." unique_id=411471170]
+visible = false
+layout_mode = 0
+offset_left = 404.0
+offset_top = 131.0
+offset_right = 712.0
+offset_bottom = 244.0
+theme_override_font_sizes/font_size = 40
+text = "      SALT-EATEN 
+       DEFEATED "
+
+[node name="Label3" type="Label" parent="." unique_id=164327407]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 94.0
+offset_right = 479.0
+offset_bottom = 637.0
+text = "
+Drunken Pirate is a chaotic soulslike boss fight
+where a drunken pirate must face the legendary
+Salt-Eaten.
+
+We wanted to create a much bigger world, with
+larger islands, deeper caves, and vast seas to
+explore, along with more enemies, bosses, attacks,
+lore, and environmental detail.
+
+Due to the limited time of the jam, we had to
+scale down many of these ideas and focus on
+creating one complete boss fight.
+
+This is what we managed to create
+with the time we had.
+
+"
+
+[node name="Label4" type="Label" parent="." unique_id=390934978]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 44.0
+offset_right = 463.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 40
+text = "DRUNKEN PIRATE"
+
+[node name="Label5" type="Label" parent="." unique_id=352361865]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 541.0
+offset_right = 537.0
+offset_bottom = 596.0
+theme_override_font_sizes/font_size = 40
+text = "THANK YOU FOR PLAYING  :)"
+
+[node name="Button" type="Button" parent="." unique_id=207917848]
+layout_mode = 0
+offset_left = 776.0
+offset_top = 509.0
+offset_right = 1077.0
+offset_bottom = 601.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_hp6sh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j0aiw")
+text = "MAIN MENU"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

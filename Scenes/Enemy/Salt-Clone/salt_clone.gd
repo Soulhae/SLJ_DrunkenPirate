@@ -5,9 +5,9 @@ class_name SaltClone
 @onready var attack_area: Area3D = $AttackArea
 
 @export var move_speed: float = 3.0
-@export var damage: int = 15
+@export var damage: int = 8
 @export var lifetime: float = 5.0
-@export var attack_cooldown: float = 1.0
+@export var attack_cooldown: float = 2
 
 var time_alive := 0.0
 var can_attack := true
