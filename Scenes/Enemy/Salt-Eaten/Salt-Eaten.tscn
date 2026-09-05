@@ -17,6 +17,8 @@
 [ext_resource type="Script" uid="uid://cjlar3lslisrc" path="res://Scenes/Enemy/Salt-Eaten/boss_salt_clone.gd" id="15_aif0f"]
 [ext_resource type="PackedScene" uid="uid://bpskkw6c4h3wy" path="res://Scenes/Enemy/salt_clone.tscn" id="16_yhmgu"]
 [ext_resource type="Script" uid="uid://cox2joxiy8awd" path="res://Scenes/Enemy/Salt-Eaten/boss_stun.gd" id="17_yhmgu"]
+[ext_resource type="AudioStream" uid="uid://b6a1qvw71x6uy" path="res://sounds/mixkit-8-bit-bomb-explosion-2811.wav" id="18_6pvxv"]
+[ext_resource type="AudioStream" uid="uid://iipjdv7qps4y" path="res://sounds/mixkit-enemy-death-voice-3168.wav" id="19_xx0oa"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uxkxr"]
 radius = 1.0
@@ -196,3 +198,16 @@ metadata/_custom_type_script = "uid://cjlar3lslisrc"
 [node name="BossStun" type="Node" parent="StateMachine" unique_id=97029539]
 script = ExtResource("17_yhmgu")
 metadata/_custom_type_script = "uid://cox2joxiy8awd"
+
+[node name="slam" type="AudioStreamPlayer" parent="." unique_id=1903304353]
+stream = ExtResource("18_6pvxv")
+volume_db = 8.0
+
+[node name="hurt" type="AudioStreamPlayer" parent="." unique_id=1558781648]
+stream = ExtResource("19_xx0oa")
+
+[node name="punch" type="AudioStreamPlayer" parent="." unique_id=1313749554]
+volume_db = 5.0
+
+[node name="death" type="AudioStreamPlayer" parent="." unique_id=1182250764]
+autoplay = true

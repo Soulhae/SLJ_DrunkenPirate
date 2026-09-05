@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cilklcf4rqdo3"]
 
 [ext_resource type="Script" uid="uid://cfc2und6drpq3" path="res://Scripts/credits.gd" id="1_r18jl"]
+[ext_resource type="AudioStream" uid="uid://bshmt5mhpoke" path="res://sounds/mixkit-game-click-1114.wav" id="2_gryuy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r18jl"]
 bg_color = Color(1, 1, 1, 1)
@@ -89,5 +90,11 @@ COMPOSER
  - Ihor Koliako
 
 "
+
+[node name="click" type="AudioStreamPlayer" parent="." unique_id=1293067233]
+stream = ExtResource("2_gryuy")
+autoplay = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=729156119]
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

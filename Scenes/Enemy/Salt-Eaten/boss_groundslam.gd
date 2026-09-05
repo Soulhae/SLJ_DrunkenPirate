@@ -9,7 +9,7 @@ class_name BossGroundSlam
 @export var player_launch_force: float = 10.0
 @export var enemy_launch_force: float = 10.0
 @export var knockback_force: float = 5.0
-
+@onready var slam = $"../../slam"
 var attack_finished: bool = false
 
 
@@ -70,6 +70,7 @@ func ground_slam():
 		return
 
 	print("GROUND SLAM LAND")
+	slam.play()
 
 	slam_radius.monitoring = true
 

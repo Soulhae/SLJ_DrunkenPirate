@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cn82ob7weu5eq" path="res://Scripts/player/states/player_attack.gd" id="7_xxarj"]
 [ext_resource type="Script" uid="uid://cutwq5hur56e2" path="res://Scripts/player/states/player_block.gd" id="8_6k3cy"]
 [ext_resource type="Script" uid="uid://u7qw10mwmvbj" path="res://Scripts/player/states/player_heal.gd" id="9_kd672"]
+[ext_resource type="AudioStream" uid="uid://d12piqri5wf5w" path="res://sounds/mixkit-boxer-getting-hit-2055.wav" id="10_t3oqc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cv0ty"]
 
@@ -284,6 +285,13 @@ metadata/_custom_type_script = "uid://u7qw10mwmvbj"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1138489737]
 libraries/ = SubResource("AnimationLibrary_t3oqc")
+
+[node name="Hurt" type="AudioStreamPlayer" parent="." unique_id=467538779]
+stream = ExtResource("10_t3oqc")
+
+[node name="Heal" type="AudioStreamPlayer" parent="." unique_id=719402111]
+
+[node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=800895962]
 
 [connection signal="body_entered" from="LockTargetRange" to="." method="_on_lock_target_range_body_entered"]
 [connection signal="body_exited" from="LockTargetRange" to="." method="_on_lock_target_range_body_exited"]

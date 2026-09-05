@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c158sumbq8j46"]
 
 [ext_resource type="Script" uid="uid://dibo6bteg062p" path="res://Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="AudioStream" uid="uid://bshmt5mhpoke" path="res://sounds/mixkit-game-click-1114.wav" id="2_48xlc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hp6sh"]
 
@@ -98,6 +99,13 @@ offset_bottom = 183.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 64
 text = "Drunken Pirate"
+
+[node name="click" type="AudioStreamPlayer" parent="." unique_id=1360376007]
+stream = ExtResource("2_48xlc")
+autoplay = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=149831436]
+current = true
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]

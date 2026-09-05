@@ -4,7 +4,7 @@ class_name BossPunch
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var punch_hitbox: Area3D = $"../../BOX/punch_hitbox"
-
+@onready var punch1 = $"../../punch"
 @export var punch_damage: int = 8
 
 var attack_finished: bool = false
@@ -45,6 +45,7 @@ func punch() -> void:
 			body.velocity.y = 3.0
 
 			print("PLAYER PUNCHED")
+			punch1.play()
 
 	punch_hitbox.monitoring = false
 

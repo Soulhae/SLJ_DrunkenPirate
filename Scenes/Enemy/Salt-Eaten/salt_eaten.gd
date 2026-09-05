@@ -13,7 +13,7 @@ extends CharacterBody3D
 @export var WalkSpeed: float = 10.0
 @export var RunSpeed: float = 15.0
 @export var Health: int = 200
-
+@onready var hurt = $hurt
 
 @export var water: MeshInstance3D
 @export var ripple_distance: float = 1.5
@@ -57,10 +57,11 @@ func take_damage(damage: int):
 	Health -= damage
 
 	print("SALT-EATEN HEALTH: ", Health)
-	
+	hurt.play()
 	# Prevent health from going below zero.
 	if Health <= 0:
 		Health = 0
+		
 
 
 # Receives the player's position from the main scene.

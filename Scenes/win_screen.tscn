@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bwwbqbcreib3n"]
 
 [ext_resource type="Script" uid="uid://dlgqspwgr0wpa" path="res://Scripts/win_screen.gd" id="1_l5sol"]
+[ext_resource type="AudioStream" uid="uid://bshmt5mhpoke" path="res://sounds/mixkit-game-click-1114.wav" id="2_a00f1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp6sh"]
 bg_color = Color(1, 1, 0.9882353, 1)
@@ -111,5 +112,11 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_hp6sh")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j0aiw")
 text = "MAIN MENU"
+
+[node name="click" type="AudioStreamPlayer" parent="." unique_id=1241372699]
+stream = ExtResource("2_a00f1")
+autoplay = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=359817864]
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

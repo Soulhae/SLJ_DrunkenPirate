@@ -4,10 +4,11 @@ class_name BossDeath
 @onready var enemy: CharacterBody3D = get_owner()
 
 var death_timer: float = 2.0
-
+@onready var death = $death
 
 func enter():
 	print("SALT-EATEN DIED")
+	death.play()
 	enemy.velocity = Vector3.ZERO
 	death_timer = 2.0
 

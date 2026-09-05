@@ -3,7 +3,7 @@ extends CharacterBody3D
 @export var Health: int = 100
 @onready var block_label: Label = $"../UI/BLOCK"
 @onready var damage_label: Label = $"../UI/DEMAGE"
-
+@onready var hurt = $Hurt
 const JUMP_VELOCITY = 6.5
 
 @export var mouse_sens: float = 0.005
@@ -240,7 +240,7 @@ func take_damage(amount: int, attacker: Node = null) -> void:
 	# TAKE DAMAGE
 	Health -= amount
 	print("PLAYER HEALTH: ", Health)
-
+	hurt.play()
 
 	# SHOW DAMAGE TAKEN
 	damage_label.text = "-" + str(amount)
