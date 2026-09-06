@@ -7,6 +7,7 @@ var wander_time: float = 0.0
 # Reference to the player and enemy.
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
+@onready var animation_player: AnimationPlayer = $"../../Boss Model Animated/AnimationPlayer"
 
 
 # Choose a random direction and time.
@@ -25,11 +26,13 @@ func randomise_variables():
 
 # Set up wandering.
 func enter():
+	animation_player.play("Armature|ArmatureAction")
 	randomise_variables()
 
 
 # Check timer and chase distance.
 func process(delta: float):
+
 	wander_time -= delta
 
 	# Player is close enough to chase.

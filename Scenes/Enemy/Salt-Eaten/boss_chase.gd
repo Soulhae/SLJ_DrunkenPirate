@@ -3,8 +3,12 @@ class_name BossChase
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
+@onready var animation_player: AnimationPlayer = $"../../Boss Model Animated/AnimationPlayer"
 
+func enter():
+	animation_player.play("Armature|ArmatureAction")
 func process(_delta: float):
+
 	var distance = enemy.global_position.distance_to(player.global_position)
 
 	if distance > enemy.ChaseDistance:
@@ -25,10 +29,6 @@ func physics_process(delta: float):
 	enemy.velocity.x = direction.x * enemy.RunSpeed
 	enemy.velocity.z = direction.z * enemy.RunSpeed
 
-	if not enemy.is_on_floor():
-		enemy.velocity += enemy.get_gravity() * delta
-
-	enemy.move_and_slide()
 	if not enemy.is_on_floor():
 		enemy.velocity += enemy.get_gravity() * delta
 

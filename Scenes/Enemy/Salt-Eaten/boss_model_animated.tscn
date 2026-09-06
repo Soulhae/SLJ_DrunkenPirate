@@ -1,27 +1,4 @@
-[gd_scene format=4 uid="uid://cyyddidb38rak"]
-
-[ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scripts/StateMachine/state_machine.gd" id="1_b52jn"]
-[ext_resource type="Script" uid="uid://d3fqsrojyg6y3" path="res://Scenes/Enemy/Salt-Eaten/salt_eaten.gd" id="1_n0msd"]
-[ext_resource type="PackedScene" uid="uid://bjrc73xjkaaxs" path="res://Boss Model.fbx" id="2_hfibc"]
-[ext_resource type="Script" uid="uid://cqbrpl8be1xkm" path="res://Scenes/Enemy/Salt-Eaten/boss_rest.gd" id="3_1517h"]
-[ext_resource type="Script" uid="uid://dgxc8rj21hf0s" path="res://Scenes/Enemy/Salt-Eaten/boss_wander.gd" id="4_ls4fi"]
-[ext_resource type="Script" uid="uid://dtvpwqjke6ni6" path="res://Scenes/Enemy/Salt-Eaten/boss_chase.gd" id="5_jt70v"]
-[ext_resource type="Script" uid="uid://djulo36byti4k" path="res://Scenes/Enemy/Salt-Eaten/boss_attack.gd" id="6_jt70v"]
-[ext_resource type="Script" uid="uid://dxa5jh0ma3yv2" path="res://Scenes/Enemy/Salt-Eaten/boss_recovery.gd" id="7_w4e77"]
-[ext_resource type="Script" uid="uid://dpw28v8mixq1x" path="res://Scenes/Enemy/Salt-Eaten/boss_death.gd" id="8_hqacl"]
-[ext_resource type="Script" uid="uid://b7wbb8oxo4slj" path="res://Scenes/Enemy/Salt-Eaten/boss_punch.gd" id="9_eeg8w"]
-[ext_resource type="Script" uid="uid://e2jrx66jchfo" path="res://Scenes/Enemy/Salt-Eaten/boss_groundslam.gd" id="10_tsk3o"]
-[ext_resource type="Script" uid="uid://dxt018p87pf84" path="res://Scenes/Enemy/Salt-Eaten/boss_dive.gd" id="11_w7spc"]
-[ext_resource type="Script" uid="uid://d0ofvc66hx3pe" path="res://Scenes/Enemy/Salt-Eaten/boss_grab.gd" id="12_bo4yb"]
-[ext_resource type="Script" uid="uid://cghoii6vqpp74" path="res://Scenes/Enemy/Salt-Eaten/boss_salt_bomb.gd" id="13_ma8vw"]
-[ext_resource type="PackedScene" uid="uid://bjx62vomghqfb" path="res://Scenes/salt_bomb.tscn" id="14_l62lc"]
-[ext_resource type="Script" uid="uid://cjlar3lslisrc" path="res://Scenes/Enemy/Salt-Eaten/boss_salt_clone.gd" id="15_aif0f"]
-[ext_resource type="PackedScene" uid="uid://bpskkw6c4h3wy" path="res://Scenes/Enemy/salt_clone.tscn" id="16_yhmgu"]
-[ext_resource type="Script" uid="uid://cox2joxiy8awd" path="res://Scenes/Enemy/Salt-Eaten/boss_stun.gd" id="17_yhmgu"]
-[ext_resource type="AudioStream" uid="uid://c1rujmyxae3ou" path="res://sounds/845437__artninja__heavy_crunchy_bassy_explosion_w_rock_texture_sound_02152026.wav" id="19_l3fob"]
-[ext_resource type="AudioStream" uid="uid://b5qbtvmobb11j" path="res://sounds/458867__raclure__damage-sound-effect.mp3" id="20_l3fob"]
-[ext_resource type="AudioStream" uid="uid://cb2au5aii18p3" path="res://sounds/573377__johnloser__cyber-punch-02.wav" id="21_t17ak"]
-[ext_resource type="AudioStream" uid="uid://bu5wilu2tug8r" path="res://sounds/571387__alexmurphy53__villain-death.wav" id="22_62cp0"]
+[gd_scene format=4 uid="uid://cbogayvor71qw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gd2nf"]
 
@@ -1247,62 +1224,13 @@ _data = {
 &"Armature|ArmatureAction": SubResource("Animation_mymfi")
 }
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_uxkxr"]
-radius = 1.0
-height = 4.0
+[node name="Boss Model Animated" type="Node3D" unique_id=183254988]
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b52jn"]
-albedo_color = Color(0, 1, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_hqacl"]
-size = Vector3(1.352417, 0.69976807, 1.2325468)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqacl"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u3l87"]
-radius = 1.0
-height = 4.0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_hp6sh"]
-radius = 10.0
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_uqvyf"]
-height = 6.0
-radius = 2.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_oqb3r"]
-size = Vector3(1, 1, 0.91308594)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_hqacl"]
-height = 5.3918457
-radius = 10.768555
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_hp6sh"]
-size = Vector3(2.3980713, 1, 5.1990967)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_k0nfe"]
-size = Vector3(3.7079773, 3.6496582, 3.9509087)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_w7spc"]
-size = Vector3(4.061096, 3.6496582, 5.568321)
-
-[node name="BOSS" type="CharacterBody3D" unique_id=1642110537 groups=["enemy"]]
-script = ExtResource("1_n0msd")
-
-[node name="Label3D" type="Label3D" parent="." unique_id=2058151517]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9099295, 0)
-pixel_size = 0.01
-billboard = 1
-text = "Salt Eaten"
-
-[node name="Boss Model Animated" type="Node3D" parent="." unique_id=183254988]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, -2.376, -2.096)
-
-[node name="Armature" type="Node3D" parent="Boss Model Animated" unique_id=435671564]
+[node name="Armature" type="Node3D" parent="." unique_id=435671564]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 5.2926483, -4.9739203)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="Boss Model Animated/Armature" unique_id=508923500]
+[node name="Skeleton3D" type="Skeleton3D" parent="Armature" unique_id=508923500]
 bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, -1.1920929e-07, -0.99999994, 0, 0.99999994, -1.1920929e-07, 0, 0, 0)
@@ -2361,160 +2289,10 @@ bones/150/position = Vector3(0, 0.016356796, 0)
 bones/150/rotation = Quaternion(0, 0, 0, 1)
 bones/150/scale = Vector3(1, 1, 1)
 
-[node name="Rapier" type="MeshInstance3D" parent="Boss Model Animated/Armature/Skeleton3D" unique_id=1161974571]
+[node name="Rapier" type="MeshInstance3D" parent="Armature/Skeleton3D" unique_id=1161974571]
 mesh = SubResource("ArrayMesh_rmyqu")
 skin = SubResource("Skin_q4oim")
 skeleton = NodePath("..")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Boss Model Animated" unique_id=413865705]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=413865705]
 libraries/ = SubResource("AnimationLibrary_s3134")
-
-[node name="Boss Model" parent="." unique_id=763551646 instance=ExtResource("2_hfibc")]
-transform = Transform3D(-0.4, 0, -6.039832e-08, 0, 0.4, 0, 6.039832e-08, 0, -0.4, 0, -2.3760684, -2.0964527)
-visible = false
-
-[node name="Body" type="MeshInstance3D" parent="." unique_id=1771702886]
-visible = false
-mesh = SubResource("CapsuleMesh_uxkxr")
-surface_material_override/0 = SubResource("StandardMaterial3D_b52jn")
-
-[node name="Eye" type="MeshInstance3D" parent="Body" unique_id=993517484]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015258789, 1.027175, -0.3862813)
-visible = false
-mesh = SubResource("BoxMesh_hqacl")
-surface_material_override/0 = SubResource("StandardMaterial3D_hqacl")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=561946460]
-shape = SubResource("CapsuleShape3D_u3l87")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=900587287]
-
-[node name="Attack-Radius" type="Area3D" parent="." unique_id=651793387]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Attack-Radius" unique_id=1159507407]
-shape = SubResource("SphereShape3D_hp6sh")
-
-[node name="BOX" type="Node3D" parent="." unique_id=1747485340]
-
-[node name="Hurtbox" type="Area3D" parent="BOX" unique_id=2108534412]
-collision_layer = 2
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/Hurtbox" unique_id=940224361]
-shape = SubResource("CylinderShape3D_uqvyf")
-
-[node name="Hitbox" type="Area3D" parent="BOX" unique_id=1643234538]
-collision_layer = 2
-collision_mask = 3
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/Hitbox" unique_id=1889977301]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.80847836)
-shape = SubResource("BoxShape3D_oqb3r")
-
-[node name="slam_radius" type="Area3D" parent="BOX" unique_id=1085303923]
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/slam_radius" unique_id=2034274680]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63952637, 0)
-shape = SubResource("CylinderShape3D_hqacl")
-
-[node name="punch_hitbox" type="Area3D" parent="BOX" unique_id=1070185608]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/punch_hitbox" unique_id=2067290081]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040549517, 0, -2.3555207)
-shape = SubResource("BoxShape3D_hp6sh")
-
-[node name="DIVE" type="Area3D" parent="BOX" unique_id=37302961]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/DIVE" unique_id=2124476961]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14104533, 0.45788574, -3.830975)
-shape = SubResource("BoxShape3D_k0nfe")
-
-[node name="GRAB" type="Area3D" parent="BOX" unique_id=939451423]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/GRAB" unique_id=1268267955]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11545679, 0.458, -2.7909966)
-shape = SubResource("BoxShape3D_w7spc")
-
-[node name="SaltBombSpawn" type="Marker3D" parent="BOX" unique_id=973032657]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4490584, -3.0136335)
-
-[node name="SaltCloneSpawn" type="Marker3D" parent="BOX" unique_id=1029339858]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9660754, 3.003869, -0.10162115)
-
-[node name="StateMachine" type="Node" parent="." unique_id=1861708363 node_paths=PackedStringArray("InitialState")]
-script = ExtResource("1_b52jn")
-InitialState = NodePath("BossRest")
-metadata/_custom_type_script = "uid://des8mb1cibtv4"
-
-[node name="BossRest" type="Node" parent="StateMachine" unique_id=870261481]
-script = ExtResource("3_1517h")
-metadata/_custom_type_script = "uid://cqbrpl8be1xkm"
-
-[node name="BossWander" type="Node" parent="StateMachine" unique_id=913366541]
-script = ExtResource("4_ls4fi")
-metadata/_custom_type_script = "uid://dgxc8rj21hf0s"
-
-[node name="BossChase" type="Node" parent="StateMachine" unique_id=48892720]
-script = ExtResource("5_jt70v")
-metadata/_custom_type_script = "uid://dtvpwqjke6ni6"
-
-[node name="BossAttack" type="Node" parent="StateMachine" unique_id=1507483052]
-script = ExtResource("6_jt70v")
-metadata/_custom_type_script = "uid://djulo36byti4k"
-
-[node name="BossRecovery" type="Node" parent="StateMachine" unique_id=1419181460]
-script = ExtResource("7_w4e77")
-metadata/_custom_type_script = "uid://dxa5jh0ma3yv2"
-
-[node name="BossDeath" type="Node" parent="StateMachine" unique_id=22303754]
-script = ExtResource("8_hqacl")
-metadata/_custom_type_script = "uid://dpw28v8mixq1x"
-
-[node name="BossPunch" type="Node" parent="StateMachine" unique_id=1467895379]
-script = ExtResource("9_eeg8w")
-metadata/_custom_type_script = "uid://b7wbb8oxo4slj"
-
-[node name="BossGroundSlam" type="Node" parent="StateMachine" unique_id=1472276183]
-script = ExtResource("10_tsk3o")
-metadata/_custom_type_script = "uid://e2jrx66jchfo"
-
-[node name="BossDive" type="Node" parent="StateMachine" unique_id=908175596]
-script = ExtResource("11_w7spc")
-metadata/_custom_type_script = "uid://dxt018p87pf84"
-
-[node name="BossGrab" type="Node" parent="StateMachine" unique_id=119607585]
-script = ExtResource("12_bo4yb")
-metadata/_custom_type_script = "uid://d0ofvc66hx3pe"
-
-[node name="BossSaltBomb" type="Node" parent="StateMachine" unique_id=1653208805]
-script = ExtResource("13_ma8vw")
-bomb_scene = ExtResource("14_l62lc")
-wind_up_time = 1.0
-recovery_time = 2.0
-metadata/_custom_type_script = "uid://cghoii6vqpp74"
-
-[node name="BossSaltClone" type="Node" parent="StateMachine" unique_id=1891033210]
-script = ExtResource("15_aif0f")
-clone_scene = ExtResource("16_yhmgu")
-metadata/_custom_type_script = "uid://cjlar3lslisrc"
-
-[node name="BossStun" type="Node" parent="StateMachine" unique_id=97029539]
-script = ExtResource("17_yhmgu")
-metadata/_custom_type_script = "uid://cox2joxiy8awd"
-
-[node name="slam" type="AudioStreamPlayer" parent="." unique_id=1903304353]
-stream = ExtResource("19_l3fob")
-volume_db = -20.0
-
-[node name="hurt" type="AudioStreamPlayer" parent="." unique_id=1558781648]
-stream = ExtResource("20_l3fob")
-
-[node name="punch" type="AudioStreamPlayer" parent="." unique_id=1313749554]
-stream = ExtResource("21_t17ak")
-volume_db = 5.0
-
-[node name="death" type="AudioStreamPlayer" parent="." unique_id=1182250764]
-stream = ExtResource("22_62cp0")
