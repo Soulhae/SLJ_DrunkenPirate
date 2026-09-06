@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cb7ruy1miv8ix" path="res://Scenes/Enemy/Short_Ranged/enemy_death.gd" id="6_dhbw1"]
 [ext_resource type="Script" uid="uid://ci15s2qufkpw7" path="res://Scenes/Enemy/Short_Ranged/enemy_recover.gd" id="7_kj52q"]
 [ext_resource type="Script" uid="uid://dae36g3h8c0pf" path="res://Scenes/Enemy/Short_Ranged/enemy_stun.gd" id="8_oyvh7"]
+[ext_resource type="AudioStream" uid="uid://b5qbtvmobb11j" path="res://sounds/458867__raclure__damage-sound-effect.mp3" id="9_ol531"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hp6sh"]
 
@@ -97,3 +98,6 @@ monitoring = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BOX/Hitbox" unique_id=1359936140]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1335231, -1.4448233)
 shape = SubResource("BoxShape3D_5q6vj")
+
+[node name="hurt" type="AudioStreamPlayer" parent="." unique_id=1705445468]
+stream = ExtResource("9_ol531")

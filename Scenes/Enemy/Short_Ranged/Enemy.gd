@@ -8,6 +8,8 @@ extends CharacterBody3D
 @onready var nav = $NavigationAgent3D
 @onready var label_3d: Label3D = $Label3D
 
+@onready var hurt = $hurt
+
 # Enemy movement settings.
 @export var JumpVelocity: float = 5.0
 @export var JumpDistance: float = 3.0

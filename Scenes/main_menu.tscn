@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c158sumbq8j46"]
 
 [ext_resource type="Script" uid="uid://dibo6bteg062p" path="res://Scripts/main_menu.gd" id="1_28flt"]
-[ext_resource type="AudioStream" uid="uid://bshmt5mhpoke" path="res://sounds/mixkit-game-click-1114.wav" id="2_48xlc"]
+[ext_resource type="AudioStream" uid="uid://bmjqnd7wfe6ps" path="res://sounds/731993__6sdeimos__click-1.wav" id="2_48xlc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hp6sh"]
 
@@ -65,7 +65,7 @@ theme_override_constants/h_separation = 20
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_1ehe0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ce3w2")
-text = "START GAME"
+text = "START GAME "
 
 [node name="Credits" type="Button" parent="VBoxContainer" unique_id=725813183]
 layout_mode = 2

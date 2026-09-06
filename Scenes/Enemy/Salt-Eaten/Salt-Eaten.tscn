@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scripts/StateMachine/state_machine.gd" id="1_b52jn"]
 [ext_resource type="Script" uid="uid://d3fqsrojyg6y3" path="res://Scenes/Enemy/Salt-Eaten/salt_eaten.gd" id="1_n0msd"]
+[ext_resource type="PackedScene" uid="uid://bjrc73xjkaaxs" path="res://Boss Model.fbx" id="2_hfibc"]
 [ext_resource type="Script" uid="uid://cqbrpl8be1xkm" path="res://Scenes/Enemy/Salt-Eaten/boss_rest.gd" id="3_1517h"]
 [ext_resource type="Script" uid="uid://dgxc8rj21hf0s" path="res://Scenes/Enemy/Salt-Eaten/boss_wander.gd" id="4_ls4fi"]
 [ext_resource type="Script" uid="uid://dtvpwqjke6ni6" path="res://Scenes/Enemy/Salt-Eaten/boss_chase.gd" id="5_jt70v"]
@@ -17,8 +18,10 @@
 [ext_resource type="Script" uid="uid://cjlar3lslisrc" path="res://Scenes/Enemy/Salt-Eaten/boss_salt_clone.gd" id="15_aif0f"]
 [ext_resource type="PackedScene" uid="uid://bpskkw6c4h3wy" path="res://Scenes/Enemy/salt_clone.tscn" id="16_yhmgu"]
 [ext_resource type="Script" uid="uid://cox2joxiy8awd" path="res://Scenes/Enemy/Salt-Eaten/boss_stun.gd" id="17_yhmgu"]
-[ext_resource type="AudioStream" uid="uid://b6a1qvw71x6uy" path="res://sounds/mixkit-8-bit-bomb-explosion-2811.wav" id="18_6pvxv"]
-[ext_resource type="AudioStream" uid="uid://iipjdv7qps4y" path="res://sounds/mixkit-enemy-death-voice-3168.wav" id="19_xx0oa"]
+[ext_resource type="AudioStream" uid="uid://c1rujmyxae3ou" path="res://sounds/845437__artninja__heavy_crunchy_bassy_explosion_w_rock_texture_sound_02152026.wav" id="19_l3fob"]
+[ext_resource type="AudioStream" uid="uid://b5qbtvmobb11j" path="res://sounds/458867__raclure__damage-sound-effect.mp3" id="20_l3fob"]
+[ext_resource type="AudioStream" uid="uid://cb2au5aii18p3" path="res://sounds/573377__johnloser__cyber-punch-02.wav" id="21_t17ak"]
+[ext_resource type="AudioStream" uid="uid://bu5wilu2tug8r" path="res://sounds/571387__alexmurphy53__villain-death.wav" id="22_62cp0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uxkxr"]
 radius = 1.0
@@ -41,8 +44,8 @@ height = 4.0
 radius = 10.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_uqvyf"]
-height = 4.0
-radius = 1.5
+height = 6.0
+radius = 2.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oqb3r"]
 size = Vector3(1, 1, 0.91308594)
@@ -69,12 +72,17 @@ pixel_size = 0.01
 billboard = 1
 text = "Salt Eaten"
 
+[node name="Boss Model" parent="." unique_id=763551646 instance=ExtResource("2_hfibc")]
+transform = Transform3D(-0.4, 0, -6.039832e-08, 0, 0.4, 0, 6.039832e-08, 0, -0.4, 0, -2.3760684, -2.0964527)
+
 [node name="Body" type="MeshInstance3D" parent="." unique_id=1771702886]
+visible = false
 mesh = SubResource("CapsuleMesh_uxkxr")
 surface_material_override/0 = SubResource("StandardMaterial3D_b52jn")
 
 [node name="Eye" type="MeshInstance3D" parent="Body" unique_id=993517484]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015258789, 1.027175, -0.3862813)
+visible = false
 mesh = SubResource("BoxMesh_hqacl")
 surface_material_override/0 = SubResource("StandardMaterial3D_hqacl")
 
@@ -200,14 +208,15 @@ script = ExtResource("17_yhmgu")
 metadata/_custom_type_script = "uid://cox2joxiy8awd"
 
 [node name="slam" type="AudioStreamPlayer" parent="." unique_id=1903304353]
-stream = ExtResource("18_6pvxv")
-volume_db = 8.0
+stream = ExtResource("19_l3fob")
+volume_db = -20.0
 
 [node name="hurt" type="AudioStreamPlayer" parent="." unique_id=1558781648]
-stream = ExtResource("19_xx0oa")
+stream = ExtResource("20_l3fob")
 
 [node name="punch" type="AudioStreamPlayer" parent="." unique_id=1313749554]
+stream = ExtResource("21_t17ak")
 volume_db = 5.0
 
 [node name="death" type="AudioStreamPlayer" parent="." unique_id=1182250764]
-autoplay = true
+stream = ExtResource("22_62cp0")

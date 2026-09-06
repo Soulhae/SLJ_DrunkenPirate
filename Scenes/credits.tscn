@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cilklcf4rqdo3"]
 
 [ext_resource type="Script" uid="uid://cfc2und6drpq3" path="res://Scripts/credits.gd" id="1_r18jl"]
-[ext_resource type="AudioStream" uid="uid://bshmt5mhpoke" path="res://sounds/mixkit-game-click-1114.wav" id="2_gryuy"]
+[ext_resource type="AudioStream" uid="uid://bmjqnd7wfe6ps" path="res://sounds/731993__6sdeimos__click-1.wav" id="2_gryuy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r18jl"]
 bg_color = Color(1, 1, 1, 1)

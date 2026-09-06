@@ -8,7 +8,7 @@ extends State
 @export var attack_damage_1: int = 10
 @export var attack_damage_2: int = 15
 @export var attack_damage_3: int = 20
-
+@onready var hurt = $"../../Hurt"
 var combo_step: int = 1
 var can_chain: bool = false
 var attack_pending: bool = false
@@ -66,7 +66,7 @@ func deal_attack_damage():
 			if body.has_method("take_damage"):
 
 				body.take_damage(damage)
-
+				hurt.play()
 				# Show damage dealt
 				damage_dealt_label.text = str(damage)
 				damage_dealt_label.visible = true

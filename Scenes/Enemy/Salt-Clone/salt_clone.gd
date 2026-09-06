@@ -8,6 +8,7 @@ class_name SaltClone
 @export var damage: int = 8
 @export var lifetime: float = 5.0
 @export var attack_cooldown: float = 2
+@onready var hurt = $hurt
 
 var time_alive := 0.0
 var can_attack := true
