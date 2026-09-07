@@ -56,7 +56,7 @@ func _physics_process(_delta: float) -> void:
 # Deal damage to the boss and reduce its health.
 func take_damage(damage: int):
 	Health -= damage
-	show_damage_number(damage, global_position + Vector3(0, 1.5, 0))
+	show_damage_number(damage, global_position + Vector3(-1, 1.5, 1.5))
 	print("SALT-EATEN HEALTH: ", Health)
 	hurt.play()
 
