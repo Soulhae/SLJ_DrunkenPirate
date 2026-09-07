@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var damage_label: Label = $"../UI/DEMAGE"
 @onready var hurt = $Hurt
 const JUMP_VELOCITY = 6.5
-
+@export var damage_number_scene: PackedScene
 @export var mouse_sens: float = 0.005
 @export var controller_sens: float = 4
 
@@ -240,6 +240,7 @@ func take_damage(amount: int, attacker: Node = null) -> void:
 	# TAKE DAMAGE
 	Health -= amount
 	print("PLAYER HEALTH: ", Health)
+	show_damage_number(amount,global_position + Vector3(0, 1.5, 0))
 	hurt.play()
 
 	# SHOW DAMAGE TAKEN
@@ -279,3 +280,11 @@ func activate_parry_stun(attacker: Node) -> void:
 			)
 
 			return
+			
+func show_damage_number(amount: int, position: Vector3) -> void:
+	var damage_number = damage_number_scene.instantiate()
+
+	get_tree().current_scene.add_child(damage_number)
+	damage_number.text_color = Color.RED
+	damage_number.global_position = position
+	damage_number.setup(-amount)

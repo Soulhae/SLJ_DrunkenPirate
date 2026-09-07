@@ -7,7 +7,7 @@ extends CharacterBody3D
 # Navigation system used by the enemy states.
 @onready var nav = $NavigationAgent3D
 @onready var label_3d: Label3D = $Label3D
-
+@export var damage_number_scene: PackedScene
 @onready var hurt = $hurt
 
 # Enemy movement settings.
@@ -57,9 +57,17 @@ func take_damage(damage: int) -> void:
 
 	Health -= damage
 	print("Enemy HP: ", Health)
-
+	show_damage_number(damage, global_position + Vector3(0, 1.5, 0))
 	if Health <= 0:
 		Health = 0
 		is_dead = true
 		print("ENEMY DIED")
 		queue_free()
+
+func show_damage_number(amount: int, position: Vector3) -> void:
+	var damage_number = damage_number_scene.instantiate()
+
+	get_tree().current_scene.add_child(damage_number)
+	damage_number.text_color = Color.WHITE
+	damage_number.global_position = position
+	damage_number.setup(-amount)

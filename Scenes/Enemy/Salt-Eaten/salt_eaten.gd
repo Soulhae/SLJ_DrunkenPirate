@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var nav = $NavigationAgent3D
 @onready var Attack_radius: Area3D = $"Attack-Radius"
 @onready var state_machine: StateMachine = $StateMachine
+@export var damage_number_scene: PackedScene
 
 # Boss movement settings.
 @export var AttackReach: float = 5.0
@@ -13,6 +14,7 @@ extends CharacterBody3D
 @export var WalkSpeed: float = 10.0
 @export var RunSpeed: float = 15.0
 @export var Health: int = 200
+
 @onready var hurt = $hurt
 
 @export var water: MeshInstance3D
@@ -42,7 +44,6 @@ func _process(_delta):
 		)
 
 
-
 func _physics_process(_delta: float) -> void:
 	if water == null:
 		return
@@ -55,15 +56,24 @@ func _physics_process(_delta: float) -> void:
 # Deal damage to the boss and reduce its health.
 func take_damage(damage: int):
 	Health -= damage
-
+	show_damage_number(damage, global_position + Vector3(0, 1.5, 0))
 	print("SALT-EATEN HEALTH: ", Health)
 	hurt.play()
+
 	# Prevent health from going below zero.
 	if Health <= 0:
 		Health = 0
-		
 
 
 # Receives the player's position from the main scene.
 func target_position(target_position):
 	nav.target_position = target_position
+
+
+func show_damage_number(amount: int, position: Vector3) -> void:
+	var damage_number = damage_number_scene.instantiate()
+
+	get_tree().current_scene.add_child(damage_number)
+	damage_number.text_color = Color.WHITE
+	damage_number.global_position = position
+	damage_number.setup(-amount)

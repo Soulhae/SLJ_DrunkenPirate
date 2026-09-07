@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d1xpljxnf3vgo"
-path="res://.godot/imported/GameJam Bodies.fbx-74bc989031a05f8a8a61ab356602d13f.scn"
+uid="uid://bjrc73xjkaaxs"
+path="res://.godot/imported/Boss Model.fbx-e065858b96c5f7921aefcaa44f3bb6e8.scn"
 
 [deps]
 
-source_file="res://GameJam Bodies.fbx"
-dest_files=["res://.godot/imported/GameJam Bodies.fbx-74bc989031a05f8a8a61ab356602d13f.scn"]
+source_file="res://Models/Boss Model.fbx"
+dest_files=["res://.godot/imported/Boss Model.fbx-e065858b96c5f7921aefcaa44f3bb6e8.scn"]
 
 [params]
 

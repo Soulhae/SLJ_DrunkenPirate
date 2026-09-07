@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://u7qw10mwmvbj" path="res://Scripts/player/states/player_heal.gd" id="9_kd672"]
 [ext_resource type="AudioStream" uid="uid://cniq0tjaq4s0v" path="res://sounds/547041__cogfirestudios__hit-swing-sword-small-3.wav" id="10_p8lfk"]
 [ext_resource type="AudioStream" uid="uid://e3covidd1u6i" path="res://sounds/407479__loyalty_freak_music__heal.mp3" id="11_uawwb"]
+[ext_resource type="PackedScene" uid="uid://ds17xvi3p1pvj" path="res://Scenes/damage_number.tscn" id="12_uawwb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cv0ty"]
 
@@ -204,6 +205,7 @@ _data = {
 
 [node name="Player" type="CharacterBody3D" unique_id=1973400536]
 script = ExtResource("1_8p05u")
+damage_number_scene = ExtResource("12_uawwb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=219403245]
 shape = SubResource("CapsuleShape3D_cv0ty")

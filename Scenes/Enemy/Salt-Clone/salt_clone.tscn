@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c60u8avcghywk" path="res://Scenes/Enemy/Salt-Clone/salt_clone.gd" id="1_ac1f2"]
 [ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scripts/StateMachine/state_machine.gd" id="2_lq6ub"]
+[ext_resource type="PackedScene" uid="uid://ds17xvi3p1pvj" path="res://Scenes/damage_number.tscn" id="2_vedjn"]
 [ext_resource type="Script" uid="uid://iq1i7bqjiih7" path="res://Scenes/Enemy/Salt-Clone/chase_clone.gd" id="3_2wywy"]
 [ext_resource type="Script" uid="uid://dl56gpyxj27xy" path="res://Scenes/Enemy/Salt-Clone/recover_clone.gd" id="4_ejyxt"]
 [ext_resource type="Script" uid="uid://dwpq0h0gd585v" path="res://Scenes/Enemy/Salt-Clone/clone_attack.gd" id="5_v4f3n"]
@@ -27,6 +28,7 @@ size = Vector3(4, 4, 2)
 
 [node name="SaltClone" type="CharacterBody3D" unique_id=219987348 groups=["enemy"]]
 script = ExtResource("1_ac1f2")
+damage_number_scene = ExtResource("2_vedjn")
 lifetime = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1334464064]

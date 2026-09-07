@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ocju0q74bp0g"
-path="res://.godot/imported/Boss Model Animated.fbx-695fcaa3335c508fae1e9d7287f0ab63.scn"
+path="res://.godot/imported/Boss Model Animated.fbx-e9260f7c899954a5955303d07586a22c.scn"
 
 [deps]
 
-source_file="res://Boss Model Animated.fbx"
-dest_files=["res://.godot/imported/Boss Model Animated.fbx-695fcaa3335c508fae1e9d7287f0ab63.scn"]
+source_file="res://Models/Boss Model Animated.fbx"
+dest_files=["res://.godot/imported/Boss Model Animated.fbx-e9260f7c899954a5955303d07586a22c.scn"]
 
 [params]
 

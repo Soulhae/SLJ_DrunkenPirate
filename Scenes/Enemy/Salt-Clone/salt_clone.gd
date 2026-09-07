@@ -3,7 +3,7 @@ class_name SaltClone
 
 @onready var player: CharacterBody3D = get_tree().get_first_node_in_group("player")
 @onready var attack_area: Area3D = $AttackArea
-
+@export var damage_number_scene: PackedScene
 @export var move_speed: float = 3.0
 @export var damage: int = 8
 @export var lifetime: float = 5.0
@@ -104,3 +104,11 @@ func _physics_process(delta: float) -> void:
 				can_attack = true
 
 				break
+
+func show_damage_number(amount: int, position: Vector3) -> void:
+	var damage_number = damage_number_scene.instantiate()
+
+	get_tree().current_scene.add_child(damage_number)
+	damage_number.text_color = Color.WHITE
+	damage_number.global_position = position
+	damage_number.setup(-amount)

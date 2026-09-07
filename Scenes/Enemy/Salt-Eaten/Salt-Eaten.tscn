@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scripts/StateMachine/state_machine.gd" id="1_b52jn"]
 [ext_resource type="Script" uid="uid://d3fqsrojyg6y3" path="res://Scenes/Enemy/Salt-Eaten/salt_eaten.gd" id="1_n0msd"]
-[ext_resource type="PackedScene" uid="uid://bjrc73xjkaaxs" path="res://Boss Model.fbx" id="2_hfibc"]
+[ext_resource type="PackedScene" uid="uid://bjrc73xjkaaxs" path="res://Models/Boss Model.fbx" id="2_hfibc"]
+[ext_resource type="PackedScene" uid="uid://ds17xvi3p1pvj" path="res://Scenes/damage_number.tscn" id="2_v3l8b"]
 [ext_resource type="Script" uid="uid://cqbrpl8be1xkm" path="res://Scenes/Enemy/Salt-Eaten/boss_rest.gd" id="3_1517h"]
 [ext_resource type="Script" uid="uid://dgxc8rj21hf0s" path="res://Scenes/Enemy/Salt-Eaten/boss_wander.gd" id="4_ls4fi"]
 [ext_resource type="Script" uid="uid://dtvpwqjke6ni6" path="res://Scenes/Enemy/Salt-Eaten/boss_chase.gd" id="5_jt70v"]
@@ -16,7 +17,7 @@
 [ext_resource type="Script" uid="uid://cghoii6vqpp74" path="res://Scenes/Enemy/Salt-Eaten/boss_salt_bomb.gd" id="13_ma8vw"]
 [ext_resource type="PackedScene" uid="uid://bjx62vomghqfb" path="res://Scenes/salt_bomb.tscn" id="14_l62lc"]
 [ext_resource type="Script" uid="uid://cjlar3lslisrc" path="res://Scenes/Enemy/Salt-Eaten/boss_salt_clone.gd" id="15_aif0f"]
-[ext_resource type="PackedScene" uid="uid://bpskkw6c4h3wy" path="res://Scenes/Enemy/salt_clone.tscn" id="16_yhmgu"]
+[ext_resource type="PackedScene" uid="uid://bpskkw6c4h3wy" path="res://Scenes/Enemy/Salt-Clone/salt_clone.tscn" id="16_yhmgu"]
 [ext_resource type="Script" uid="uid://cox2joxiy8awd" path="res://Scenes/Enemy/Salt-Eaten/boss_stun.gd" id="17_yhmgu"]
 [ext_resource type="AudioStream" uid="uid://c1rujmyxae3ou" path="res://sounds/845437__artninja__heavy_crunchy_bassy_explosion_w_rock_texture_sound_02152026.wav" id="19_l3fob"]
 [ext_resource type="AudioStream" uid="uid://b5qbtvmobb11j" path="res://sounds/458867__raclure__damage-sound-effect.mp3" id="20_l3fob"]
@@ -1289,6 +1290,7 @@ size = Vector3(4.061096, 3.6496582, 5.568321)
 
 [node name="BOSS" type="CharacterBody3D" unique_id=1642110537 groups=["enemy"]]
 script = ExtResource("1_n0msd")
+damage_number_scene = ExtResource("2_v3l8b")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=2058151517]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9099295, 0)

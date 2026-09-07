@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://743qfrqljurk" path="res://Scenes/Enemy/Short_Ranged/Enemy.gd" id="1_l40u0"]
 [ext_resource type="Script" uid="uid://des8mb1cibtv4" path="res://Scripts/StateMachine/state_machine.gd" id="2_7drta"]
+[ext_resource type="PackedScene" uid="uid://ds17xvi3p1pvj" path="res://Scenes/damage_number.tscn" id="2_ie3ob"]
 [ext_resource type="Script" uid="uid://dwfkejg0fu7x5" path="res://Scenes/Enemy/Short_Ranged/enemy_wander.gd" id="3_16av8"]
 [ext_resource type="Script" uid="uid://6bd2cb1kmt8i" path="res://Scenes/Enemy/Short_Ranged/enemy_chase.gd" id="4_16av8"]
 [ext_resource type="Script" uid="uid://caa8acf8lrdpl" path="res://Scenes/Enemy/Short_Ranged/enemy_attack.gd" id="5_5q6vj"]
@@ -31,6 +32,7 @@ size = Vector3(1, 1, 3)
 
 [node name="Enemy(SR)" type="CharacterBody3D" unique_id=1434957411 groups=["enemy"]]
 script = ExtResource("1_l40u0")
+damage_number_scene = ExtResource("2_ie3ob")
 
 [node name="body" type="MeshInstance3D" parent="." unique_id=1153664325]
 mesh = SubResource("CapsuleMesh_hp6sh")
