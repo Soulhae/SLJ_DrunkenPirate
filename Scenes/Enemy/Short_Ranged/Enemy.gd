@@ -9,7 +9,8 @@ extends CharacterBody3D
 @onready var label_3d: Label3D = $Label3D
 @export var damage_number_scene: PackedScene
 @onready var hurt = $hurt
-
+@onready var mesh: MeshInstance3D = $body
+var original_material: Material
 # Enemy movement settings.
 @export var JumpVelocity: float = 5.0
 @export var JumpDistance: float = 3.0
@@ -31,6 +32,7 @@ var target: Node3D
 func _ready() -> void:
 	last_water_position = global_position
 	label_3d.text = name
+	original_material = mesh.get_active_material(0)
 
 
 # Receives the player's position from the main scene.
@@ -58,6 +60,8 @@ func take_damage(damage: int) -> void:
 	Health -= damage
 	print("Enemy HP: ", Health)
 	show_damage_number(damage, global_position + Vector3(0, 1.5, 0))
+	hit_flash()
+
 	if Health <= 0:
 		Health = 0
 		is_dead = true
@@ -71,3 +75,30 @@ func show_damage_number(amount: int, position: Vector3) -> void:
 	damage_number.text_color = Color.WHITE
 	damage_number.global_position = position
 	damage_number.setup(-amount)
+
+func hit_flash() -> void:
+	var material = mesh.get_active_material(0).duplicate()
+	
+	if material is StandardMaterial3D:
+		material.emission_enabled = true
+		material.emission = Color.WHITE
+		material.emission_energy_multiplier = 5.0
+		
+		mesh.set_surface_override_material(0, material)
+		
+		await get_tree().create_timer(0.1).timeout
+		
+		mesh.set_surface_override_material(0, original_material)
+func stagger() -> void:
+	if is_dead:
+		return
+
+	var state_machine = $StateMachine
+
+	if state_machine.current_state.name == "EnemyStagger":
+		return
+
+	state_machine.current_state.Transitioned.emit(
+		state_machine.current_state,
+		"enemystagger"
+	)

@@ -5,8 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cyyddidb38rak" path="res://Scenes/Enemy/Salt-Eaten/Salt-Eaten.tscn" id="4_wha5u"]
 [ext_resource type="Script" uid="uid://bdowfqtoviurd" path="res://Scripts/ui.gd" id="5_b3sq5"]
 [ext_resource type="PackedScene" uid="uid://ccfglh7ctads5" path="res://Scenes/Enemy/Short_Ranged/Short-R.tscn" id="5_tstyl"]
-[ext_resource type="Script" uid="uid://nhave5o8uwt5" path="res://Scripts/music.gd" id="6_aq6fk"]
-[ext_resource type="AudioStream" uid="uid://dikus710klqfp" path="res://sounds/Salt EATEN.mp3" id="6_b3sq5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vibap"]
 sky_top_color = Color(0.192157, 0.282353, 0.509804, 1)
@@ -219,10 +217,8 @@ mesh = SubResource("BoxMesh_su5vk")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -97.49687, 12.558609, -2.7814484)
 mesh = SubResource("BoxMesh_su5vk")
 
-[node name="BOSS" parent="." unique_id=1642110537 node_paths=PackedStringArray("water") groups=["Boss"] instance=ExtResource("4_wha5u")]
+[node name="BOSS" parent="." unique_id=1642110537 groups=["Boss"] instance=ExtResource("4_wha5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4939237, 0)
-ChaseDistance = 40.0
-water = NodePath("../Water")
 
 [node name="enemy" type="Node3D" parent="." unique_id=529067313]
 
@@ -341,11 +337,11 @@ offset_bottom = 333.0
 text = "Damage Dealt:
 "
 
-[node name="MUSIC" type="Node" parent="." unique_id=2067639958]
-script = ExtResource("6_aq6fk")
-
-[node name="MUSICA" type="AudioStreamPlayer" parent="MUSIC" unique_id=1412486301]
-stream = ExtResource("6_b3sq5")
-
-[node name="MUSICB" type="AudioStreamPlayer" parent="MUSIC" unique_id=1143242524]
-stream = ExtResource("6_b3sq5")
+[node name="HurtFlash" type="ColorRect" parent="UI" unique_id=531361734]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.72156864, 0, 0.10980392, 0)

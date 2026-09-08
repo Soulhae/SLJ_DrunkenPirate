@@ -37,7 +37,7 @@ func _ready() -> void:
 func _process(_delta):
 	if Health <= 0 and not is_dead:
 		is_dead = true
-		
+
 		state_machine.current_state.Transitioned.emit(
 			state_machine.current_state,
 			"bossdeath"
@@ -56,8 +56,14 @@ func _physics_process(_delta: float) -> void:
 # Deal damage to the boss and reduce its health.
 func take_damage(damage: int):
 	Health -= damage
-	show_damage_number(damage, global_position + Vector3(-1, 1.5, 1.5))
+
+	show_damage_number(
+		damage,
+		global_position + Vector3(-1, 1.5, 1.5)
+	)
+
 	print("SALT-EATEN HEALTH: ", Health)
+
 	hurt.play()
 
 	# Prevent health from going below zero.
@@ -74,6 +80,19 @@ func show_damage_number(amount: int, position: Vector3) -> void:
 	var damage_number = damage_number_scene.instantiate()
 
 	get_tree().current_scene.add_child(damage_number)
+
 	damage_number.text_color = Color.WHITE
 	damage_number.global_position = position
 	damage_number.setup(-amount)
+
+func stagger() -> void:
+	if Health <= 0:
+		return
+
+	if state_machine.current_state.name == "BossStagger":
+		return
+
+	state_machine.current_state.Transitioned.emit(
+		state_machine.current_state,
+		"bossstagger"
+	)

@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://cox2joxiy8awd" path="res://Scenes/Enemy/Salt-Eaten/boss_stun.gd" id="17_yhmgu"]
 [ext_resource type="AudioStream" uid="uid://c1rujmyxae3ou" path="res://sounds/845437__artninja__heavy_crunchy_bassy_explosion_w_rock_texture_sound_02152026.wav" id="19_l3fob"]
 [ext_resource type="AudioStream" uid="uid://b5qbtvmobb11j" path="res://sounds/458867__raclure__damage-sound-effect.mp3" id="20_l3fob"]
+[ext_resource type="Script" uid="uid://bd36q2q4rahqj" path="res://Scenes/Enemy/Salt-Eaten/bossstagger.gd" id="20_t17ak"]
 [ext_resource type="AudioStream" uid="uid://cb2au5aii18p3" path="res://sounds/573377__johnloser__cyber-punch-02.wav" id="21_t17ak"]
 [ext_resource type="AudioStream" uid="uid://bu5wilu2tug8r" path="res://sounds/571387__alexmurphy53__villain-death.wav" id="22_62cp0"]
 
@@ -2506,6 +2507,10 @@ metadata/_custom_type_script = "uid://cjlar3lslisrc"
 [node name="BossStun" type="Node" parent="StateMachine" unique_id=97029539]
 script = ExtResource("17_yhmgu")
 metadata/_custom_type_script = "uid://cox2joxiy8awd"
+
+[node name="BossStagger" type="Node" parent="StateMachine" unique_id=261415601]
+script = ExtResource("20_t17ak")
+metadata/_custom_type_script = "uid://bd36q2q4rahqj"
 
 [node name="slam" type="AudioStreamPlayer" parent="." unique_id=1903304353]
 stream = ExtResource("19_l3fob")

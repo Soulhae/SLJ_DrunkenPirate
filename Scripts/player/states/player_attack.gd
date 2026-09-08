@@ -9,6 +9,7 @@ extends State
 @export var attack_damage_2: int = 15
 @export var attack_damage_3: int = 20
 @onready var hurt = $"../../Hurt"
+
 var combo_step: int = 1
 var can_chain: bool = false
 var attack_pending: bool = false
@@ -64,9 +65,29 @@ func deal_attack_damage():
 	for body in attack_hitbox.get_overlapping_bodies():
 		if body.is_in_group("enemy"):
 			if body.has_method("take_damage"):
-
 				body.take_damage(damage)
+
+				# Attack 3 staggers the boss.
+				if combo_step == 3 and body.has_method("stagger"):
+					body.stagger()
+
+				# Hit-stop
+				if combo_step == 3:
+					player.hit_stop(0.10)
+				else:
+					player.hit_stop(0.07)
+
+				# Camera shake
+				match combo_step:
+					1:
+						player.shake_camera(0.035, 0.06)
+					2:
+						player.shake_camera(0.045, 0.07)
+					3:
+						player.shake_camera(0.08, 0.12)
+
 				hurt.play()
+
 				# Show damage dealt
 				damage_dealt_label.text = str(damage)
 				damage_dealt_label.visible = true
@@ -74,8 +95,8 @@ func deal_attack_damage():
 				print("PLAYER HIT: ", body.name, " DAMAGE: ", damage)
 
 				await get_tree().create_timer(0.5).timeout
-
 				damage_dealt_label.visible = false
+
 
 func allow_chain():
 	can_chain = true
