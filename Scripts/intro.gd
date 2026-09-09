@@ -1,7 +1,7 @@
 extends Control
 
 @onready var text_label: Label = $ColorRect/Label
-@onready var next_button: Button = $Button
+@onready var next_button: Button = $ColorRect/button
 
 var text_index := 0
 
@@ -20,11 +20,12 @@ func _ready():
 
 
 func _on_button_pressed() -> void:
-
 	if text_index < texts.size() - 1:
 		text_index += 1
-		text_label.text = texts[text_index]
-
+		
+		# Add the next line instead of replacing the old text.
+		text_label.text += "\n" + texts[text_index]
+		
 	else:
 		next_button.text = "WAKE UP"
 		next_button.pressed.disconnect(_on_button_pressed)

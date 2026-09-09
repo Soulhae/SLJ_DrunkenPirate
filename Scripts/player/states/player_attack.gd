@@ -5,10 +5,12 @@ extends State
 @onready var anim_player: AnimationPlayer = player.get_node("AnimationPlayer")
 @onready var attack_hitbox: Area3D = player.get_node("AttackHitbox")
 @onready var damage_dealt_label: Label = player.get_node("../UI/DamageDealtLabel")
+@onready var effect_hit = $"../../HitEffect"
+@onready var hurt = $"../../Hurt"
+
 @export var attack_damage_1: int = 10
 @export var attack_damage_2: int = 15
 @export var attack_damage_3: int = 20
-@onready var hurt = $"../../Hurt"
 
 var combo_step: int = 1
 var can_chain: bool = false
@@ -67,7 +69,11 @@ func deal_attack_damage():
 			if body.has_method("take_damage"):
 				body.take_damage(damage)
 
-				# Attack 3 staggers the boss.
+				# Hit particle effect.
+				effect_hit.global_position = body.global_position
+				effect_hit.restart()
+
+				# Attack 3 staggers the enemy/boss.
 				if combo_step == 3 and body.has_method("stagger"):
 					body.stagger()
 

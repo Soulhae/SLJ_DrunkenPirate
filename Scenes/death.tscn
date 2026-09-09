@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://bbgux84q8uriu"]
+
+[ext_resource type="FontFile" uid="uid://bfstw3mntrixx" path="res://Resources/fonts/lazzy-sunday/Lazzy-Sunday-Regular.otf" id="1_g62mh"]
+[ext_resource type="Script" uid="uid://dfht5pvngl7s7" path="res://Scripts/death.gd" id="1_mna5k"]
+[ext_resource type="AudioStream" uid="uid://bmjqnd7wfe6ps" path="res://sounds/731993__6sdeimos__click-1.wav" id="3_rsl6c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g62mh"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 6
+shadow_offset = Vector2(0, 3.095)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mna5k"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 6
+shadow_offset = Vector2(0, -0.565)
+
+[node name="DEATH" type="Control" unique_id=992145674]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mna5k")
+
+[node name="Background" type="ColorRect" parent="." unique_id=346164509]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.050980393, 0.050980393, 1)
+
+[node name="you die" type="Label" parent="Background" unique_id=661627451]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -149.0
+offset_right = 116.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9098039, 0.88235295, 0.8352941, 1)
+theme_override_fonts/font = ExtResource("1_g62mh")
+theme_override_font_sizes/font_size = 60
+text = "YOU DIED"
+
+[node name="stats" type="Label" parent="Background" unique_id=863550498]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -537.0
+offset_top = 53.0
+offset_right = -378.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.6627451, 0.6313726, 0.6039216, 1)
+theme_override_fonts/font = ExtResource("1_g62mh")
+theme_override_font_sizes/font_size = 40
+text = "Stats:"
+
+[node name="BossHPLabel" type="Label" parent="Background/stats" unique_id=1635252988]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = 55.0
+offset_right = 424.5
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.6627451, 0.6313726, 0.6039216, 1)
+theme_override_fonts/font = ExtResource("1_g62mh")
+theme_override_font_sizes/font_size = 40
+text = "SALT-EATEN HP: 73 / 200"
+
+[node name="HealsLabel" type="Label" parent="Background/stats" unique_id=734431395]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = 133.0
+offset_right = 298.5
+offset_bottom = 183.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.6627451, 0.6313726, 0.6039216, 1)
+theme_override_fonts/font = ExtResource("1_g62mh")
+theme_override_font_sizes/font_size = 40
+text = "HEALS USED: 2 / 3"
+
+[node name="back" type="Button" parent="Background" unique_id=1864134121]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 394.0
+offset_right = 1089.0
+offset_bottom = 469.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 20
+theme_override_fonts/font = ExtResource("1_g62mh")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_g62mh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mna5k")
+text = "RETRY"
+
+[node name="mainmenu" type="Button" parent="Background" unique_id=2103153337]
+layout_mode = 0
+offset_left = 909.0
+offset_top = 527.0
+offset_right = 1120.0
+offset_bottom = 602.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 20
+theme_override_fonts/font = ExtResource("1_g62mh")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_g62mh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mna5k")
+text = "Main Menu"
+
+[node name="click" type="AudioStreamPlayer" parent="." unique_id=1596263235]
+stream = ExtResource("3_rsl6c")
+autoplay = true
+
+[connection signal="pressed" from="Background/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Background/mainmenu" to="." method="_on_mainmenu_pressed"]

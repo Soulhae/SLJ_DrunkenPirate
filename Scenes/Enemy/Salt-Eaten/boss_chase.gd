@@ -3,8 +3,7 @@ class_name BossChase
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
-@onready var animation_player: AnimationPlayer = $"../../Boss Model Animated/AnimationPlayer"
-
+@onready var animation_player: AnimationPlayer = $"../../Boss Model with all animations/AnimationPlayer"
 func enter():
 	animation_player.play("Armature|ArmatureAction")
 func process(_delta: float):

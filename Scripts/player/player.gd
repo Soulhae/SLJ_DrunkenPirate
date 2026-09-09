@@ -227,9 +227,18 @@ func take_damage(amount: int, attacker: Node = null) -> void:
 
 	if Health <= 0:
 		Health = 0
-		print("======PLAYER DIED================")
-		get_tree().reload_current_scene()
+		print("====== PLAYER DIED ======")
 
+		var boss = get_tree().get_first_node_in_group("enemy")
+
+		if boss:
+			GameState.boss_remaining_health = boss.Health
+			GameState.boss_max_health = boss.MaxHealth
+
+		GameState.heals_used = max_heals - heals_left
+		await get_tree().create_timer(1.0).timeout
+		get_tree().change_scene_to_file("res://Scenes/death.tscn")
+		
 func activate_parry_stun(attacker: Node) -> void:
 	if not is_instance_valid(attacker):
 		return

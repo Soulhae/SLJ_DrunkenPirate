@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cniq0tjaq4s0v" path="res://sounds/547041__cogfirestudios__hit-swing-sword-small-3.wav" id="10_p8lfk"]
 [ext_resource type="AudioStream" uid="uid://e3covidd1u6i" path="res://sounds/407479__loyalty_freak_music__heal.mp3" id="11_uawwb"]
 [ext_resource type="PackedScene" uid="uid://ds17xvi3p1pvj" path="res://Scenes/damage_number.tscn" id="12_uawwb"]
+[ext_resource type="PackedScene" uid="uid://bdjnu4y22lei" path="res://Scenes/hit_effect.tscn" id="13_ag54m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cv0ty"]
 
@@ -298,6 +299,10 @@ stream = ExtResource("11_uawwb")
 volume_db = 24.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=800895962]
+
+[node name="HitEffect" parent="." unique_id=1919505199 instance=ExtResource("13_ag54m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82457554, -0.68121576)
+amount = 50
 
 [connection signal="body_entered" from="LockTargetRange" to="." method="_on_lock_target_range_body_entered"]
 [connection signal="body_exited" from="LockTargetRange" to="." method="_on_lock_target_range_body_exited"]

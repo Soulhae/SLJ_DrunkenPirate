@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://qxs6g1jrlo7k"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_su5vk"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+inherit_velocity_ratio = 10.0
+direction = Vector3(0, 0, 1)
+spread = 60.0
+initial_velocity_min = 6.7599998
+initial_velocity_max = 27.029999
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_827x2"]
+albedo_color = Color(0.94509804, 0.11372549, 0.16470589, 1)
+roughness = 0.32
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hp6sh"]
+material = SubResource("StandardMaterial3D_827x2")
+radius = 0.05
+height = 0.05
+
+[node name="Demaged" type="GPUParticles3D" unique_id=1795063031]
+emitting = false
+amount = 20
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_su5vk")
+draw_pass_1 = SubResource("SphereMesh_hp6sh")

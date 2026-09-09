@@ -1,6 +1,25 @@
 [gd_scene format=3 uid="uid://du8ktitxe51p6"]
 
 [ext_resource type="Script" uid="uid://d2c218q6ojhus" path="res://Scripts/intro.gd" id="1_b226h"]
+[ext_resource type="FontFile" uid="uid://bfstw3mntrixx" path="res://Resources/fonts/lazzy-sunday/Lazzy-Sunday-Regular.otf" id="2_duh1u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_alxvg"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 6
+shadow_offset = Vector2(0, 3.095)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geirw"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 6
+shadow_offset = Vector2(0, -0.565)
 
 [node name="Intro" type="Control" unique_id=340550575]
 layout_mode = 3
@@ -26,12 +45,20 @@ offset_left = 37.0
 offset_top = 66.0
 offset_right = 331.0
 offset_bottom = 207.0
+theme_override_fonts/font = ExtResource("2_duh1u")
 
-[node name="Button" type="Button" parent="." unique_id=900893041]
+[node name="button" type="Button" parent="ColorRect" unique_id=1990538290]
 layout_mode = 0
-offset_left = 817.0
-offset_top = 477.0
-offset_right = 1120.0
-offset_bottom = 619.0
+offset_left = 875.0
+offset_top = 521.0
+offset_right = 1074.0
+offset_bottom = 584.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 20
+theme_override_fonts/font = ExtResource("2_duh1u")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_alxvg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_geirw")
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ColorRect/button" to="." method="_on_button_pressed"]

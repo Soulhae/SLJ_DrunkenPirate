@@ -13,7 +13,9 @@ extends CharacterBody3D
 @export var ChaseDistance: float = 30.0
 @export var WalkSpeed: float = 10.0
 @export var RunSpeed: float = 15.0
+
 @export var Health: int = 200
+@export var MaxHealth: int = 200
 
 @onready var hurt = $hurt
 
@@ -28,15 +30,33 @@ var target: Node3D
 # Prevents the death transition from being called multiple times.
 var is_dead: bool = false
 
+# Boss fight timer.
+var fight_time: float = 0.0
+
 
 func _ready() -> void:
+	Health = MaxHealth
 	last_water_position = global_position
+
+	# Find the player.
+	target = get_tree().get_first_node_in_group("player")
 
 
 # Check if the boss has died.
-func _process(_delta):
+func _process(delta: float) -> void:
+	if not is_dead:
+		fight_time += delta
+
 	if Health <= 0 and not is_dead:
 		is_dead = true
+		Health = 0
+
+		# Save time taken to kill the boss.
+		GameState.boss_fight_time = fight_time
+
+		# Save heals used.
+		if target != null:
+			GameState.heals_used = target.max_heals - target.heals_left
 
 		state_machine.current_state.Transitioned.emit(
 			state_machine.current_state,
@@ -66,7 +86,6 @@ func take_damage(damage: int):
 
 	hurt.play()
 
-	# Prevent health from going below zero.
 	if Health <= 0:
 		Health = 0
 
@@ -84,6 +103,7 @@ func show_damage_number(amount: int, position: Vector3) -> void:
 	damage_number.text_color = Color.WHITE
 	damage_number.global_position = position
 	damage_number.setup(-amount)
+
 
 func stagger() -> void:
 	if Health <= 0:
