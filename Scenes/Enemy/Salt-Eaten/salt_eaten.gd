@@ -6,6 +6,9 @@ extends CharacterBody3D
 @onready var state_machine: StateMachine = $StateMachine
 @export var damage_number_scene: PackedScene
 
+@onready var mesh: MeshInstance3D = $boss/Armature/Skeleton3D/Rapier
+var original_material: Material
+
 # Boss movement settings.
 @export var AttackReach: float = 5.0
 @export var SlamReach: float = 8.0
@@ -76,12 +79,10 @@ func _physics_process(_delta: float) -> void:
 # Deal damage to the boss and reduce its health.
 func take_damage(damage: int):
 	Health -= damage
+	hit_flash()
 
-	show_damage_number(
-		damage,
-		global_position + Vector3(-1, 1.5, 1.5)
-	)
-
+	show_damage_number(damage,global_position + Vector3(-1, 1.5, 1.5))
+	
 	print("SALT-EATEN HEALTH: ", Health)
 
 	hurt.play()
@@ -116,3 +117,17 @@ func stagger() -> void:
 		state_machine.current_state,
 		"bossstagger"
 	)
+
+func hit_flash() -> void:
+	var material = mesh.get_active_material(0).duplicate()
+	
+	if material is StandardMaterial3D:
+		material.emission_enabled = true
+		material.emission = Color.WHITE
+		material.emission_energy_multiplier = 5.0
+		
+		mesh.set_surface_override_material(0, material)
+		
+		await get_tree().create_timer(0.1).timeout
+		
+		mesh.set_surface_override_material(0, original_material)

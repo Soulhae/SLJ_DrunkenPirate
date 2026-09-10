@@ -4,6 +4,7 @@ extends State
 
 @onready var player: CharacterBody3D = get_owner()
 @onready var label_3d: Label3D = player.get_node("Visuals/Label3D")
+@onready var walk_sand: AudioStreamPlayer = $"../../walk_sand"
 
 
 func enter():

@@ -4,13 +4,11 @@ class_name BossWander
 var wander_direction: Vector3
 var wander_time: float = 0.0
 
-# Reference to the player and enemy.
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
-@onready var animation_player: AnimationPlayer = $"../../Boss Model with all animations/AnimationPlayer"
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
 
-# Choose a random direction and time.
 func randomise_variables():
 	if randi_range(0, 2) != 1:
 		wander_direction = Vector3(
@@ -24,28 +22,25 @@ func randomise_variables():
 	wander_time = randf_range(1.5, 4.0)
 
 
-# Set up wandering.
 func enter():
-	animation_player.play("Armature|ArmatureAction")
+	animation_player.play("walk")
 	randomise_variables()
 
 
-# Check timer and chase distance.
 func process(delta: float):
 
 	wander_time -= delta
 
-	# Player is close enough to chase.
 	if enemy.global_position.distance_to(player.global_position) < enemy.ChaseDistance:
 		Transitioned.emit(self, "bosschase")
 		return
 
-	# Finished wandering.
 	if wander_time <= 0.0:
+		enemy.velocity.x = 0
+		enemy.velocity.z = 0
 		Transitioned.emit(self, "bossrest")
 
 
-# Move and face the random direction.
 func physics_process(delta: float):
 
 	if wander_direction.length() > 0.1:
@@ -57,7 +52,6 @@ func physics_process(delta: float):
 	enemy.velocity.x = wander_direction.x * enemy.WalkSpeed
 	enemy.velocity.z = wander_direction.z * enemy.WalkSpeed
 
-	# Apply gravity.
 	if not enemy.is_on_floor():
 		enemy.velocity += enemy.get_gravity() * delta
 

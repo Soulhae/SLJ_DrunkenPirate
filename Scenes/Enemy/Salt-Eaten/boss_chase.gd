@@ -3,10 +3,17 @@ class_name BossChase
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
-@onready var animation_player: AnimationPlayer = $"../../Boss Model with all animations/AnimationPlayer"
-func enter():
-	animation_player.play("Armature|ArmatureAction")
-func process(_delta: float):
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
+
+
+func enter() -> void:
+	animation_player.play("walk")
+
+
+func process(_delta: float) -> void:
+
+	if player == null or not player.is_inside_tree():
+		return
 
 	var distance = enemy.global_position.distance_to(player.global_position)
 
@@ -17,13 +24,24 @@ func process(_delta: float):
 	if distance <= enemy.DiveReach:
 		Transitioned.emit(self, "bossattack")
 
-func physics_process(delta: float):
+
+func physics_process(delta: float) -> void:
+
+	if player == null or not player.is_inside_tree():
+		enemy.velocity.x = 0.0
+		enemy.velocity.z = 0.0
+		return
+
 	var direction = player.global_position - enemy.global_position
 	direction.y = 0.0
 
 	if direction.length() > 0.1:
 		direction = direction.normalized()
-		enemy.look_at(enemy.global_position + direction, Vector3.UP)
+
+		enemy.look_at(
+			enemy.global_position + direction,
+			Vector3.UP
+		)
 
 	enemy.velocity.x = direction.x * enemy.RunSpeed
 	enemy.velocity.z = direction.z * enemy.RunSpeed

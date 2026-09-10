@@ -47,17 +47,17 @@ func enter() -> void:
 		# Almost 50 / 50
 	#
 	# Slam can happen up to 3 times.
-	# Clone can happen up to 3 times.
-	# Neither can happen 4 times in a row.
+	# Clone can happen up to 2 times.
+	# Clone cannot happen 3 times in a row.
 
 		if slam_streak >= 3:
 
 			# Force Clone after 3 Slams.
 			selected_attack = 3
 
-		elif clone_streak >= 3:
+		elif clone_streak >= 2:
 
-			# Force Slam after 3 Clones.
+			# Force Slam after 2 Clones.
 			selected_attack = 2
 
 		else:
@@ -184,13 +184,13 @@ func process(_delta: float) -> void:
 			Transitioned.emit(self, "bossdive")
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
 
 	enemy.velocity.x = 0.0
 	enemy.velocity.z = 0.0
 
 	if not enemy.is_on_floor():
-		enemy.velocity += enemy.get_gravity() * delta
+		enemy.velocity += enemy.get_gravity() * _delta
 
 	enemy.move_and_slide()
 

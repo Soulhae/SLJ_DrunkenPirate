@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://dgdcd0j3fm7re"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hp6sh"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 9, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, 5, 0)
+
+[sub_resource type="TorusMesh" id="TorusMesh_7vnww"]
+inner_radius = 0.01
+outer_radius = 0.05
+
+[sub_resource type="TorusMesh" id="TorusMesh_hp6sh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_827x2"]
+transparency = 1
+albedo_color = Color(0.84705883, 0.8156863, 0.72156864, 1)
+
+[sub_resource type="Animation" id="Animation_7vnww"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.84705883, 0.8156863, 0.72156864, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v467e"]
+resource_name = "dust"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(14.65, 14.65, 14.65)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.98),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.84705883, 0.8156863, 0.72156864, 1), Color(0.84705883, 0.8156863, 0.72156864, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xcih5"]
+_data = {
+&"RESET": SubResource("Animation_7vnww"),
+&"dust": SubResource("Animation_v467e")
+}
+
+[node name="Slam Impact" type="Node3D" unique_id=184061419]
+
+[node name="Slam Impact effct" type="GPUParticles3D" parent="." unique_id=1814674628]
+emitting = false
+amount = 20
+amount_ratio = 0.5
+one_shot = true
+explosiveness = 1.0
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_hp6sh")
+draw_pass_1 = SubResource("TorusMesh_7vnww")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=601313086]
+mesh = SubResource("TorusMesh_hp6sh")
+surface_material_override/0 = SubResource("StandardMaterial3D_827x2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1604336111]
+libraries/ = SubResource("AnimationLibrary_xcih5")

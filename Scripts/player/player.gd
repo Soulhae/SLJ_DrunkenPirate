@@ -5,7 +5,13 @@ extends CharacterBody3D
 @onready var damage_label: Label = $"../UI/DEMAGE"
 @onready var hurt_flash: ColorRect = $"../UI/HurtFlash"
 @onready var hurt = $Hurt
+
+# BLOCK / PARRY VFX
+@onready var block_effect: GPUParticles3D = $"BLOCK IMPACT"
+@onready var parry_effect: GPUParticles3D = $"Parry Flash"
+
 const JUMP_VELOCITY = 6.5
+
 @export var damage_number_scene: PackedScene
 @export var mouse_sens: float = 0.005
 @export var controller_sens: float = 4
@@ -17,6 +23,7 @@ var camera_original_rotation: Vector3
 
 @export var max_heals: int = 3
 var heals_left: int
+
 @export var MaxHealth: int = 100
 
 var enemy_target: CharacterBody3D
@@ -31,7 +38,9 @@ var move_speed: float = 10.0
 @onready var camera: Camera3D = $HPivot/VPivot/SpringArm3D/Camera3D
 
 @export var water: MeshInstance3D
+
 @onready var state_machine: StateMachine = $StateMachine
+
 var last_position: Vector3
 
 var drunk_timer: float = 0.0
@@ -42,12 +51,20 @@ var drunk_change_timer: float = 0.0
 var drunk_camera_time: float = 0.0
 var drunk_fov: float = 75.0
 
+
 func _ready() -> void:
 	heals_left = max_heals
 	last_position = global_position
 	camera_original_rotation = camera.rotation
+
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 	hurt_flash.color.a = 0.0
+
+	# Make sure both VFX start hidden.
+	block_effect.visible = false
+	parry_effect.visible = false
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -70,7 +87,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if lock_target_range.has_overlapping_bodies():
 			for body in lock_target_range.get_overlapping_bodies():
 				if body.is_in_group("enemy"):
-					var enemy_vector = (body.global_position - camera_3d.global_position).normalized()
+					var enemy_vector = (
+						body.global_position - camera_3d.global_position
+					).normalized()
+
 					var enemy_distance_to_center = camera_vector.dot(enemy_vector)
 
 					if enemy_distance_to_center > closest_distance:
@@ -83,6 +103,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				enemy_target = closest_enemy
 			else:
 				enemy_target = null
+
 
 func _process(delta: float) -> void:
 	if state_machine.current_state.name == "PlayerBlock":
@@ -115,15 +136,19 @@ func _process(delta: float) -> void:
 			drunk = false
 			drunk_timer = 0.0
 			drunk_camera_time = 0.0
+
 			spring_arm.rotation.x = 0.0
 			spring_arm.rotation.z = 0.0
 			spring_arm.position.y = 0.0
+
 			camera.fov = drunk_fov
+
 			print("NO LONGER DRUNK")
 
 	# CAMERA SHAKE
 	if shake_time > 0.0:
 		shake_time -= delta
+
 		var shake_fade = shake_time / shake_duration
 
 		camera.rotation = camera_original_rotation + Vector3(
@@ -137,13 +162,31 @@ func _process(delta: float) -> void:
 			camera.rotation = camera_original_rotation
 
 	if not enemy_target:
-		var input_dir := Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
+		var input_dir := Input.get_vector(
+			"camera_left",
+			"camera_right",
+			"camera_up",
+			"camera_down"
+		)
+
 		h_pivot.rotation.y -= input_dir.x * controller_sens * delta
+
 		v_pivot.rotation.x -= input_dir.y * controller_sens * delta
-		v_pivot.rotation.x = clamp(v_pivot.rotation.x, -PI / 3, PI / 4)
+
+		v_pivot.rotation.x = clamp(
+			v_pivot.rotation.x,
+			-PI / 3,
+			PI / 4
+		)
 	else:
-		var new_enemy_position = Vector3(enemy_target.global_position.x, h_pivot.global_position.y, enemy_target.global_position.z)
+		var new_enemy_position = Vector3(
+			enemy_target.global_position.x,
+			h_pivot.global_position.y,
+			enemy_target.global_position.z
+		)
+
 		h_pivot.look_at(new_enemy_position)
+
 
 func _physics_process(_delta: float) -> void:
 	if water == null:
@@ -153,12 +196,15 @@ func _physics_process(_delta: float) -> void:
 		water.create_ripple(global_position)
 		last_position = global_position
 
+
 func _on_lock_target_range_body_entered(_body: Node3D) -> void:
 	pass
+
 
 func _on_lock_target_range_body_exited(body: Node3D) -> void:
 	if body == enemy_target:
 		enemy_target = null
+
 
 func check_enemy_is_visible(closest_enemy: CharacterBody3D) -> bool:
 	if not closest_enemy:
@@ -166,36 +212,88 @@ func check_enemy_is_visible(closest_enemy: CharacterBody3D) -> bool:
 
 	var ray_from = camera_3d.global_position
 	var ray_to = closest_enemy.global_position
+
 	var space = get_world_3d().direct_space_state
-	var ray_query = PhysicsRayQueryParameters3D.create(ray_from, ray_to)
+
+	var ray_query = PhysicsRayQueryParameters3D.create(
+		ray_from,
+		ray_to
+	)
+
 	ray_query.exclude = [self.get_rid()]
+
 	var ray_result = space.intersect_ray(ray_query)
 
 	return true if ray_result and ray_result.collider == closest_enemy else false
 
+
 func get_camera_relative_input() -> Vector3:
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	return (h_pivot.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var input_dir := Input.get_vector(
+		"move_left",
+		"move_right",
+		"move_forward",
+		"move_backward"
+	)
+
+	return (
+		h_pivot.global_transform.basis *
+		Vector3(input_dir.x, 0, input_dir.y)
+	).normalized()
+
 
 func update_visuals_rotation(direction: Vector3, delta: float) -> void:
 	var target_angle: float
 
 	if enemy_target:
-		var enemy_to_player_vector = (enemy_target.global_position - global_position).normalized()
-		target_angle = atan2(-enemy_to_player_vector.x, -enemy_to_player_vector.z)
-		visuals.rotation.y = lerp_angle(visuals.rotation.y, target_angle, 5 * delta)
+		var enemy_to_player_vector = (
+			enemy_target.global_position - global_position
+		).normalized()
+
+		target_angle = atan2(
+			-enemy_to_player_vector.x,
+			-enemy_to_player_vector.z
+		)
+
+		visuals.rotation.y = lerp_angle(
+			visuals.rotation.y,
+			target_angle,
+			5 * delta
+		)
+
 	elif direction:
-		target_angle = atan2(-direction.x, -direction.z)
-		visuals.rotation.y = lerp_angle(visuals.rotation.y, target_angle, 5 * delta)
+		target_angle = atan2(
+			-direction.x,
+			-direction.z
+		)
+
+		visuals.rotation.y = lerp_angle(
+			visuals.rotation.y,
+			target_angle,
+			5 * delta
+		)
+
 
 func take_damage(amount: int, attacker: Node = null) -> void:
+
+	# ============================================================
+	# BLOCK / PARRY
+	# ============================================================
+
 	if state_machine.current_state.name == "PlayerBlock":
 		var block_state: PlayerBlock = state_machine.current_state as PlayerBlock
 
+		# ========================================================
+		# PARRY
+		# ========================================================
+
 		if block_state.is_parrying():
 			print("========== PARRIED! ==========")
+
 			block_label.text = "PARRY!"
 			block_label.visible = true
+
+			# PLAY PARRY EFFECT
+			play_parry_effect()
 
 			if attacker != null:
 				activate_parry_stun(attacker)
@@ -207,26 +305,55 @@ func take_damage(amount: int, attacker: Node = null) -> void:
 				block_label.visible = true
 			else:
 				block_label.visible = false
+
 			return
 
+		# ========================================================
+		# NORMAL BLOCK
+		# ========================================================
+
 		amount = int(amount * 0.7)
+
 		print("BLOCKED! Damage: ", amount)
 
+		# PLAY BLOCK EFFECT
+		play_block_effect()
+
+
+	# ============================================================
+	# DAMAGE
+	# ============================================================
+
 	Health -= amount
+
 	print("PLAYER HEALTH: ", Health)
+
 	show_hurt_flash()
+
 	shake_camera(0.035, 0.10)
-	show_damage_number(amount, global_position + Vector3(0, 1.5, 0))
+
+	show_damage_number(
+		amount,
+		global_position + Vector3(0, 1.5, 0)
+	)
+
 	hurt.play()
 
 	damage_label.text = "-" + str(amount)
 	damage_label.visible = true
 
 	await get_tree().create_timer(0.5).timeout
+
 	damage_label.visible = false
+
+
+	# ============================================================
+	# DEATH
+	# ============================================================
 
 	if Health <= 0:
 		Health = 0
+
 		print("====== PLAYER DIED ======")
 
 		var boss = get_tree().get_first_node_in_group("enemy")
@@ -236,52 +363,114 @@ func take_damage(amount: int, attacker: Node = null) -> void:
 			GameState.boss_max_health = boss.MaxHealth
 
 		GameState.heals_used = max_heals - heals_left
+
 		await get_tree().create_timer(1.0).timeout
+
 		get_tree().change_scene_to_file("res://Scenes/death.tscn")
-		
+
+
+# ================================================================
+# BLOCK VFX
+# ================================================================
+
+func play_block_effect() -> void:
+	if not is_instance_valid(block_effect):
+		return
+
+	block_effect.visible = true
+	block_effect.restart()
+	block_effect.emitting = true
+
+	await get_tree().create_timer(0.5).timeout
+
+	if is_instance_valid(block_effect):
+		block_effect.emitting = false
+		block_effect.visible = false
+
+
+# ================================================================
+# PARRY VFX
+# ================================================================
+
+func play_parry_effect() -> void:
+	if not is_instance_valid(parry_effect):
+		return
+
+	parry_effect.visible = true
+	parry_effect.restart()
+	parry_effect.emitting = true
+
+	await get_tree().create_timer(0.5).timeout
+
+	if is_instance_valid(parry_effect):
+		parry_effect.emitting = false
+		parry_effect.visible = false
+
+
 func activate_parry_stun(attacker: Node) -> void:
 	if not is_instance_valid(attacker):
 		return
 
 	var attacker_state_machine = attacker.get_node_or_null("StateMachine")
+
 	if attacker_state_machine == null:
 		return
 
 	for state in attacker_state_machine.get_children():
 		if state.name.to_lower().ends_with("stun"):
 			print("STUNNING: ", attacker.name)
+
 			attacker_state_machine.current_state.Transitioned.emit(
 				attacker_state_machine.current_state,
 				state.name.to_lower()
 			)
+
 			return
+
 
 func show_damage_number(amount: int, position: Vector3) -> void:
 	var damage_number = damage_number_scene.instantiate()
+
 	get_tree().current_scene.add_child(damage_number)
+
 	damage_number.text_color = Color.RED
+
 	damage_number.global_position = position
+
 	damage_number.setup(-amount)
+
 
 func shake_camera(strength: float, duration: float) -> void:
 	shake_strength = strength
 	shake_duration = duration
 	shake_time = duration
 
+
 func hit_stop(duration: float) -> void:
 	Engine.time_scale = 0.0
+
 	await get_tree().create_timer(
 		duration,
 		true,
 		false,
 		true
 	).timeout
+
 	Engine.time_scale = 1.0
+
 
 func show_hurt_flash() -> void:
 	var flash_color = hurt_flash.color
+
 	flash_color.a = 0.35
+
 	hurt_flash.color = flash_color
 
 	var tween = create_tween()
-	tween.tween_property(hurt_flash, "color:a", 0.0, 0.1)
+
+	tween.tween_property(
+		hurt_flash,
+		"color:a",
+		0.0,
+		0.1
+	)

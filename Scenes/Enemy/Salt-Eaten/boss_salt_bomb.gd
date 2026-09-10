@@ -4,29 +4,27 @@ class_name BossSaltBomb
 @onready var player: CharacterBody3D = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var bomb_spawn: Marker3D = $"../../BOX/SaltBombSpawn"
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
 @export var bomb_scene: PackedScene
 @export var wind_up_time: float = 0.7
 @export var recovery_time: float = 1.0
 
-var attack_finished := false
-var attacking := false
-
 
 func enter() -> void:
-	attack_finished = false
-	attacking = true
+	animation_player.play("swing")
 	enemy.velocity = Vector3.ZERO
 
 	salt_bomb()
 
 
 func salt_bomb() -> void:
+
 	print("SALT BOMB WIND UP")
 
 	if player == null:
 		print("ERROR: PLAYER NOT FOUND")
-		attack_finished = true
+		Transitioned.emit(self, "bossrecovery")
 		return
 
 	var direction = player.global_position - enemy.global_position
@@ -42,12 +40,12 @@ func salt_bomb() -> void:
 
 	await get_tree().create_timer(wind_up_time).timeout
 
-	if bomb_scene == null:
-		print("ERROR: SALT BOMB SCENE NOT ASSIGNED")
-		attack_finished = true
+	if not is_inside_tree():
 		return
 
-	if not is_inside_tree():
+	if bomb_scene == null:
+		print("ERROR: SALT BOMB SCENE NOT ASSIGNED")
+		Transitioned.emit(self, "bossrecovery")
 		return
 
 	var bomb = bomb_scene.instantiate()
@@ -67,20 +65,13 @@ func salt_bomb() -> void:
 	if not is_inside_tree():
 		return
 
-	attacking = false
-
 	print("SALT BOMB FINISHED")
 
-	attack_finished = true
-
-
-func process(_delta: float) -> void:
-	if attack_finished:
-		attack_finished = false
 	Transitioned.emit(self, "bossrecovery")
 
 
 func physics_process(delta: float) -> void:
+
 	enemy.velocity.x = 0.0
 	enemy.velocity.z = 0.0
 
@@ -91,4 +82,5 @@ func physics_process(delta: float) -> void:
 
 
 func exit() -> void:
-	attacking = false
+	enemy.velocity.x = 0.0
+	enemy.velocity.z = 0.0

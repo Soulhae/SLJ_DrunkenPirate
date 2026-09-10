@@ -6,9 +6,9 @@ extends Control
 var text_index := 0
 
 var texts = [
-	"I was just drinking with my crew...",
 	"Ugh... my head hurts.",
 	"Where the hell am I?",
+	"I was just drinking with my crew...",
 	"Where's my crew?",
 	"...At least I still have my drink and my weapons."
 ]
@@ -33,4 +33,4 @@ func _on_button_pressed() -> void:
 
 
 func _wake_up():
-	get_tree().change_scene_to_file("res://Scenes/cave.tscn")
+	get_tree().change_scene_to_file("res://Scenes/boss_fight.tscn")

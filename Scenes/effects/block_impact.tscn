@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://t3k2vejgms8v"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hxci3"]
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hg0r0"]
+shading_mode = 0
+albedo_color = Color(0.43529412, 0.84705883, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qt8go"]
+material = SubResource("StandardMaterial3D_hg0r0")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="BLOCK IMPACT" type="GPUParticles3D" unique_id=281270417]
+emitting = false
+lifetime = 0.15000000000000002
+one_shot = true
+explosiveness = 0.41
+process_material = SubResource("ParticleProcessMaterial_hxci3")
+draw_pass_1 = SubResource("BoxMesh_qt8go")

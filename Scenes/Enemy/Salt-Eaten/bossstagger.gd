@@ -3,22 +3,24 @@ class_name BossStagger
 
 @export var stagger_duration: float = 0.6
 
-var boss: CharacterBody3D
+@onready var boss_stagger: GPUParticles3D = $"../../BOSS STAGGER"
+@onready var enemy: CharacterBody3D = get_owner()
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
+
 var timer: float = 0.0
 
 
 func enter() -> void:
-	boss = owner as CharacterBody3D
+	animation_player.stop()
+	enemy.velocity = Vector3.ZERO
 	timer = stagger_duration
 
-	if boss:
-		boss.velocity = Vector3.ZERO
+	# PLAY STAGGER EFFECT
+	if is_instance_valid(boss_stagger):
+		boss_stagger.restart()
+		boss_stagger.emitting = true
 
 	print("BOSS STAGGERED!")
-
-
-func exit() -> void:
-	pass
 
 
 func process(delta: float) -> void:
@@ -29,5 +31,8 @@ func process(delta: float) -> void:
 
 
 func physics_process(_delta: float) -> void:
-	if boss:
-		boss.velocity = Vector3.ZERO
+	enemy.velocity = Vector3.ZERO
+
+
+func exit() -> void:
+	enemy.velocity = Vector3.ZERO

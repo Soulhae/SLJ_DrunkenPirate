@@ -4,6 +4,7 @@ class_name BossGrab
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var grab_area: Area3D = $"../../BOX/GRAB"
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
 @export var grab_damage: int = 10
 @export var throw_force: float = 100.0
@@ -14,6 +15,7 @@ var grabbed: bool = false
 
 
 func enter():
+	animation_player.play("grab")
 	finished = false
 	grabbed = false
 	enemy.velocity = Vector3.ZERO

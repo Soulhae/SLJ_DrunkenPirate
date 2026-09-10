@@ -3,22 +3,27 @@ class_name BossDive
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy: CharacterBody3D = get_owner()
-@onready var boss_mesh: MeshInstance3D = $"../../Body"
+@onready var boss_mesh: Node3D = $"../../boss/Armature/Skeleton3D/Rapier"
 @onready var dive_area: Area3D = $"../../BOX/DIVE"
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
 @export var dive_speed: float = 40.0
-@export var dive_depth: float = 1.5
 @export var dive_damage: int = 20
 @export var throw_force: float = 5.0
 @export var stop_distance: float = 1.5
 
 var diving: bool = false
 var player_hit: bool = false
+var original_position: Vector3
 
 
 func enter() -> void:
+	animation_player.stop()
 	diving = true
 	player_hit = false
+
+	# Save the boss mesh's original position.
+	original_position = boss_mesh.position
 
 	if not is_inside_tree():
 		return
@@ -28,7 +33,7 @@ func enter() -> void:
 
 	enemy.velocity = Vector3.ZERO
 
-	# Find player again in case the reference became invalid.
+	# Find player again.
 	player = get_tree().get_first_node_in_group("player")
 
 	if player == null or not player.is_inside_tree():
@@ -54,7 +59,6 @@ func dive() -> void:
 
 	await get_tree().create_timer(0.5).timeout
 
-	# Make sure everything still exists.
 	if not is_inside_tree():
 		return
 
@@ -72,20 +76,19 @@ func dive() -> void:
 	if dive_area == null or not dive_area.is_inside_tree():
 		return
 
-	# Stop before going underwater.
+	# Stop before starting the dive.
 	enemy.velocity = Vector3.ZERO
 
 	# Save the player's position.
 	var target: Vector3 = player.global_position
 
-	# Move boss mesh underwater.
-	boss_mesh.position.y = -dive_depth
+	# Lower the boss mesh by 1 on the Y axis.
+	boss_mesh.position.y = original_position.y - 1.0
 
-	print("UNDERWATER")
+	print("DIVE LOWERED")
 
 	await get_tree().create_timer(0.25).timeout
 
-	# Check again after underwater wait.
 	if not is_inside_tree():
 		return
 
@@ -122,10 +125,6 @@ func dive() -> void:
 	var dash_time: float = 1.0
 	var elapsed: float = 0.0
 
-	# ========================================================
-	# DIVE DASH
-	# ========================================================
-
 	while elapsed < dash_time:
 
 		if not is_inside_tree():
@@ -159,7 +158,7 @@ func dive() -> void:
 
 					player_hit = true
 
-					body.take_damage(dive_damage,enemy)
+					body.take_damage(dive_damage, enemy)
 
 					var throw_direction: Vector3 = (
 						body.global_position - enemy.global_position
@@ -182,9 +181,6 @@ func dive() -> void:
 
 					break
 
-		# FIX:
-		# Use Engine.get_main_loop() instead of get_tree()
-		# so process_frame isn't accessed from a null SceneTree.
 		var main_loop := Engine.get_main_loop()
 
 		if main_loop == null:
@@ -195,10 +191,7 @@ func dive() -> void:
 		if not is_inside_tree():
 			return
 
-
-	# ========================================================
 	# END DIVE
-	# ========================================================
 
 	if not is_inside_tree():
 		return
@@ -209,12 +202,12 @@ func dive() -> void:
 	if dive_area != null and dive_area.is_inside_tree():
 		dive_area.monitoring = false
 
+	# Return boss mesh to its original position.
 	if boss_mesh != null and boss_mesh.is_inside_tree():
-		boss_mesh.position.y = 0.0
+		boss_mesh.position = original_position
 
 	print("DIVE RECOVERY")
 
-	# Recovery.
 	await get_tree().create_timer(0.6).timeout
 
 	if not is_inside_tree():
@@ -242,6 +235,8 @@ func physics_process(delta: float) -> void:
 		enemy.velocity += enemy.get_gravity() * delta
 
 	enemy.move_and_slide()
+
+
 func exit() -> void:
 
 	diving = false
@@ -253,5 +248,6 @@ func exit() -> void:
 	if enemy != null and enemy.is_inside_tree():
 		enemy.velocity = Vector3.ZERO
 
+	# Always restore the original mesh position.
 	if boss_mesh != null and boss_mesh.is_inside_tree():
-		boss_mesh.position.y = 0.0
+		boss_mesh.position = original_position

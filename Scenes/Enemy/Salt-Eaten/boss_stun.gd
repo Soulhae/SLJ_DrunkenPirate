@@ -2,14 +2,13 @@ extends State
 class_name BossStun
 
 @onready var enemy: CharacterBody3D = get_owner()
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
 @export var stun_time: float = 2.0
 
-var stun_finished: bool = false
-
 
 func enter() -> void:
-	stun_finished = false
+	animation_player.stop()
 	enemy.velocity = Vector3.ZERO
 
 	print("========== BOSS STUNNED ==========")
@@ -23,13 +22,7 @@ func stun() -> void:
 	if not is_inside_tree():
 		return
 
-	stun_finished = true
-
-
-func process(_delta: float) -> void:
-	if stun_finished:
-		stun_finished = false
-		Transitioned.emit(self, "bossrecovery")
+	Transitioned.emit(self, "bossrecovery")
 
 
 func physics_process(delta: float) -> void:
