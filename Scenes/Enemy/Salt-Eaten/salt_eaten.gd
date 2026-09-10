@@ -9,6 +9,10 @@ extends CharacterBody3D
 @onready var mesh: MeshInstance3D = $boss/Armature/Skeleton3D/Rapier
 var original_material: Material
 
+var phase_2_started: bool = false
+var heals_used: int = 0
+
+@export var max_boss_heals: int = 3
 # Boss movement settings.
 @export var AttackReach: float = 5.0
 @export var SlamReach: float = 8.0
@@ -50,6 +54,16 @@ func _process(delta: float) -> void:
 	if not is_dead:
 		fight_time += delta
 
+		# Start Phase 2 when boss reaches 50% HP.
+	if Health <= MaxHealth * 0.5 and not phase_2_started and not is_dead:
+		phase_2_started = true
+		print("========== BOSS PHASE 2 ==========")
+
+		state_machine.current_state.Transitioned.emit(
+			state_machine.current_state,
+			"bossheal"
+		)
+
 	if Health <= 0 and not is_dead:
 		is_dead = true
 		Health = 0
@@ -65,7 +79,6 @@ func _process(delta: float) -> void:
 			state_machine.current_state,
 			"bossdeath"
 		)
-
 
 func _physics_process(_delta: float) -> void:
 	if water == null:

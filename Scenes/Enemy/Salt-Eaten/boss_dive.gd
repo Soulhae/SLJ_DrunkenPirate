@@ -158,7 +158,12 @@ func dive() -> void:
 
 					player_hit = true
 
-					body.take_damage(dive_damage, enemy)
+					var damage = dive_damage
+
+					if enemy.phase_2_started:
+						damage = 25
+
+					body.take_damage(damage, enemy)
 
 					var throw_direction: Vector3 = (
 						body.global_position - enemy.global_position

@@ -24,6 +24,13 @@ func enter() -> void:
 
 	print("BOSS ATTACK DISTANCE: ", distance)
 
+	# Randomly heal during Phase 2.
+	if enemy.phase_2_started and enemy.heals_used < enemy.max_boss_heals:
+		if randf() < 0.25:
+			selected_attack = 6
+			print("BOSS CHOSE TO HEAL")
+			can_transition = true
+			return
 
 	# =========================
 	# 0–5m: PUNCH / GRAB
@@ -182,6 +189,9 @@ func process(_delta: float) -> void:
 		5:
 			print("TRANSITIONING TO DIVE")
 			Transitioned.emit(self, "bossdive")
+		6:
+			print("TRANSITIONING TO BOSS HEAL")
+			Transitioned.emit(self, "bossheal")
 
 
 func physics_process(_delta: float) -> void:

@@ -15,7 +15,11 @@
 [ext_resource type="AudioStream" uid="uid://dw1prbh003tom" path="res://sounds/player/Sand Footsteps.mp3" id="13_6vj4j"]
 [ext_resource type="PackedScene" uid="uid://bdjnu4y22lei" path="res://Scenes/hit_effect.tscn" id="13_ag54m"]
 [ext_resource type="PackedScene" uid="uid://da7to7unbnc07" path="res://Scenes/effects/parry_flash.tscn" id="14_h0khc"]
+[ext_resource type="AudioStream" uid="uid://cl0j2mog576wy" path="res://sounds/player/Rolls in sand.mp3" id="14_spm8d"]
 [ext_resource type="PackedScene" uid="uid://t3k2vejgms8v" path="res://Scenes/effects/block_impact.tscn" id="15_6vj4j"]
+[ext_resource type="AudioStream" uid="uid://d1y3p3ftuuhad" path="res://sounds/player/Water Footsteps.mp3" id="15_dpkfr"]
+[ext_resource type="AudioStream" uid="uid://chpb45ym3grij" path="res://sounds/player/Rolls in water.mp3" id="16_kysaj"]
+[ext_resource type="AudioStream" uid="uid://b4r13vpqwpi7p" path="res://sounds/player/Jump.mp3" id="17_dpkfr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cv0ty"]
 
@@ -301,8 +305,24 @@ stream = ExtResource("10_p8lfk")
 stream = ExtResource("11_uawwb")
 volume_db = 24.0
 
-[node name="walk_sand" type="AudioStreamPlayer" parent="." unique_id=643161804]
+[node name="Sand Walk Sound" type="AudioStreamPlayer" parent="." unique_id=643161804]
 stream = ExtResource("13_6vj4j")
+volume_db = -5.0
+
+[node name="Sand Roll Sound" type="AudioStreamPlayer" parent="." unique_id=222102417]
+stream = ExtResource("14_spm8d")
+volume_db = -5.0
+
+[node name="Water Walk Sound" type="AudioStreamPlayer" parent="." unique_id=165476023]
+stream = ExtResource("15_dpkfr")
+volume_db = -5.0
+
+[node name="Water Roll Sound" type="AudioStreamPlayer" parent="." unique_id=1438049435]
+stream = ExtResource("16_kysaj")
+volume_db = -5.0
+
+[node name="jump" type="AudioStreamPlayer" parent="." unique_id=1754771484]
+stream = ExtResource("17_dpkfr")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=800895962]
 

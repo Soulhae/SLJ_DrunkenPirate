@@ -39,7 +39,12 @@ func punch() -> void:
 
 		if body.is_in_group("player"):
 
-			body.take_damage(punch_damage, enemy)
+			var damage = punch_damage
+
+			if enemy.phase_2_started:
+				damage = 12
+
+			body.take_damage(damage, enemy)
 
 			var punch_direction = -enemy.global_transform.basis.z
 

@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var damage_label: Label = $"../UI/DEMAGE"
 @onready var hurt_flash: ColorRect = $"../UI/HurtFlash"
 @onready var hurt = $Hurt
+var in_water: bool = false
 
 # BLOCK / PARRY VFX
 @onready var block_effect: GPUParticles3D = $"BLOCK IMPACT"
@@ -379,7 +380,7 @@ func play_block_effect() -> void:
 
 	block_effect.visible = true
 	block_effect.restart()
-	block_effect.emitting = true
+	block_effect.emitting = false
 
 	await get_tree().create_timer(0.5).timeout
 
@@ -396,9 +397,9 @@ func play_parry_effect() -> void:
 	if not is_instance_valid(parry_effect):
 		return
 
-	parry_effect.visible = true
+	parry_effect.visible = false
 	parry_effect.restart()
-	parry_effect.emitting = true
+	parry_effect.emitting = false
 
 	await get_tree().create_timer(0.5).timeout
 
@@ -474,3 +475,9 @@ func show_hurt_flash() -> void:
 		0.0,
 		0.1
 	)
+
+func enter_water():
+	in_water = true
+
+func exit_water():
+	in_water = false

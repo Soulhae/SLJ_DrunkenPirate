@@ -70,7 +70,12 @@ func grab():
 			if not is_inside_tree():
 				return
 
-			body.take_damage(grab_damage, enemy)
+			var damage = grab_damage
+
+			if enemy.phase_2_started:
+				damage = 15
+
+			body.take_damage(damage, enemy)
 
 			var direction: Vector3 = body.global_position - enemy.global_position
 			direction.y = 0.0

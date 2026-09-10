@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Sand Footsteps.mp3-dec7e6b3c8d0c99f9ea88d4c49
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

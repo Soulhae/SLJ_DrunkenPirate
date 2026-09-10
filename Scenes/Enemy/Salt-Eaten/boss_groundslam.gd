@@ -109,7 +109,12 @@ func ground_slam() -> void:
 		# PLAYER
 		if body.is_in_group("player"):
 
-			body.take_damage(slam_damage, enemy)
+			var damage = slam_damage
+
+			if enemy.phase_2_started:
+				damage = 20
+
+			body.take_damage(damage, enemy)
 
 			var direction: Vector3 = body.global_position - enemy.global_position
 			direction.y = 0.0

@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dchtlmndg3m06"]
 
-[ext_resource type="PackedScene" uid="uid://b35mxcc3d74di" path="res://Shader/water/WaterPlane.tscn" id="2_41hqx"]
+[ext_resource type="Material" uid="uid://c3mh5p2w5s8g7" path="res://Shader/water/Water.tres" id="1_aq6fk"]
+[ext_resource type="Script" uid="uid://e4id20mx1jv4" path="res://Scripts/water.gd" id="2_qwimq"]
 [ext_resource type="PackedScene" uid="uid://l20t8ais4e3k" path="res://Scenes/player/player.tscn" id="3_41hqx"]
+[ext_resource type="Script" uid="uid://dca73g3woryeq" path="res://Scripts/water_area.gd" id="3_qwimq"]
 [ext_resource type="PackedScene" uid="uid://cyyddidb38rak" path="res://Scenes/Enemy/Salt-Eaten/Salt-Eaten.tscn" id="4_wha5u"]
 [ext_resource type="Script" uid="uid://bdowfqtoviurd" path="res://Scripts/ui.gd" id="5_b3sq5"]
 [ext_resource type="PackedScene" uid="uid://ccfglh7ctads5" path="res://Scenes/Enemy/Short_Ranged/Short-R.tscn" id="5_tstyl"]
@@ -33,6 +35,9 @@ size = Vector2(200, 200)
 subdivide_width = 400
 subdivide_depth = 400
 orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hp6sh"]
+size = Vector3(200, 0.6, 200)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_hp6sh"]
 
@@ -147,9 +152,19 @@ shadow_blur = 2.0
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 256.0
 
-[node name="Water" parent="." unique_id=1487049067 instance=ExtResource("2_41hqx")]
+[node name="Water" type="MeshInstance3D" parent="." unique_id=1487049067]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8766222, 0)
+cast_shadow = 0
 mesh = SubResource("QuadMesh_rc8yv")
+surface_material_override/0 = ExtResource("1_aq6fk")
+script = ExtResource("2_qwimq")
+
+[node name="Area3D" type="Area3D" parent="Water" unique_id=1628892545]
+script = ExtResource("3_qwimq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/Area3D" unique_id=1718770049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24216986, 0)
+shape = SubResource("BoxShape3D_hp6sh")
 
 [node name="Player" parent="." unique_id=1973400536 node_paths=PackedStringArray("water") groups=["player"] instance=ExtResource("3_41hqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.04574, 6.749256, 0.44144726)
@@ -407,3 +422,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.7019608, 0.14901961, 0.18039216, 0)
+
+[connection signal="body_entered" from="Water/Area3D" to="Water/Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="Water/Area3D" to="Water/Area3D" method="_on_body_exited"]

@@ -1,6 +1,7 @@
 class_name PlayerAir
 extends State
 
+@onready var jump: AudioStreamPlayer = $"../../jump"
 
 @onready var player: CharacterBody3D = get_owner()
 @onready var label_3d: Label3D = player.get_node("Visuals/Label3D")
@@ -8,8 +9,14 @@ extends State
 @onready var air_control: float = player.move_speed
 
 
+
 func enter():
 	label_3d.text = "State: Air"
+	jump.play()
+#	ROLLS_IN_SAND.stop()
+	#ROLLS_IN_WATER.stop()
+	#SAND_FOOTSTEPS.stop()
+	#WATER_FOOTSTEPS.stop()
 
 
 func physics_process(delta: float):
