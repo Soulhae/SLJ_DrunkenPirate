@@ -4,10 +4,14 @@ class_name BossHeal
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
+@onready var mesh: MeshInstance3D = $"../../boss/Armature/Skeleton3D/Rapier"
 
 @export var heal_amount: int = 25
 @export var heal_time: float = 2.0
 @export var heal_speed: float = 3.0
+
+var original_material: Material
+var original_color: Color
 
 var heal_finished: bool = false
 
@@ -23,7 +27,8 @@ func enter() -> void:
 		return
 
 	animation_player.play("walk")
-
+	# Heal - Bright Green
+	flash_attack_color(Color(0.1, 1.0, 0.5))
 	print("========== BOSS HEALING ==========")
 
 	heal()
@@ -87,3 +92,29 @@ func physics_process(delta: float) -> void:
 func exit() -> void:
 	enemy.velocity.x = 0.0
 	enemy.velocity.z = 0.0
+
+func flash_attack_color(color: Color) -> void:
+	if mesh == null:
+		return
+
+	if mesh.material_override == null:
+		original_material = mesh.get_active_material(0)
+
+		if original_material == null:
+			return
+
+		var new_material = original_material.duplicate()
+		mesh.material_override = new_material
+
+	var material = mesh.material_override
+
+	if material is StandardMaterial3D:
+		original_color = material.albedo_color
+		material.albedo_color = color
+
+		await get_tree().create_timer(0.2).timeout
+
+		if not is_inside_tree():
+			return
+
+		material.albedo_color = original_color

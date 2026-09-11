@@ -65,15 +65,25 @@ func deal_attack_damage():
 			damage = attack_damage_3
 
 	for body in attack_hitbox.get_overlapping_bodies():
+
+		# Ignore enemies that were already deleted
+		if not is_instance_valid(body):
+			continue
+
 		if body.is_in_group("enemy"):
 			if body.has_method("take_damage"):
+
 				body.take_damage(damage)
 
-				# Hit particle effect.
+				# Make sure the enemy still exists after taking damage
+				if not is_instance_valid(body):
+					continue
+
+				# Hit particle effect
 				effect_hit.global_position = body.global_position
 				effect_hit.restart()
 
-				# Attack 3 staggers the enemy/boss.
+				# Attack 3 staggers the enemy/boss
 				if combo_step == 3 and body.has_method("stagger"):
 					body.stagger()
 
@@ -101,8 +111,9 @@ func deal_attack_damage():
 				print("PLAYER HIT: ", body.name, " DAMAGE: ", damage)
 
 				await get_tree().create_timer(0.5).timeout
-				damage_dealt_label.visible = false
 
+				if is_instance_valid(damage_dealt_label):
+					damage_dealt_label.visible = false
 
 func allow_chain():
 	can_chain = true

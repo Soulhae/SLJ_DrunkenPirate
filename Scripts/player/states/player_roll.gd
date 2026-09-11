@@ -1,8 +1,7 @@
 class_name PlayerRoll
 extends State
 
-@onready var sand_roll_sound: AudioStreamPlayer = $"../../Sand Roll Sound"
-@onready var water_roll_sound: AudioStreamPlayer = $"../../Water Roll Sound"
+
 
 @onready var player: CharacterBody3D = get_owner()
 @onready var label_3d: Label3D = player.get_node("Visuals/Label3D")
@@ -10,17 +9,20 @@ extends State
 var roll_direction: Vector3
 var roll_time: float # used only for testing, it should transition to idle when roll animation ends
 var breaking_factor: float = 7.5
-const ROLLS_IN_SAND = preload("uid://cl0j2mog576wy")
-const ROLLS_IN_WATER = preload("uid://chpb45ym3grij")
-const SAND_FOOTSTEPS = preload("uid://dw1prbh003tom")
-const WATER_FOOTSTEPS = preload("uid://d1y3p3ftuuhad")
+
+@onready var sand_walk_sound: AudioStreamPlayer = $"../../Sand Walk Sound"
+@onready var sand_roll_sound: AudioStreamPlayer = $"../../Sand Roll Sound"
+@onready var water_walk_sound: AudioStreamPlayer = $"../../Water Walk Sound"
+@onready var water_roll_sound: AudioStreamPlayer = $"../../Water Roll Sound"
+
 func enter():
 	if player.in_water:
+		water_roll_sound.stop()
 		water_roll_sound.play()
 	else:
+		sand_roll_sound.stop()
 		sand_roll_sound.play()
-	#SAND_FOOTSTEPS.stop()
-	#WATER_FOOTSTEPS.stop()
+
 	label_3d.text = "State: Roll"
 	
 	roll_time = 0.5
@@ -34,7 +36,6 @@ func enter():
 	
 	player.velocity.x = roll_direction.x * player.move_speed * 1.5
 	player.velocity.z = roll_direction.z * player.move_speed * 1.5
-
 
 func physics_process(delta: float):
 

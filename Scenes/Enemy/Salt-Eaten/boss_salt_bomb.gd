@@ -12,7 +12,7 @@ class_name BossSaltBomb
 
 
 func enter() -> void:
-	animation_player.play("swing")
+	animation_player.play_backwards("swing")
 	enemy.velocity = Vector3.ZERO
 
 	salt_bomb()

@@ -307,24 +307,26 @@ volume_db = 24.0
 
 [node name="Sand Walk Sound" type="AudioStreamPlayer" parent="." unique_id=643161804]
 stream = ExtResource("13_6vj4j")
-volume_db = -5.0
+volume_db = -10.0
 
 [node name="Sand Roll Sound" type="AudioStreamPlayer" parent="." unique_id=222102417]
 stream = ExtResource("14_spm8d")
-volume_db = -5.0
+volume_db = -10.0
 
 [node name="Water Walk Sound" type="AudioStreamPlayer" parent="." unique_id=165476023]
 stream = ExtResource("15_dpkfr")
-volume_db = -5.0
+volume_db = -10.0
 
 [node name="Water Roll Sound" type="AudioStreamPlayer" parent="." unique_id=1438049435]
 stream = ExtResource("16_kysaj")
-volume_db = -5.0
+volume_db = -10.0
 
 [node name="jump" type="AudioStreamPlayer" parent="." unique_id=1754771484]
 stream = ExtResource("17_dpkfr")
+volume_db = 10.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=800895962]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85611683, 0)
 
 [node name="HitEffect" parent="." unique_id=1919505199 instance=ExtResource("13_ag54m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82457554, -0.68121576)

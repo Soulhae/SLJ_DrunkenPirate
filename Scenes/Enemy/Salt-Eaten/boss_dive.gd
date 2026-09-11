@@ -6,11 +6,15 @@ class_name BossDive
 @onready var boss_mesh: Node3D = $"../../boss/Armature/Skeleton3D/Rapier"
 @onready var dive_area: Area3D = $"../../BOX/DIVE"
 @onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
+@onready var mesh: MeshInstance3D = $"../../boss/Armature/Skeleton3D/Rapier"
 
 @export var dive_speed: float = 40.0
 @export var dive_damage: int = 20
 @export var throw_force: float = 5.0
 @export var stop_distance: float = 1.5
+
+var original_material: Material
+var original_color: Color
 
 var diving: bool = false
 var player_hit: bool = false
@@ -18,11 +22,10 @@ var original_position: Vector3
 
 
 func enter() -> void:
-	animation_player.stop()
-	diving = true
+	enemy.velocity = Vector3.ZERO
+	diving = false
 	player_hit = false
 
-	# Save the boss mesh's original position.
 	original_position = boss_mesh.position
 
 	if not is_inside_tree():
@@ -31,15 +34,11 @@ func enter() -> void:
 	if dive_area != null:
 		dive_area.monitoring = false
 
-	enemy.velocity = Vector3.ZERO
-
-	# Find player again.
 	player = get_tree().get_first_node_in_group("player")
 
 	if player == null or not player.is_inside_tree():
 		return
 
-	# Face the player before starting the dive.
 	var direction: Vector3 = player.global_position - enemy.global_position
 	direction.y = 0.0
 
@@ -51,12 +50,18 @@ func enter() -> void:
 			Vector3.UP
 		)
 
-	dive()
+	# Blue flash = DIVE
+	flash_attack_color(Color(0.2, 0.5, 1.0))
 
+	diving = true
+	animation_player.play("swing")
+
+	dive()
 
 func dive() -> void:
 	print("DIVE WIND UP")
 
+	# Short wind-up
 	await get_tree().create_timer(0.5).timeout
 
 	if not is_inside_tree():
@@ -76,17 +81,18 @@ func dive() -> void:
 	if dive_area == null or not dive_area.is_inside_tree():
 		return
 
-	# Stop before starting the dive.
+	# Stop before starting the dive
 	enemy.velocity = Vector3.ZERO
 
-	# Save the player's position.
+	# Save player's position
 	var target: Vector3 = player.global_position
 
-	# Lower the boss mesh by 1 on the Y axis.
+	# Lower the boss mesh
 	boss_mesh.position.y = original_position.y - 1.0
 
 	print("DIVE LOWERED")
 
+	# Very short extra pause
 	await get_tree().create_timer(0.25).timeout
 
 	if not is_inside_tree():
@@ -108,7 +114,7 @@ func dive() -> void:
 
 	print("DIVE DASH")
 
-	# Dash toward the position where the player was.
+	# Dash toward where the player was
 	var direction: Vector3 = target - enemy.global_position
 	direction.y = 0.0
 
@@ -119,7 +125,7 @@ func dive() -> void:
 
 	enemy.velocity = direction * dive_speed
 
-	# Enable hitbox during dash.
+	# Enable hitbox
 	dive_area.monitoring = true
 
 	var dash_time: float = 1.0
@@ -143,13 +149,11 @@ func dive() -> void:
 
 		elapsed += get_process_delta_time()
 
-		# Stop when close to player's current position.
 		if enemy.global_position.distance_to(
 			player.global_position
 		) <= stop_distance:
 			break
 
-		# Check for player hit.
 		if not player_hit:
 
 			for body in dive_area.get_overlapping_bodies():
@@ -207,7 +211,7 @@ func dive() -> void:
 	if dive_area != null and dive_area.is_inside_tree():
 		dive_area.monitoring = false
 
-	# Return boss mesh to its original position.
+	# Restore mesh
 	if boss_mesh != null and boss_mesh.is_inside_tree():
 		boss_mesh.position = original_position
 
@@ -253,6 +257,32 @@ func exit() -> void:
 	if enemy != null and enemy.is_inside_tree():
 		enemy.velocity = Vector3.ZERO
 
-	# Always restore the original mesh position.
+	# Always restore original mesh position
 	if boss_mesh != null and boss_mesh.is_inside_tree():
 		boss_mesh.position = original_position
+
+func flash_attack_color(color: Color) -> void:
+	if mesh == null:
+		return
+
+	if mesh.material_override == null:
+		original_material = mesh.get_active_material(0)
+
+		if original_material == null:
+			return
+
+		var new_material = original_material.duplicate()
+		mesh.material_override = new_material
+
+	var material = mesh.material_override
+
+	if material is StandardMaterial3D:
+		original_color = material.albedo_color
+		material.albedo_color = color
+
+		await get_tree().create_timer(0.1).timeout
+
+		if not is_inside_tree():
+			return
+
+		material.albedo_color = original_color

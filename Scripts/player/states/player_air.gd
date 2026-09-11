@@ -5,18 +5,26 @@ extends State
 
 @onready var player: CharacterBody3D = get_owner()
 @onready var label_3d: Label3D = player.get_node("Visuals/Label3D")
-# if we want more realism at jump, tweakable. 0 = no movement in-air, player.move_speed = full movement in-air
+
 @onready var air_control: float = player.move_speed
 
+@onready var sand_walk_sound: AudioStreamPlayer = $"../../Sand Walk Sound"
+@onready var sand_roll_sound: AudioStreamPlayer = $"../../Sand Roll Sound"
+@onready var water_walk_sound: AudioStreamPlayer = $"../../Water Walk Sound"
+@onready var water_roll_sound: AudioStreamPlayer = $"../../Water Roll Sound"
 
 
 func enter():
 	label_3d.text = "State: Air"
+
+	# Stop all movement sounds
+	sand_walk_sound.stop()
+	sand_roll_sound.stop()
+	water_walk_sound.stop()
+	water_roll_sound.stop()
+
+	# Play jump
 	jump.play()
-#	ROLLS_IN_SAND.stop()
-	#ROLLS_IN_WATER.stop()
-	#SAND_FOOTSTEPS.stop()
-	#WATER_FOOTSTEPS.stop()
 
 
 func physics_process(delta: float):
