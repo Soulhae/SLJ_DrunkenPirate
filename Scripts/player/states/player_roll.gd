@@ -5,6 +5,7 @@ extends State
 
 @onready var player: CharacterBody3D = get_owner()
 @onready var label_3d: Label3D = player.get_node("Visuals/Label3D")
+@onready var animation_player: AnimationPlayer = $"../../player/AnimationPlayer"
 
 var roll_direction: Vector3
 var roll_time: float # used only for testing, it should transition to idle when roll animation ends
@@ -16,6 +17,7 @@ var breaking_factor: float = 7.5
 @onready var water_roll_sound: AudioStreamPlayer = $"../../Water Roll Sound"
 
 func enter():
+	animation_player.play("roll")
 	if player.in_water:
 		water_roll_sound.stop()
 		water_roll_sound.play()
@@ -25,7 +27,7 @@ func enter():
 
 	label_3d.text = "State: Roll"
 	
-	roll_time = 0.5
+	roll_time = 0.8
 	
 	var input_dir: Vector3 = player.get_camera_relative_input()
 	

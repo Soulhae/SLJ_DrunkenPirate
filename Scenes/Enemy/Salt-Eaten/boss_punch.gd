@@ -7,7 +7,7 @@ class_name BossPunch
 @onready var punch1 = $"../../punch"
 @onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
-@export var punch_damage: int = 8
+@export var punch_damage: int = 10
 @export var wind_up_time: float = 0.6
 @export var hit_time: float = 0.2
 
@@ -42,7 +42,7 @@ func punch() -> void:
 			var damage = punch_damage
 
 			if enemy.phase_2_started:
-				damage = 12
+				damage = 15
 
 			body.take_damage(damage, enemy)
 

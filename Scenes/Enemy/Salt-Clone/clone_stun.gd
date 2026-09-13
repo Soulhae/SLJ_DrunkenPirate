@@ -4,6 +4,7 @@ class_name CloneStun
 @onready var enemy: CharacterBody3D = get_owner()
 
 @export var stun_time: float = 1.0
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
 var stun_finished: bool = false
 
@@ -13,7 +14,7 @@ func enter() -> void:
 	enemy.velocity = Vector3.ZERO
 
 	print("========== CLONE STUNNED ==========")
-
+	animation_player.stop()
 	stun()
 
 

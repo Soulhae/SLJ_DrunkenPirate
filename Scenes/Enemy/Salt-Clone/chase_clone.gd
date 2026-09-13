@@ -5,12 +5,13 @@ class_name SaltCloneChase
 @onready var clone: CharacterBody3D = get_owner()
 
 @export var attack_range: float = 1.5
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
 
 func enter() -> void:
 	clone.velocity.x = 0.0
 	clone.velocity.z = 0.0
-
+	animation_player.play("walk")
 
 func process(_delta: float) -> void:
 

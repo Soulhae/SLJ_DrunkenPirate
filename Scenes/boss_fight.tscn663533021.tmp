@@ -8,11 +8,6 @@
 [ext_resource type="Script" uid="uid://bdowfqtoviurd" path="res://Scripts/ui.gd" id="5_b3sq5"]
 [ext_resource type="PackedScene" uid="uid://ccfglh7ctads5" path="res://Scenes/Enemy/Short_Ranged/Short-R.tscn" id="5_tstyl"]
 [ext_resource type="FontFile" uid="uid://bfstw3mntrixx" path="res://Resources/fonts/lazzy-sunday/Lazzy-Sunday-Regular.otf" id="6_b3sq5"]
-[ext_resource type="PackedScene" uid="uid://dhpcnve5oa1e0" path="res://Models/rock model 1.fbx" id="9_d8q5e"]
-[ext_resource type="PackedScene" uid="uid://bkshjkbi1bsf6" path="res://Models/rock model 3.fbx" id="10_c4sr7"]
-[ext_resource type="PackedScene" uid="uid://denduidnktfkw" path="res://Models/rock model 4.fbx" id="11_0ofhf"]
-[ext_resource type="PackedScene" uid="uid://dk6r5o1t0unnm" path="res://Models/rock model 5.fbx" id="12_1skp6"]
-[ext_resource type="PackedScene" uid="uid://drl076uorruk3" path="res://Models/rock model 2.fbx" id="13_35aa3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vibap"]
 sky_top_color = Color(0.192157, 0.282353, 0.509804, 1)
@@ -32,10 +27,6 @@ ambient_light_source = 3
 ambient_light_color = Color(0.55, 0.55, 0.55, 1)
 ambient_light_sky_contribution = 0.3
 tonemap_mode = 3
-fog_enabled = true
-fog_light_color = Color(0.056499653, 0.19076705, 0.21273702, 1)
-fog_sun_scatter = 0.56
-fog_density = 0.0218
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_0gcl0"]
 
@@ -155,8 +146,7 @@ camera_attributes = SubResource("CameraAttributesPractical_0gcl0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=694260489]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-light_color = Color(2.887845e-06, 0.5876709, 0.6603923, 1)
-light_energy = 1.328
+light_energy = 0.5
 shadow_enabled = true
 shadow_blur = 2.0
 directional_shadow_blend_splits = true
@@ -431,93 +421,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.7019608, 0.14901961, 0.18039216, 0)
-
-[node name="rock model 1" parent="." unique_id=174521642 instance=ExtResource("9_d8q5e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.95096, 2.8098164, -25.431122)
-
-[node name="rock model 3" parent="." unique_id=563928091 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.98297, 2.8098164, 23.503853)
-
-[node name="rock model 4" parent="." unique_id=1239409775 instance=ExtResource("11_0ofhf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.75414, 2.8098164, 53.219296)
-
-[node name="rock model 5" parent="." unique_id=176343034 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(0.89087284, -0.40867892, 0.19831073, 0, 0.43656468, 0.89967287, -0.4542528, -0.8014941, 0.38892362, 37.876446, 11.730554, 96.75403)
-
-[node name="rock model 6" parent="." unique_id=379413244 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.994637, 2.4949837, 1.988184)
-
-[node name="rock model 7" parent="." unique_id=1094711597 instance=ExtResource("11_0ofhf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.696415, 6.1831074, -43.16545)
-
-[node name="rock model 8" parent="." unique_id=1444544374 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.646816, 2.8098145, -42.784676)
-
-[node name="rock model 9" parent="." unique_id=1274073768 instance=ExtResource("12_1skp6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.341225, 5.8827276, 43.545853)
-
-[node name="rock model 10" parent="." unique_id=216435069 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(0.7722908, 0.6352691, 0, -0.6352691, 0.7722908, 0, 0, 0, 1, -36.79132, 2.809815, 55.180798)
-
-[node name="rock model 11" parent="." unique_id=148581118 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.848484, 2.8098164, 77.961136)
-
-[node name="rock model 12" parent="." unique_id=552631165 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.72976, 2.8098164, 75.27294)
-
-[node name="rock model 13" parent="." unique_id=2045781578 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.164444, 11.139109, 74.53713)
-
-[node name="rock model 14" parent="." unique_id=1298531029 instance=ExtResource("11_0ofhf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.85561, 2.8098164, 17.051344)
-
-[node name="rock model 2" parent="." unique_id=683435048 instance=ExtResource("13_35aa3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.75758, 2.8098164, 36.386375)
-
-[node name="rock model 15" parent="." unique_id=1033698963 instance=ExtResource("11_0ofhf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.37511, 2.4644337, -6.846049)
-
-[node name="rock model 16" parent="." unique_id=1737851636 instance=ExtResource("12_1skp6")]
-transform = Transform3D(0.17299215, 0, 0.9849232, 0, 1, 0, -0.9849232, 0, 0.17299215, 18.621368, 5.8827276, 57.927864)
-
-[node name="rock model 17" parent="." unique_id=1758277863 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(0.13360026, 0.109896585, 0.9849233, -0.63526917, 0.77229095, 0, -0.7606471, -0.6256913, 0.17299215, 26.024214, 2.809815, 83.03716)
-
-[node name="rock model 18" parent="." unique_id=273509893 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(0.17299215, 0, 0.9849232, 0, 1, 0, -0.9849232, 0, 0.17299215, 51.565067, 2.8098164, 69.30566)
-
-[node name="rock model 19" parent="." unique_id=628111174 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(0.17299215, 0, 0.9849232, 0, 1, 0, -0.9849232, 0, 0.17299215, 59.396965, 2.8098164, 9.175711)
-
-[node name="rock model 20" parent="." unique_id=1880051667 instance=ExtResource("10_c4sr7")]
-transform = Transform3D(0.17299215, 0, 0.9849232, 0, 1, 0, -0.9849232, 0, 0.17299215, 63.418236, 11.139109, -17.972635)
-
-[node name="rock model 21" parent="." unique_id=167226664 instance=ExtResource("11_0ofhf")]
-transform = Transform3D(0.17299215, 0, 0.9849232, 0, 1, 0, -0.9849232, 0, 0.17299215, 4.4968224, 2.8098164, -14.809048)
-
-[node name="rock model 22" parent="." unique_id=1825821060 instance=ExtResource("13_35aa3")]
-transform = Transform3D(0.17299215, 0, 0.9849232, 0, 1, 0, -0.9849232, 0, 0.17299215, 25.599293, 2.8098164, -23.186766)
-
-[node name="rock model 23" parent="." unique_id=530082468 instance=ExtResource("11_0ofhf")]
-transform = Transform3D(0.17299215, 0, 0.9849232, 0, 1, 0, -0.9849232, 0, 0.17299215, -17.22048, 2.4644337, -29.304003)
-
-[node name="Label3D" type="Label3D" parent="." unique_id=1144244345]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 96.84759, 7.741477, 0.17839307)
-text = "This was planed to be a cave "
-font = ExtResource("6_b3sq5")
-font_size = 50
-
-[node name="Label3D2" type="Label3D" parent="." unique_id=1513658821]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 90.93504, 11.176764, 0.17839307)
-text = "you start in a cave and then find exit to this area "
-font = ExtResource("6_b3sq5")
-font_size = 50
-
-[node name="Label3D3" type="Label3D" parent="." unique_id=698911798]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 90.93504, 10.78723, 0.004934728)
-text = "this is a salt cave "
-font = ExtResource("6_b3sq5")
-font_size = 50
 
 [connection signal="body_entered" from="Water/Area3D" to="Water/Area3D" method="_on_body_entered"]
 [connection signal="body_exited" from="Water/Area3D" to="Water/Area3D" method="_on_body_exited"]

@@ -146,6 +146,36 @@ theme_override_fonts/font = ExtResource("4_n45e2")
 theme_override_font_sizes/font_size = 30
 text = "OPTION"
 
+[node name="Label2" type="Label" parent="Options" unique_id=289925595]
+layout_mode = 0
+offset_left = 24.5
+offset_top = 236.9375
+offset_right = 212.5
+offset_bottom = 277.875
+theme_override_fonts/font = ExtResource("4_n45e2")
+theme_override_font_sizes/font_size = 30
+text = " Volume :"
+
+[node name="Label4" type="Label" parent="Options" unique_id=1896730128]
+layout_mode = 0
+offset_left = 152.5
+offset_top = 123.9375
+offset_right = 434.5
+offset_bottom = 164.9375
+theme_override_fonts/font = ExtResource("4_n45e2")
+theme_override_font_sizes/font_size = 30
+text = "Options? Nah, I’m lazy."
+
+[node name="Label3" type="Label" parent="Options" unique_id=1206226185]
+layout_mode = 0
+offset_left = 62.5
+offset_top = 280.9375
+offset_right = 438.5
+offset_bottom = 321.875
+theme_override_fonts/font = ExtResource("4_n45e2")
+theme_override_font_sizes/font_size = 25
+text = "Bro, just lower your device volume."
+
 [node name="back" type="Button" parent="Options" unique_id=2099482493]
 layout_mode = 0
 offset_left = 447.5

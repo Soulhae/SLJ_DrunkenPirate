@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cy4jeau77xovg"
+path="res://.godot/imported/swing the air.mp3-5afaa1fdbc6e2e4ffb65fd7cab639602.mp3str"
+
+[deps]
+
+source_file="res://sounds/ihor/swing the air.mp3"
+dest_files=["res://.godot/imported/swing the air.mp3-5afaa1fdbc6e2e4ffb65fd7cab639602.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -4,7 +4,7 @@ class_name BossRecovery
 @onready var enemy: CharacterBody3D = get_owner()
 @onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
-@export var recovery_time: float = 0.8
+@export var recovery_time: float = 0.4
 
 
 func enter():

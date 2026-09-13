@@ -9,16 +9,21 @@ class_name SaltClone
 @export var lifetime: float = 5.0
 @export var attack_cooldown: float = 2
 @onready var hurt = $hurt
+@onready var animation_player: AnimationPlayer = $boss/AnimationPlayer
+@onready var hurtbox: Area3D = $Hurtbox
+var health = 50
 
 var time_alive := 0.0
 var can_attack := true
 
 
 func _ready() -> void:
+	animation_player.play("up")
 	add_to_group("enemy")
 
 
 func _physics_process(delta: float) -> void:
+	animation_player.play("walk")
 
 	# Safety check
 	if not is_inside_tree():
@@ -82,7 +87,8 @@ func _physics_process(delta: float) -> void:
 	if can_attack and is_inside_tree():
 
 		for body in attack_area.get_overlapping_bodies():
-
+			animation_player.stop()
+			animation_player.play("grab")
 			if body.is_in_group("player"):
 
 				body.take_damage(damage)
@@ -106,9 +112,40 @@ func _physics_process(delta: float) -> void:
 				break
 
 func show_damage_number(amount: int, position: Vector3) -> void:
+	if damage_number_scene == null:
+		return
+
 	var damage_number = damage_number_scene.instantiate()
 
 	get_tree().current_scene.add_child(damage_number)
 	damage_number.text_color = Color.WHITE
 	damage_number.global_position = position
 	damage_number.setup(-amount)
+var is_dead := false
+
+
+func take_damage(amount: int) -> void:
+	if is_dead:
+		return
+
+	# Take damage
+	# Change 30 to whatever HP you want
+	health -= amount
+
+	print("SALT CLONE HP: ", health)
+
+	show_damage_number(amount, global_position + Vector3(0, 1.5, 0))
+
+	# Die
+	if health <= 0:
+		health = 0
+		is_dead = true
+
+		print("SALT CLONE DIED")
+
+		animation_player.stop()
+		animation_player.play("death")
+
+		set_physics_process(false)
+
+		queue_free()

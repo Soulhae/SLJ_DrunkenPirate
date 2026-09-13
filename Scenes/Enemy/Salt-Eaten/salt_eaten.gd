@@ -17,9 +17,9 @@ var heals_used: int = 0
 @export var AttackReach: float = 5.0
 @export var SlamReach: float = 8.0
 @export var DiveReach: float = 20.0
-@export var ChaseDistance: float = 30.0
+@export var ChaseDistance: float = 40.0
 @export var WalkSpeed: float = 10.0
-@export var RunSpeed: float = 15.0
+@export var RunSpeed: float = 20.0
 
 @export var Health: int = 200
 @export var MaxHealth: int = 200
@@ -98,7 +98,7 @@ func take_damage(damage: int):
 	
 	print("SALT-EATEN HEALTH: ", Health)
 
-	hurt.play()
+	play_hurt_sound()
 
 	if Health <= 0:
 		Health = 0
@@ -144,3 +144,10 @@ func hit_flash() -> void:
 		await get_tree().create_timer(0.1).timeout
 		
 		mesh.set_surface_override_material(0, original_material)
+
+func play_hurt_sound():
+	hurt.play()
+	await get_tree().create_timer(1.1).timeout
+	
+	if is_instance_valid(hurt):
+		hurt.stop()

@@ -3,6 +3,7 @@ extends State
 
 @onready var sand_walk_sound: AudioStreamPlayer = $"../../Sand Walk Sound"
 @onready var water_walk_sound: AudioStreamPlayer = $"../../Water Walk Sound"
+@onready var animation_player: AnimationPlayer = $"../../player/AnimationPlayer"
 
 @onready var player: CharacterBody3D = get_owner()
 @onready var label_3d: Label3D = player.get_node("Visuals/Label3D")
@@ -10,6 +11,7 @@ extends State
 
 func enter():
 	label_3d.text = "State: Move"
+	animation_player.play("walk")
 
 	if player.in_water:
 		sand_walk_sound.stop()

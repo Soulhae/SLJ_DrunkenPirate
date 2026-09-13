@@ -78,12 +78,12 @@ A game made for  Soulslike Game Jam  #3
 
 [node name="1" type="Label" parent="." unique_id=1333993652]
 layout_mode = 0
-offset_left = 69.0
-offset_top = 231.0
-offset_right = 484.0
-offset_bottom = 569.0
+offset_left = 114.0
+offset_top = 192.0
+offset_right = 553.0
+offset_bottom = 646.0
 theme_override_fonts/font = ExtResource("2_ccovl")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "PROGRAMMING & GAME DESIGN
   -Kachori
   -Soulhae

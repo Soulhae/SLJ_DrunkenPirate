@@ -4,11 +4,13 @@ class_name SaltCloneRecovery
 @onready var clone: CharacterBody3D = get_owner()
 
 @export var recovery_time: float = 1.5
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
 var timer: float = 0.0
 
 
 func enter() -> void:
+	animation_player.stop()
 	timer = recovery_time
 
 	# Stop the clone completely during recovery

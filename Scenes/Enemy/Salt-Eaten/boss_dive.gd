@@ -9,7 +9,7 @@ class_name BossDive
 @onready var mesh: MeshInstance3D = $"../../boss/Armature/Skeleton3D/Rapier"
 
 @export var dive_speed: float = 40.0
-@export var dive_damage: int = 20
+@export var dive_damage: int = 25
 @export var throw_force: float = 5.0
 @export var stop_distance: float = 1.5
 

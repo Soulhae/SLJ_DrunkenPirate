@@ -59,6 +59,7 @@ func take_damage(damage: int) -> void:
 
 	Health -= damage
 	print("Enemy HP: ", Health)
+	play_hurt_sound()
 	show_damage_number(damage, global_position + Vector3(0, 1.5, 0))
 	hit_flash()
 
@@ -102,3 +103,10 @@ func stagger() -> void:
 		state_machine.current_state,
 		"enemystagger"
 	)
+
+func play_hurt_sound():
+	hurt.play()
+	await get_tree().create_timer(1.1).timeout
+	
+	if is_instance_valid(hurt):
+		hurt.stop()

@@ -2,6 +2,7 @@ class_name PlayerBlock
 extends State
 
 @onready var player: CharacterBody3D = get_owner()
+@onready var animation_player: AnimationPlayer = $"../../player/AnimationPlayer"
 
 var block_speed: float = 3.0
 
@@ -11,6 +12,7 @@ var parry_timer: float = 0.0
 func enter():
 	parry_timer = parry_window
 	print("BLOCKING - PARRY WINDOW")
+	animation_player.play("block")
 
 func exit():
 	print("STOP BLOCKING")

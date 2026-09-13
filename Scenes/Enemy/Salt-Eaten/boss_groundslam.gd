@@ -10,9 +10,9 @@ class_name BossGroundSlam
 
 @export var slam_damage: int = 15
 @export var boss_jump_force: float = 15.0
-@export var player_launch_force: float = 10.0
+@export var player_launch_force: float = 12.0
 @export var enemy_launch_force: float = 10.0
-@export var knockback_force: float = 5.0
+@export var knockback_force: float = 10.0
 @export var wind_up_time: float = 0.8
 @export var slam_recovery_time: float = 1.0
 

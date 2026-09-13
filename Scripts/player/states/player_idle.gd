@@ -4,10 +4,16 @@ extends State
 
 @onready var player: CharacterBody3D = get_owner()
 @onready var label_3d: Label3D = player.get_node("Visuals/Label3D")
+@onready var animation_player: AnimationPlayer = $"../../player/AnimationPlayer"
+
 
 
 func enter():
 	label_3d.text = "State: Idle"
+	var animation = animation_player.get_animation("idle")
+	animation.loop_mode = Animation.LOOP_LINEAR
+	animation_player.play("idle")
+
 
 
 func physics_process(delta: float) -> void:

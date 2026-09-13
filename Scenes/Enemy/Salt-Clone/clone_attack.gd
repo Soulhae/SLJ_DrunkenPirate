@@ -4,6 +4,7 @@ class_name SaltCloneAttack
 @onready var clone: CharacterBody3D = get_owner()
 @onready var player: CharacterBody3D = get_tree().get_first_node_in_group("player")
 @onready var attack_area: Area3D = $"../../AttackArea"
+@onready var animation_player: AnimationPlayer = $"../../boss/AnimationPlayer"
 
 @export var attack_damage: int = 8
 @export var attack_range: float = 1.5
@@ -17,6 +18,7 @@ var player_hit := false
 
 
 func enter() -> void:
+	animation_player.play("grab")
 
 	attack_finished = false
 	attack_active = false
@@ -87,7 +89,7 @@ func perform_attack() -> void:
 	player_hit = false
 
 	attack_area.monitoring = true
-
+	
 	print("SALT CLONE HIT")
 
 
