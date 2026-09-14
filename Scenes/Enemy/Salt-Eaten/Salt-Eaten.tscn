@@ -10068,3 +10068,8 @@ libraries/ = SubResource("AnimationLibrary_xcih5")
 
 [node name="BOSS STAGGER" parent="." unique_id=641233828 instance=ExtResource("27_i2du3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0136695, -0.6545074)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=145646857]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5.858345, 0)
+light_color = Color(0.23137255, 1, 1, 1)
+spot_range = 17.25223

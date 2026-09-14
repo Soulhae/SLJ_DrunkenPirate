@@ -4,6 +4,7 @@ extends State
 @onready var player: CharacterBody3D = get_owner()
 @onready var animation_player: AnimationPlayer = $"../../player/AnimationPlayer"
 
+
 @export var heal_amount: int = 50
 @export var heal_time: float = 1.0
 @export var drunk_time: float = 6.0
@@ -29,7 +30,7 @@ func enter() -> void:
 	# Stop the player while drinking
 	player.velocity.x = 0
 	player.velocity.z = 0
-	
+	animation_player.play("heal")
 	heal()
 
 

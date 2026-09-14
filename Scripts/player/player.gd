@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var block_label: Label = $"../UI/BLOCK"
 @onready var damage_label: Label = $"../UI/DEMAGE"
 @onready var hurt_flash: ColorRect = $"../UI/HurtFlash"
-@onready var hurt = $Hurt
+
 @onready var parry: AudioStreamPlayer = $parry
 
 var in_water: bool = false
@@ -113,7 +113,6 @@ var move_speed: float = 10.0
 
 @onready var state_machine: StateMachine = $StateMachine
 
-
 var last_position: Vector3
 
 
@@ -129,6 +128,16 @@ var drunk_direction: Vector3 = Vector3.ZERO
 var drunk_change_timer: float = 0.0
 var drunk_camera_time: float = 0.0
 var drunk_fov: float = 75.0
+
+
+# ================================================================
+# PLAYER SOUNDS
+# ================================================================
+
+@onready var hurt: AudioStreamPlayer = %Hurt
+@onready var hurt_2: AudioStreamPlayer = %Hurt2
+@onready var hurt_3: AudioStreamPlayer = %Hurt3
+@onready var death: AudioStreamPlayer = %death
 
 
 func _ready() -> void:
@@ -460,6 +469,7 @@ func check_enemy_is_visible(
 		camera_3d.global_position
 	)
 
+
 	var ray_to = (
 		closest_enemy.global_position
 	)
@@ -602,12 +612,13 @@ func update_visuals_rotation(
 	# ============================================================
 	# ROTATE PLAYER MODEL
 	# ============================================================
+
 	target_angle += PI
 
 	player_.rotation.y = lerp_angle(
-	player_.rotation.y,
-	target_angle,
-	5.0 * delta
+		player_.rotation.y,
+		target_angle,
+		5.0 * delta
 	)
 
 
@@ -633,7 +644,9 @@ func take_damage(
 		# ========================================================
 
 		if block_state.is_parrying():
+
 			parry.play()
+
 			print(
 				"========== PARRIED! =========="
 			)
@@ -720,7 +733,11 @@ func take_damage(
 	)
 
 
-	hurt.play()
+	# ============================================================
+	# RANDOM DAMAGE SOUND
+	# ============================================================
+
+	play_hurt_sound()
 
 
 	damage_label.text = (
@@ -751,6 +768,10 @@ func take_damage(
 		print(
 			"====== PLAYER DIED ======"
 		)
+
+
+		# PLAY DEATH SOUND
+		death.play()
 
 
 		var boss = (
@@ -785,6 +806,28 @@ func take_damage(
 		get_tree().change_scene_to_file(
 			"res://Scenes/death.tscn"
 		)
+
+
+# ================================================================
+# RANDOM PIRATE HURT SOUND
+# ================================================================
+
+func play_hurt_sound() -> void:
+
+	var sound = randi_range(1, 3)
+
+
+	if sound == 1:
+
+		hurt.play()
+
+	elif sound == 2:
+
+		hurt_2.play()
+
+	else:
+
+		hurt_3.play()
 
 
 # ================================================================
@@ -908,6 +951,7 @@ func show_damage_number(
 
 	if damage_number_scene == null:
 		return
+
 
 	var damage_number = (
 		damage_number_scene.instantiate()

@@ -12,7 +12,11 @@ initial_velocity_min = 1.0
 initial_velocity_max = 4.0
 gravity = Vector3(0, 0, 0)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_35aa3"]
+albedo_color = Color(1, 1, 0, 1)
+
 [sub_resource type="PrismMesh" id="PrismMesh_tehjv"]
+material = SubResource("StandardMaterial3D_35aa3")
 size = Vector3(0.1, 0.1, 0.1)
 
 [node name="BOSS STAGGER" type="GPUParticles3D" unique_id=641233828]

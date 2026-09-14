@@ -64,37 +64,82 @@ text = "CREDITS
 
 [node name="Label2" type="Label" parent="." unique_id=1262033585]
 layout_mode = 0
-offset_left = 69.0
-offset_top = 111.0
-offset_right = 484.0
-offset_bottom = 263.0
+offset_left = 313.0
+offset_top = 92.0
+offset_right = 767.0
+offset_bottom = 313.0
 theme_override_fonts/font = ExtResource("2_ccovl")
 theme_override_font_sizes/font_size = 20
 text = "DRUNKEN PIRATE
-A game made for  Soulslike Game Jam  #3 
+A game originally created for Soulslike Game Jam #3
+
 
 
 "
 
 [node name="1" type="Label" parent="." unique_id=1333993652]
 layout_mode = 0
-offset_left = 114.0
-offset_top = 192.0
-offset_right = 553.0
-offset_bottom = 646.0
+offset_left = 69.0
+offset_top = 187.0
+offset_right = 508.0
+offset_bottom = 351.0
 theme_override_fonts/font = ExtResource("2_ccovl")
 theme_override_font_sizes/font_size = 30
 text = "PROGRAMMING & GAME DESIGN
-  -Kachori
-  -Soulhae
-
-3D ART
- -BarryRylan_Art
-
-COMPOSER
- - Ihor Koliako
-
+	    Kachori
+	    Soulhae
 "
+
+[node name="6" type="Label" parent="." unique_id=118244129]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 444.0
+offset_right = 507.0
+offset_bottom = 608.0
+theme_override_fonts/font = ExtResource("2_ccovl")
+theme_override_font_sizes/font_size = 30
+text = "COMPOSER / SFX ARTIST
+   Ihor Koliako
+"
+
+[node name="2" type="Label" parent="." unique_id=1238134347]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 329.0
+offset_right = 508.0
+offset_bottom = 408.0
+theme_override_fonts/font = ExtResource("2_ccovl")
+theme_override_font_sizes/font_size = 30
+text = "3D ART & ANIMATION"
+
+[node name="3" type="Label" parent="." unique_id=1889517238]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 384.0
+offset_right = 554.0
+offset_bottom = 463.0
+theme_override_fonts/font = ExtResource("2_ccovl")
+theme_override_font_sizes/font_size = 30
+text = "BarryRylan"
+
+[node name="4" type="Label" parent="." unique_id=2118030394]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 385.0
+offset_right = 700.0
+offset_bottom = 495.0
+theme_override_fonts/font = ExtResource("2_ccovl")
+theme_override_font_sizes/font_size = 30
+text = "Art"
+
+[node name="5" type="Label" parent="." unique_id=207676975]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 378.0
+offset_right = 686.0
+offset_bottom = 457.0
+theme_override_font_sizes/font_size = 30
+text = "_"
 
 [node name="click" type="AudioStreamPlayer" parent="." unique_id=1293067233]
 stream = ExtResource("2_gryuy")

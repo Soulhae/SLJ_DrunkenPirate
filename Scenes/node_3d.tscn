@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://ca84wu8q8q53t"]
+
+[ext_resource type="PackedScene" uid="uid://lsvs8a7urkca" path="res://demo/assets/models/RockC.tscn" id="1_wosnj"]
+[ext_resource type="PackedScene" uid="uid://b35mxcc3d74di" path="res://Shader/water/WaterPlane.tscn" id="2_t3l2h"]
+[ext_resource type="PackedScene" uid="uid://bjrc73xjkaaxs" path="res://Models/Boss Model.fbx" id="3_a8auw"]
+[ext_resource type="FontFile" uid="uid://bfstw3mntrixx" path="res://Resources/fonts/lazzy-sunday/Lazzy-Sunday-Regular.otf" id="4_ifh66"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_aeo3b"]
+sky_top_color = Color(0.192157, 0.282353, 0.509804, 1)
+sky_horizon_color = Color(0.505882, 0.615686, 0.709804, 1)
+ground_bottom_color = Color(0.211765, 0.313726, 0.552941, 1)
+ground_horizon_color = Color(0.505882, 0.615686, 0.709804, 1)
+ground_curve = 0.13
+
+[sub_resource type="Sky" id="Sky_srg7c"]
+sky_material = SubResource("ProceduralSkyMaterial_aeo3b")
+
+[sub_resource type="Environment" id="Environment_worak"]
+background_mode = 2
+background_energy_multiplier = 0.76
+sky = SubResource("Sky_srg7c")
+ambient_light_source = 3
+ambient_light_color = Color(0.55, 0.55, 0.55, 1)
+ambient_light_sky_contribution = 0.3
+ambient_light_energy = 0.25
+tonemap_mode = 3
+fog_enabled = true
+fog_light_color = Color(0.056499653, 0.19076705, 0.21273702, 1)
+fog_sun_scatter = 0.56
+fog_density = 0.0218
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_rvjhm"]
+
+[node name="Node3D" type="Node3D" unique_id=1488156477]
+
+[node name="Environment" type="Node3D" parent="." unique_id=2057266042]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=67401264]
+environment = SubResource("Environment_worak")
+camera_attributes = SubResource("CameraAttributesPractical_rvjhm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=127837348]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(0.13725491, 0.46666667, 0.5254902, 1)
+light_energy = 1.328
+shadow_enabled = true
+shadow_blur = 2.0
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 256.0
+
+[node name="RockC" parent="." unique_id=49257384 instance=ExtResource("1_wosnj")]
+transform = Transform3D(0.010746433, 10.999474, 0, -0.7203182, 0.16401972, -0.27781275, -0.01607625, 0.0036606349, 12.447778, 0.54607177, -10.262794, 0.94308805)
+
+[node name="RockC3" parent="." unique_id=1788572537 instance=ExtResource("1_wosnj")]
+transform = Transform3D(0.010927962, 15.619246, 0, -0.7326682, 0.23296589, 0, 0, 0, 15.510563, 0.54607177, 74.95767, -108.355644)
+
+[node name="RockC2" parent="." unique_id=1518632789 instance=ExtResource("1_wosnj")]
+transform = Transform3D(-0.009266452, 14.730645, -0.3493633, -0.65375876, -0.6600099, -2.8160849, -0.406788, 0.72516066, 4.533755, 0.54607177, -5.030044, -41.37619)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1349158561]
+transform = Transform3D(1, 0, 0, 0, 0.9855675, 0.16928294, 0, -0.16928294, 0.9855675, 2.2938728, 10.226921, 24.681637)
+
+[node name="Water" parent="." unique_id=1487049067 instance=ExtResource("2_t3l2h")]
+transform = Transform3D(156.96341, 0, 0, 0, 1, 0, 0, 0, 56.6392, 0, -8.038542, 0)
+
+[node name="Boss Model" parent="." unique_id=1305889056 instance=ExtResource("3_a8auw")]
+transform = Transform3D(1.3778772, 0, -1.4496394, 0, 2, 0, 1.4496394, 0, 1.3778772, 12.458298, -8.095789, -11.493923)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Boss Model" unique_id=523958603]
+transform = Transform3D(0.49999997, -1.4901161e-08, -8.881784e-16, 0, -2.18557e-08, 0.5, -1.4901161e-08, -0.49999997, -2.1855698e-08, 1.1171854, 23.658978, 1.5569749)
+light_color = Color(0.011764706, 0.6117647, 0.68235296, 1)
+light_energy = 14.609
+spot_range = 54.11272
+
+[node name="Label3D" type="Label3D" parent="." unique_id=535801363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.327494, 10.87619, 0)
+text = "Drunken Pirate"
+font = ExtResource("4_ifh66")
+font_size = 500

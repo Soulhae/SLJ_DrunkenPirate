@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bti1clmfiic2t"
+path="res://.godot/imported/Drunken Pirate Boss.mp3-df3644ad78bd6f47fa6a30f86d01058a.mp3str"
+
+[deps]
+
+source_file="res://sounds/ihor/Drunken Pirate Boss.mp3"
+dest_files=["res://.godot/imported/Drunken Pirate Boss.mp3-df3644ad78bd6f47fa6a30f86d01058a.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ch1oml2nj0bwn"]
+
+[ext_resource type="PackedScene" uid="uid://dhpcnve5oa1e0" path="res://Models/rock model 1.fbx" id="1_p5pcn"]
+[ext_resource type="Texture2D" uid="uid://bbo66b1eoyl0c" path="res://Models/salt rock 3.png" id="2_bwl3y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6oxt"]
+albedo_texture = ExtResource("2_bwl3y")
+
+[node name="rock model 1" unique_id=174521642 instance=ExtResource("1_p5pcn")]
+
+[node name="Plane" parent="." index="0" unique_id=610447755]
+material_override = SubResource("StandardMaterial3D_r6oxt")
